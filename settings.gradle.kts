@@ -1,4 +1,4 @@
-rootProject.name = "job_service"
+rootProject.name = "job_posting_service"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
