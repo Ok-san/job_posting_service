@@ -1,4 +1,4 @@
-package org.example.project
+package org.example.job_posting_service
 
 import App
 import android.os.Bundle
