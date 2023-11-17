@@ -23,15 +23,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.example.job_posting_service.data.master1
-import org.example.job_posting_service.data.master2
-import org.example.job_posting_service.data.order1
-import org.example.job_posting_service.data.order2
-import org.example.job_posting_service.ui.theme.BaseFont
+import data.master1
+import data.master2
+import data.order1
+import data.order2
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.FirstLayer
 import org.example.job_posting_service.ui.theme.richYellow
-
+import org.example.job_posting_service.ui.theme.BaseFont
 @Composable
 fun FavoritesScreen() {
     var tabIndex by remember { mutableIntStateOf(0) }

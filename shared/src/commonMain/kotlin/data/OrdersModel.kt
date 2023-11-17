@@ -1,4 +1,4 @@
-package org.example.job_posting_service.data
+package data
 
 data class OrdersModel(
     val title: String = "I need help",

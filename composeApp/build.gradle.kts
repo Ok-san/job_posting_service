@@ -36,6 +36,7 @@ kotlin {
             implementation(compose.material)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
+//            implementation("androidx.compose.material3:material3")
         }
     }
 }

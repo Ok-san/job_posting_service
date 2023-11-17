@@ -24,14 +24,14 @@ import org.example.job_posting_service.screens.ProfileScreen
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) { HomeScreen() }
-        //composable(NavigationItem.Notification.route) { NotificationScreen() }
+//        composable(NavigationItem.Notification.route) { NotificationScreen() }
         composable(NavigationItem.Favorites.route) { FavoritesScreen() }
         composable(NavigationItem.Profile.route) { ProfileScreen() }
     }
 }
 
-@Composable
-fun TopBar() {
+//@Composable
+//fun TopBar() {
 //    TopAppBar(
 //        title = {
 //            androidx.compose.material.Text(
@@ -50,13 +50,13 @@ fun TopBar() {
 //@Composable
 //fun TopBarPreview() {
 //    TopBar()
-}
+//}
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         NavigationItem.Home,
-        //NavigationItem.Notification,
+//        NavigationItem.Notification,
         NavigationItem.Favorites,
         NavigationItem.Profile,
     )

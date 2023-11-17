@@ -1,4 +1,4 @@
-package org.example.job_posting_service.data
+package data
 
 val order1 = OrdersModel()
 val order2 = OrdersModel(

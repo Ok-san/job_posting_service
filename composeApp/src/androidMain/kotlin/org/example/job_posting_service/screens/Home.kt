@@ -37,10 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.job_posting_service.R
-import org.example.job_posting_service.data.master1
-import org.example.job_posting_service.data.master2
-import org.example.job_posting_service.data.order1
-import org.example.job_posting_service.data.order2
+import data.*
 import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.FirstLayer
@@ -124,15 +121,12 @@ fun SettingBar() {
         modifier = Modifier
             .padding(top = 47.dp, start = 20.dp, end = 20.dp)
             .height(50.dp)
-//            .requiredWidth(361.dp)
             .fillMaxWidth(),
     ) {
 
         TextField(
             value = text,
             shape = RoundedCornerShape(size = 10.dp),
-            //          modifier = Modifier.requiredHeight(39.dp),
-//                .requiredWidth(292.dp),
             onValueChange = { newText ->
                 text = newText
             },
@@ -151,7 +145,6 @@ fun SettingBar() {
 //                fontFamily = FontFamily(Font(R.font.inter)),
                     fontWeight = FontWeight(400),
                     color = BaseFont
-                    //modifier = Modifier.padding(0.dp)
                 )
             },
             colors = TextFieldDefaults.textFieldColors(
@@ -177,7 +170,6 @@ fun SettingBar() {
                     .width(39.dp),
                 painter = painterResource(id = R.drawable.icon_filter),
                 contentDescription = "image description",
-                //contentScale = ContentScale.None
             )
         }
     }
