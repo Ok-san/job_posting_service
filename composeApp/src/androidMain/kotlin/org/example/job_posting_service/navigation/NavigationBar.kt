@@ -1,5 +1,6 @@
 package org.example.job_posting_service.navigation
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -8,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -19,6 +21,8 @@ import androidx.navigation.compose.rememberNavController
 import org.example.job_posting_service.screens.FavoritesScreen
 import org.example.job_posting_service.screens.HomeScreen
 import org.example.job_posting_service.screens.ProfileScreen
+import org.example.job_posting_service.ui.theme.BaseFont
+import org.example.job_posting_service.ui.theme.richYellow
 
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -61,8 +65,9 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationItem.Profile,
     )
     BottomNavigation(
-        backgroundColor = Color.Black,
-        contentColor = Color.White,
+        modifier = Modifier.height(52.dp),
+        backgroundColor = Color.White,
+        contentColor = richYellow,
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -70,14 +75,14 @@ fun BottomNavigationBar(navController: NavController) {
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        imageVector = item.icon,
+                        painter = painterResource(item.icon),
                         contentDescription = null, //contentDescription = item.title,
-                        modifier = Modifier.size(40.dp)
+                        modifier = Modifier.size(30.dp)
                     )
                 },
                 //label = { Text(text = item.title) },
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.White.copy(0.4f),
+                selectedContentColor = BaseFont,
+                unselectedContentColor = richYellow,
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {

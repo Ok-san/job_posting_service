@@ -87,7 +87,7 @@ fun HomeScreen() {
                     color = FirstLayer,
                     shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp)
                 )
-                .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp),
+                .padding(top = 22.dp, start = 20.dp, end = 20.dp),
 
             ) {
             when (tabIndex) {
