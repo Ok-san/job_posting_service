@@ -1,5 +1,6 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -108,5 +109,16 @@ compose.desktop {
             packageName = "org.example.job_posting_service"
             packageVersion = "1.0.0"
         }
+    }
+}
+
+val commonResourcesTask = tasks.register<Copy>("resources"){
+    from("src/commonMain/resources")
+    into("build/resources")
+}
+
+tasks.withType<KotlinCompile>().configureEach{
+    if(name.endsWith("Android")){
+        dependsOn(commonResourcesTask)
     }
 }
