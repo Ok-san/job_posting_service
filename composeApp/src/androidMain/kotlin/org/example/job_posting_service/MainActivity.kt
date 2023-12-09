@@ -14,13 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
+import com.arkivanov.decompose.defaultComponentContext
+import component.identification.SignInComponent
 import org.example.job_posting_service.navigation.BottomNavigationBar
 import org.example.job_posting_service.navigation.Navigation
+import org.example.job_posting_service.screens.IdentificationScreen
 import org.example.job_posting_service.ui.theme.Job_posting_serviceTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val rootComponent = SignInComponent(defaultComponentContext())
 
         setContent {
             Job_posting_serviceTheme {
@@ -28,7 +32,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    //MainScreen()
+                    IdentificationScreen(rootComponent)
                 }
             }
         }

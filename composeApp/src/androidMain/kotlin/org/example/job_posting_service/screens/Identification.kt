@@ -19,21 +19,33 @@ import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import component.identification.FakeSignInComponent
+import component.identification.SignIn
+import component.identification.SignInComponent
+import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
 import org.example.job_posting_service.ui.theme.BackButtonTint
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.ButtonBackground
 import org.example.job_posting_service.ui.theme.ProfileTypography
 import org.example.job_posting_service.ui.theme.SecondLayerShape
+import org.jetbrains.compose.resources.resource
 
 @Composable
-fun IdentificationScreen() {
+fun IdentificationScreen(component: SignIn) {
+
+    val login by component.login.collectAsState(Dispatchers.Main.immediate)
+    val password by component.password.collectAsState(Dispatchers.Main.immediate)
+    val inProgress by component.inProgress.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,11 +73,12 @@ fun IdentificationScreen() {
             )
         }
         Column(modifier = Modifier.fillMaxSize()) {
-            DefaultField("Email:")
-            Box(modifier = Modifier
-                .padding(top = 17.dp)
+            DefaultField("Email:", login, component::onLoginChanged)
+            Box(
+                modifier = Modifier
+                    .padding(top = 17.dp)
             ) {
-                DefaultField("Password:")
+                DefaultField("Password:", password, component::onPasswordChanged)
             }
             Row(
                 modifier = Modifier
@@ -74,7 +87,7 @@ fun IdentificationScreen() {
                     .padding(top = 34.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                RegistrationButton()
+                RegistrationButton(component)
                 RecoverButton()
                 ForwardButton()
             }
@@ -100,9 +113,9 @@ fun ForwardButton() {
 }
 
 @Composable
-fun RegistrationButton() {
+fun RegistrationButton(component: SignIn) {
     TextButton(
-        onClick = { }
+        onClick = component::onSignInClick
     ) {
         Text(
             text = "Registration",
@@ -125,8 +138,10 @@ fun RecoverButton() {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun IdentificationScreenPreview() {
-    IdentificationScreen()
+
+    IdentificationScreen(component = FakeSignInComponent())
 }

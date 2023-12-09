@@ -49,6 +49,9 @@ val buttonSize = 40.dp
 
 @Composable
 fun ProfileScreen() {
+
+    val message = remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier
             .background(BaseLayer)
@@ -112,12 +115,24 @@ fun ProfileScreen() {
                         )
                     }
                     Column {
-                        DefaultField("Name:")
-                        DefaultField("Date of birth:")
-                        DefaultField("City:")
-                        DefaultField("Address")
-                        DefaultField("Phone number:")
-                        DefaultField("Email:")
+                        DefaultField("Name:", message.value, { newText -> message.value = newText })
+                        DefaultField(
+                            "Date of birth:",
+                            message.value,
+                            { newText -> message.value = newText })
+                        DefaultField("City:", message.value, { newText -> message.value = newText })
+                        DefaultField(
+                            "Address",
+                            message.value,
+                            { newText -> message.value = newText })
+                        DefaultField(
+                            "Phone number:",
+                            message.value,
+                            { newText -> message.value = newText })
+                        DefaultField(
+                            "Email:",
+                            message.value,
+                            { newText -> message.value = newText })
                     }
                 }
 
@@ -153,9 +168,18 @@ fun ProfileScreen() {
 
                 ) {
                     Column {
-                        DefaultField("Category:")
-                        DefaultField("Specialization")
-                        DefaultField("Coast:")
+                        DefaultField(
+                            "Category:",
+                            message.value,
+                            { newText -> message.value = newText })
+                        DefaultField(
+                            "Specialization",
+                            message.value,
+                            { newText -> message.value = newText })
+                        DefaultField(
+                            "Coast:",
+                            message.value,
+                            { newText -> message.value = newText })
                     }
                     Text(
                         "Tell us more details:",
@@ -184,7 +208,7 @@ fun ProfileScreen() {
 }
 
 @Composable
-fun DefaultField(text: String) {
+fun DefaultField(text: String, message: String, change: (String) -> Unit) {
     Row(
         Modifier.padding(top = 8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -195,10 +219,10 @@ fun DefaultField(text: String) {
                 .padding(end = 10.dp),
             style = ProfileTypography.bodyMedium
         )
-        val message = remember { mutableStateOf("") }
+        //val message = remember { mutableStateOf("") }
         BasicTextField(
-            value = message.value,
-            onValueChange = { newText -> message.value = newText },
+            value = message,
+            onValueChange = change,
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(40.dp))

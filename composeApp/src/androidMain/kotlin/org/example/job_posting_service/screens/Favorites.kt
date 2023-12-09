@@ -31,6 +31,7 @@ import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.FirstLayer
 import org.example.job_posting_service.ui.theme.richYellow
 import org.example.job_posting_service.ui.theme.BaseFont
+
 @Composable
 fun FavoritesScreen() {
     var tabIndex by remember { mutableIntStateOf(0) }
@@ -48,7 +49,7 @@ fun FavoritesScreen() {
                 //fontFamily = FontFamily(Font(R.font.inter)),
                 fontWeight = FontWeight(700),
                 color = BaseFont,
-                ),
+            ),
             modifier = Modifier
                 .padding(top = 47.dp, start = 20.dp, end = 20.dp)
                 .height(50.dp)
@@ -89,16 +90,17 @@ fun FavoritesScreen() {
                 .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp),
 
             ) {
-        when (tabIndex) {
-            0 -> {
-                itemsIndexed(
-                    listOf(order1, order2, order2, order2)
-                ) { _, item ->
-                    if (item.favorite) {
-                        OrderItem(item = item)
+            when (tabIndex) {
+                0 -> {
+                    itemsIndexed(
+                        listOf(order1, order2, order2, order2)
+                    ) { _, item ->
+                        if (item.favorite) {
+                            OrderItem(item = item)
+                        }
                     }
                 }
-            }
+
                 1 -> {
                     itemsIndexed(
                         listOf(master1, master2, master2, master2)

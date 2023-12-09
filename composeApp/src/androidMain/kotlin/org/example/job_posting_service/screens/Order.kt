@@ -161,7 +161,7 @@ fun OrderScreen() {
             Divider(
                 modifier = Modifier.fillMaxWidth(),
                 color = BaseFont,
-               // thickness = 1.dp
+                // thickness = 1.dp
             )
         }
     }
