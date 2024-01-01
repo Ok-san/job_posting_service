@@ -42,7 +42,6 @@ kotlin {
             implementation(libs.decompose.core)
             implementation(libs.decompose.extension.compose)
             implementation(libs.kotlinx.serialization.json)
-//            implementation("androidx.compose.material3:material3")
         }
     }
 }
@@ -53,7 +52,7 @@ android {
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("build/resources")
+    sourceSets["main"].resources.srcDirs("src/resources")
 
     defaultConfig {
         applicationId = "org.example.job_posting_service"
@@ -114,16 +113,5 @@ compose.desktop {
             packageName = "org.example.job_posting_service"
             packageVersion = "1.0.0"
         }
-    }
-}
-
-val commonResourcesTask = tasks.register<Copy>("resources"){
-    from("src/commonMain/resources")
-    into("build/resources")
-}
-
-tasks.withType<KotlinCompile>().configureEach{
-    if(name.endsWith("Android")){
-        dependsOn(commonResourcesTask)
     }
 }
