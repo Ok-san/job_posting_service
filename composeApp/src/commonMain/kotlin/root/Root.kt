@@ -2,14 +2,14 @@ package root
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
+import page.identification.IdentificationPage
+import page.main.MainPage
 
 interface Root {
-    val router: Value<ChildStack<*, Child>>
+    val route: Value<ChildStack<*, Child>>
 
-    fun onNext()
-    fun onPrev()
-    sealed interface Child{
-        //class StartChild(val component: StartPage) : Child
-
+    sealed class Child {
+        class Identification(val component: IdentificationPage) : Child()
+        class Main(val component: MainPage) : Child()
     }
 }

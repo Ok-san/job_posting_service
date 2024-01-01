@@ -23,14 +23,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.job_posting_service.R
-import data.MastersModel
+import data.ProfileModel
+import data.ServicesModel
 import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.richYellow
 import org.example.job_posting_service.ui.theme.textGrey
 
 @Composable
-fun MasterItem(item: MastersModel) {
+fun MasterItem(item: ServicesModel) {
     Card(
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
@@ -52,7 +53,7 @@ fun MasterItem(item: MastersModel) {
                     .fillMaxSize()
             ) {
                 Text(
-                    text = item.name,
+                    text = item.master.name,
                     color = BaseFont,
                     fontSize = 18.sp,
                     fontWeight = FontWeight(600),
@@ -108,9 +109,9 @@ fun MasterItem(item: MastersModel) {
                     .fillMaxSize()
             ) {
                 Column {
-                    if (item.price != null) {
+                    if (item.coast != null) {
                         Text(
-                            text = "${item.price} P",
+                            text = "${item.coast} P",
                             fontSize = 14.sp,
                             fontWeight = FontWeight(700),
                             color = richYellow,

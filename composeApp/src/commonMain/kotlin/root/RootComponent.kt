@@ -3,27 +3,45 @@ package root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.serializer
+import page.identification.IdentificationPageComponent
+import page.main.MainPageComponent
 
 class RootComponent(
-    context: ComponentContext, override val router: Value<ChildStack<*, Root.Child>>,
-) : Root, ComponentContext by context {
-    private val navigator = StackNavigation<Config>()
+    componentContext: ComponentContext,
+) : Root, ComponentContext by componentContext {
+
+    private val navigate = StackNavigation<Config>()
+
+    override val route: Value<ChildStack<*, Root.Child>> =
+        childStack(
+            source = navigate,
+            serializer = Config.serializer(),
+            initialConfiguration = Config.IdentificationScreenConfig,
+            childFactory = ::child
+        )
+
+    private fun child(config: Config, context: ComponentContext): Root.Child =
+        when (config) {
+            is Config.IdentificationScreenConfig -> Root.Child.Identification(
+                IdentificationPageComponent(
+                    context = context,
+                    onSignIn = { navigate.replaceAll(Config.MainScreenConfig) },
+                )
+            )
+
+            is Config.MainScreenConfig -> Root.Child.Main(MainPageComponent(context = context))
+        }
 
     @Serializable
-    private sealed interface Config {
+    private sealed interface Config  {
         @Serializable
-        data class StartChildConfig(val index: Int) : Config
-    }
+        data object IdentificationScreenConfig : Config
 
-    override fun onNext() {
-        navigator.push(Config.StartChildConfig(index = router.value.backStack.size + 1))
-    }
-
-    override fun onPrev() {
-        TODO("Not yet implemented")
+        @Serializable
+        data object MainScreenConfig : Config
     }
 }

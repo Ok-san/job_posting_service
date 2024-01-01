@@ -33,7 +33,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.example.job_posting_service.R
@@ -42,9 +41,11 @@ import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.FirstLayer
 import org.example.job_posting_service.ui.theme.richYellow
+import page.main.MainPage
+import page.main.home.HomePage
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(component: HomePage) {
 
     var tabIndex by remember { mutableIntStateOf(0) }
     val tabs = listOf("Orders", "Masters")
@@ -101,7 +102,7 @@ fun HomeScreen() {
 
                 1 -> {
                     itemsIndexed(
-                        listOf(master1, master2, master2, master2)
+                        listOf(service1, service2, service2, service2)
                     ) { _, item ->
                         MasterItem(item = item)
                     }
@@ -123,6 +124,7 @@ fun SettingBar() {
             .height(50.dp)
             .fillMaxWidth(),
     ) {
+
 
         TextField(
             value = text,
@@ -175,8 +177,8 @@ fun SettingBar() {
     }
 }
 
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}
+//@Preview
+//@Composable
+//fun HomeScreenPreview() {
+//    HomeScreen()
+//}

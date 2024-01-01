@@ -1,15 +1,16 @@
-package component.identification
+package component.identification.registration
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface SignIn {
+interface Registration {
     val login: StateFlow<String>
     val password: StateFlow<String>
+    val name: StateFlow<String>
     val inProgress: StateFlow<Boolean>
 
     fun onLoginChanged(login: String)
     fun onPasswordChanged(password: String)
-    fun onSignInClick()
+    fun onNameChanged(password: String)
     fun onRegistrationClick()
-    fun onRecoverClick()
+    fun onAuthorizationClick()
 }

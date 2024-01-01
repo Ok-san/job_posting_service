@@ -18,21 +18,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import org.example.job_posting_service.R
 import org.example.job_posting_service.screens.FavoritesScreen
 import org.example.job_posting_service.screens.HomeScreen
 import org.example.job_posting_service.screens.ProfileScreen
 import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.richYellow
+import page.main.MainPage
 
-@Composable
-fun Navigation(navController: NavHostController) {
-    NavHost(navController, startDestination = NavigationItem.Home.route) {
-        composable(NavigationItem.Home.route) { HomeScreen() }
-//        composable(NavigationItem.Notification.route) { NotificationScreen() }
-        composable(NavigationItem.Favorites.route) { FavoritesScreen() }
-        composable(NavigationItem.Profile.route) { ProfileScreen() }
-    }
-}
+//@Composable
+//fun Navigation(navController: NavHostController) {
+//    NavHost(navController, startDestination = NavigationItem.Home.route) {
+//        composable(NavigationItem.Home.route) { HomeScreen() }
+////        composable(NavigationItem.Notification.route) { NotificationScreen() }
+//        composable(NavigationItem.Favorites.route) { FavoritesScreen() }
+//        composable(NavigationItem.Profile.route) { ProfileScreen() }
+//    }
+//}
 
 //@Composable
 //fun TopBar() {
@@ -57,59 +59,56 @@ fun Navigation(navController: NavHostController) {
 //}
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
-    val items = listOf(
-        NavigationItem.Home,
-//        NavigationItem.Notification,
-        NavigationItem.Favorites,
-        NavigationItem.Profile,
-    )
+fun BottomNavigationBar(onClick: (MainPage.Tab) -> Unit) {
     BottomNavigation(
         modifier = Modifier.height(52.dp),
         backgroundColor = Color.White,
         contentColor = richYellow,
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
-            BottomNavigationItem(
-                icon = {
-                    Icon(
-                        painter = painterResource(item.icon),
-                        contentDescription = null, //contentDescription = item.title,
-                        modifier = Modifier.size(30.dp)
-                    )
-                },
-                //label = { Text(text = item.title) },
-                selectedContentColor = BaseFont,
-                unselectedContentColor = richYellow,
-                alwaysShowLabel = true,
-                selected = currentRoute == item.route,
-                onClick = {
-                    navController.navigate(item.route) {
-                        // Pop up to the start destination of the graph to
-                        // avoid building up a large stack of destinations
-                        // on the back stack as users select items
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
-                            }
-                        }
-                        // Avoid multiple copies of the same destination when
-                        // selecting the same item
-                        launchSingleTop = true
-                        // Restore state when selecting a previously selected item
-                        restoreState = true
-                    }
-                }
-            )
-        }
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_home),
+                    modifier = Modifier.size(30.dp),
+                    contentDescription = null
+                )
+            },
+            selected = true,
+            selectedContentColor = BaseFont,
+            onClick = {
+                onClick(MainPage.Tab.Home)
+            }
+        )
+
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_favorite_false),
+                    modifier = Modifier.size(30.dp),
+                    contentDescription = null
+                )
+            },
+            selected = true,
+            selectedContentColor = BaseFont,
+            onClick = {
+                onClick(MainPage.Tab.Favorites)
+            }
+        )
+
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_profile),
+                    modifier = Modifier.size(30.dp),
+                    contentDescription = null
+                )
+            },
+            selected = true,
+            selectedContentColor = BaseFont,
+            onClick = {
+                onClick(MainPage.Tab.Profile)
+            }
+        )
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun BottomNavigationBarPreview() {
-    val navController = rememberNavController()
-    BottomNavigationBar(navController)
-}

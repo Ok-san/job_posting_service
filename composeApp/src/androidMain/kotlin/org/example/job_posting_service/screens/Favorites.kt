@@ -23,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import data.master1
-import data.master2
+import data.service1
+import data.service2
 import data.order1
 import data.order2
 import org.example.job_posting_service.ui.theme.BaseLayer
@@ -103,7 +103,7 @@ fun FavoritesScreen() {
 
                 1 -> {
                     itemsIndexed(
-                        listOf(master1, master2, master2, master2)
+                        listOf(service1, service1, service2, service2)
                     ) { _, item ->
                         if (item.favorite) {
                             MasterItem(item = item)

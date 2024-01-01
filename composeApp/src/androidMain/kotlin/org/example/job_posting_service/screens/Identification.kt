@@ -25,11 +25,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import component.identification.FakeSignInComponent
-import component.identification.SignIn
-import component.identification.SignInComponent
+import component.identification.authorization.Authorization
+import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
 import org.example.job_posting_service.ui.theme.BackButtonTint
@@ -37,10 +35,10 @@ import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.ButtonBackground
 import org.example.job_posting_service.ui.theme.ProfileTypography
 import org.example.job_posting_service.ui.theme.SecondLayerShape
-import org.jetbrains.compose.resources.resource
+import page.identification.IdentificationPage
 
 @Composable
-fun IdentificationScreen(component: SignIn) {
+fun IdentificationScreen(component: IdentificationPage) {
 
     val login by component.login.collectAsState(Dispatchers.Main.immediate)
     val password by component.password.collectAsState(Dispatchers.Main.immediate)
@@ -88,17 +86,17 @@ fun IdentificationScreen(component: SignIn) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 RegistrationButton(component)
-                RecoverButton()
-                ForwardButton()
+                RecoverButton(component)
+                ForwardButton(component)
             }
         }
     }
 }
 
 @Composable
-fun ForwardButton() {
+fun ForwardButton(component: IdentificationPage) {
     Button(
-        onClick = { },
+        onClick = component::onSignInClick,
         modifier = Modifier.size(buttonSize),
         shape = SecondLayerShape,
         contentPadding = PaddingValues(0.dp),
@@ -113,9 +111,9 @@ fun ForwardButton() {
 }
 
 @Composable
-fun RegistrationButton(component: SignIn) {
+fun RegistrationButton(component: Registration) {
     TextButton(
-        onClick = component::onSignInClick
+        onClick = component::onRegistrationClick
     ) {
         Text(
             text = "Registration",
@@ -126,9 +124,9 @@ fun RegistrationButton(component: SignIn) {
 }
 
 @Composable
-fun RecoverButton() {
+fun RecoverButton(component: Authorization) {
     TextButton(
-        onClick = { },
+        onClick = component::onRecoverClick,
     ) {
         Text(
             text = "Recover Password",
@@ -139,9 +137,9 @@ fun RecoverButton() {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun IdentificationScreenPreview() {
-
-    IdentificationScreen(component = FakeSignInComponent())
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun IdentificationScreenPreview() {
+//
+//    IdentificationScreen(component = FakeSignInComponent())
+//}
