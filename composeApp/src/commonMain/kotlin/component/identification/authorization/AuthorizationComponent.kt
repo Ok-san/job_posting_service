@@ -5,7 +5,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class AuthorizationComponent(
     componentContext: ComponentContext,
-    val onSignIn: ( ) -> Unit,
+    val onSignIn: () -> Unit,
+    val onRegistration: () -> Unit,
     //private val authorizationRepository: IdentificationRepository
 ) : ComponentContext by componentContext, Authorization {
 
@@ -35,7 +36,7 @@ class AuthorizationComponent(
 
 
     override fun onRegistrationClick() {
-        TODO("Not yet implemented")
+        onRegistration()
     }
 
     override fun onRecoverClick() {

@@ -1,6 +1,5 @@
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.useResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.arkivanov.decompose.DefaultComponentContext
@@ -11,7 +10,7 @@ import utils.runOnUiThread
 fun main() {
     val lifecycle = LifecycleRegistry()
     val root = runOnUiThread {
-        RootComponent(componentContext = DefaultComponentContext(lifecycle=lifecycle))
+        RootComponent(componentContext = DefaultComponentContext(lifecycle = lifecycle))
     }
 
     application {

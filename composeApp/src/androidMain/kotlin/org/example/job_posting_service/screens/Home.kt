@@ -41,7 +41,6 @@ import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.FirstLayer
 import org.example.job_posting_service.ui.theme.richYellow
-import page.main.MainPage
 import page.main.home.HomePage
 
 @Composable

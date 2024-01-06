@@ -8,17 +8,11 @@ import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import component.identification.authorization.AuthorizationComponent
 import component.identification.registration.RegistrationComponent
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Serializable
-import page.main.MainPage
-import page.main.MainPageComponent
-import page.main.favorites.FavoritesPageComponent
-import page.main.home.HomePageComponent
-import page.main.profile.ProfilePageComponent
 
 class IdentificationPageComponent(
     context: ComponentContext,
-    val onSignIn: ( ) -> Unit,
+    val onSignIn: () -> Unit,
 ) : IdentificationPage, ComponentContext by context {
     private val navigate = StackNavigation<Config>()
 
@@ -32,14 +26,15 @@ class IdentificationPageComponent(
         )
 
     private fun child(
-        config: IdentificationPageComponent.Config,
+        config: Config,
         context: ComponentContext
     ): IdentificationPage.Child =
         when (config) {
             is Config.AuthorizationConfig -> IdentificationPage.Child.AuthorizationChild(
                 AuthorizationComponent(
                     componentContext = context,
-                    onSignIn = onSignIn
+                    onSignIn = onSignIn,
+                    onRegistration = { navigate.replaceAll(Config.RegistrationConfig) }
                 )
             )
 

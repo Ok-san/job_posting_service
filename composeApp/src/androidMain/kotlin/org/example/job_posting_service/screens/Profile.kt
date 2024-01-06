@@ -187,7 +187,6 @@ fun ProfileScreen() {
                         style = ProfileTypography.bodyMedium
                     )
 
-                    val message = remember { mutableStateOf("") }
                     BasicTextField(
                         value = message.value,
                         onValueChange = { newText -> message.value = newText },

@@ -37,7 +37,7 @@ class RootComponent(
         }
 
     @Serializable
-    private sealed interface Config  {
+    private sealed interface Config {
         @Serializable
         data object IdentificationScreenConfig : Config
 

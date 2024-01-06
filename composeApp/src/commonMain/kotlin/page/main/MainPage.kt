@@ -2,13 +2,12 @@ package page.main
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import network.model.Model
 import page.main.favorites.FavoritesPage
 import page.main.home.HomePage
 import page.main.profile.ProfilePage
 
 interface MainPage {
-    val route: Value<ChildStack<*, MainPage.Child>>
+    val route: Value<ChildStack<*, Child>>
 
     fun onTabClick(tab: Tab)
 

@@ -11,6 +11,6 @@ interface Registration {
     fun onLoginChanged(login: String)
     fun onPasswordChanged(password: String)
     fun onNameChanged(password: String)
-    fun onRegistrationClick()
+    fun onSignInClick()
     fun onAuthorizationClick()
 }

@@ -1,6 +1,7 @@
 package component.identification.registration
 
 import com.arkivanov.decompose.ComponentContext
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class RegistrationComponent(
@@ -9,10 +10,10 @@ class RegistrationComponent(
 
     ) : Registration, ComponentContext by componentContext {
 
-    override val login: StateFlow<String> = TODO()
-    override val password: StateFlow<String> = TODO()
-    override val name: StateFlow<String> = TODO()
-    override val inProgress: StateFlow<Boolean> = TODO()
+    override val name: StateFlow<String> = MutableStateFlow("")
+    override val login: StateFlow<String> = MutableStateFlow("")
+    override val password: StateFlow<String> = MutableStateFlow("")
+    override val inProgress: StateFlow<Boolean> = MutableStateFlow(false)
 
     override fun onLoginChanged(login: String) {
         TODO("Not yet implemented")
@@ -26,9 +27,8 @@ class RegistrationComponent(
         TODO("Not yet implemented")
     }
 
-    override fun onRegistrationClick() {
-        TODO("Not yet implemented")
-        onSignIn
+    override fun onSignInClick() {
+        onSignIn()
     }
 
     override fun onAuthorizationClick() {

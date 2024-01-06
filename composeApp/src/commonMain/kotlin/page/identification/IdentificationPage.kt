@@ -7,7 +7,8 @@ import component.identification.registration.Registration
 
 interface IdentificationPage {
 
-   val route: Value<ChildStack<*, Child>>
+    val route: Value<ChildStack<*, Child>>
+
     sealed class Child {
         class AuthorizationChild(val component: Authorization) : Child()
         class RegistrationChild(val component: Registration) : Child()
