@@ -31,8 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -41,7 +39,6 @@ import component.identification.authorization.Authorization
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import screens.AuthorizationButton
 
 val BaseLayer = Color(0xFFFFFFFF)
 val FirstLayer = Color(0xFFFCE3AD)
@@ -94,10 +91,10 @@ val SecondLayerShape: Shape = RoundedCornerShape(10.dp)
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun AuthorizationScreen() {
+fun AuthorizationScreen(component: Authorization) {
 
-//    val login by component.login.collectAsState(Dispatchers.Main.immediate)
-//    val password by component.password.collectAsState(Dispatchers.Main.immediate)
+    val login by component.login.collectAsState(Dispatchers.Main.immediate)
+    val password by component.password.collectAsState(Dispatchers.Main.immediate)
 
     Column(
         modifier = Modifier
@@ -126,14 +123,14 @@ fun AuthorizationScreen() {
             )
         }
         Column(modifier = Modifier.fillMaxSize()) {
-//            DefaultField("Email:", login, component::onLoginChanged)
-            DefaultField("Email:", "", {})
+            DefaultField("Email:", login, component::onLoginChanged)
+//            DefaultField("Email:", "", {})
             Box(
                 modifier = Modifier
                     .padding(top = 17.dp)
             ) {
-//                DefaultField("Password:", password, component::onPasswordChanged)
-                DefaultField("Password:", "", {})
+                DefaultField("Password:", password, component::onPasswordChanged)
+//                DefaultField("Password:", "", {})
             }
             Row(
                 modifier = Modifier
@@ -142,11 +139,9 @@ fun AuthorizationScreen() {
                     .padding(top = 34.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-//                RegistrationButton(component)
-//                ForwardButton(component)
 
-                RegistrationButton()
-                ForwardButton()
+                RegistrationButton(component)
+                ForwardButton(component)
             }
         }
     }
@@ -170,10 +165,9 @@ fun ForwardButton(component: Authorization) {
 }
 
 @Composable
-fun ForwardButton(/*component: Registration*/) {
+fun ForwardButton(component: Registration) {
     Button(
-//        onClick = component::onSignInClick,
-        onClick = {},
+        onClick = component::onSignInClick,
         modifier = Modifier.size(buttonSize),
         shape = SecondLayerShape,
         contentPadding = PaddingValues(0.dp),
@@ -188,10 +182,9 @@ fun ForwardButton(/*component: Registration*/) {
 }
 
 @Composable
-fun RegistrationButton(/*component: Authorization*/) {
+fun RegistrationButton(component: Authorization) {
     TextButton(
-//        onClick = component::onRegistrationClick
-        onClick = {}
+        onClick = component::onRegistrationClick
     ) {
         Text(
             text = "Registration",

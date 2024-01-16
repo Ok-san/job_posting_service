@@ -41,7 +41,8 @@ class IdentificationPageComponent(
             Config.RegistrationConfig -> IdentificationPage.Child.RegistrationChild(
                 RegistrationComponent(
                     componentContext = context,
-                    onSignIn = onSignIn
+                    onSignIn = onSignIn,
+                    onAuthorization = { navigate.replaceAll(Config.AuthorizationConfig) }
                 )
             )
         }

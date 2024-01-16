@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 class RegistrationComponent(
     componentContext: ComponentContext,
     val onSignIn: () -> Unit,
+    val onAuthorization: () -> Unit,
 
     ) : Registration, ComponentContext by componentContext {
 
@@ -32,7 +33,7 @@ class RegistrationComponent(
     }
 
     override fun onAuthorizationClick() {
-        TODO("Not yet implemented")
+        onAuthorization()
     }
 
 }

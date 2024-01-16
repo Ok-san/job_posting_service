@@ -6,6 +6,7 @@ internal fun <T> runOnUiThread(block: () -> T): T {
     if (SwingUtilities.isEventDispatchThread()) {
         return block()
     }
+
     var error: Throwable? = null
     var result: T? = null
 

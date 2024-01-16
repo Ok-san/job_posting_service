@@ -30,6 +30,8 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutine)
+            implementation(libs.kotlinx.swing)
         }
         commonMain.dependencies {
             implementation(projects.shared)

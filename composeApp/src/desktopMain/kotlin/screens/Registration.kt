@@ -31,7 +31,6 @@ import org.example.job_posting_service.screens.BaseFont
 import org.example.job_posting_service.screens.DefaultField
 import org.example.job_posting_service.screens.ForwardButton
 import org.example.job_posting_service.screens.ProfileTypography
-import org.example.job_posting_service.screens.RegistrationButton
 import org.example.job_posting_service.screens.mainIconSize
 
 val ProfileTypography = Typography()
@@ -66,11 +65,11 @@ private val Typography.bodyMedium: TextStyle
     }
 
 @Composable
-fun RegistrationScreen() {
+fun RegistrationScreen(component: Registration) {
 
-    //    val login by component.login.collectAsState(Dispatchers.Main.immediate)
-//    val password by component.password.collectAsState(Dispatchers.Main.immediate)
-//    val password by component.password.collectAsState(Dispatchers.Main.immediate)
+    val name by component.login.collectAsState(Dispatchers.Main.immediate)
+    val login by component.login.collectAsState(Dispatchers.Main.immediate)
+    val password by component.password.collectAsState(Dispatchers.Main.immediate)
 
     Column(
         modifier = Modifier
@@ -99,20 +98,20 @@ fun RegistrationScreen() {
             )
         }
         Column(modifier = Modifier.fillMaxSize()) {
-            //            DefaultField(text = "Name:", message = name, change = component::onNameChanged)
-            DefaultField(text = "Name:", message = "", change = {})
+            DefaultField(text = "Name:", message = name, change = component::onNameChanged)
+//            DefaultField(text = "Name:", message = "", change = {})
             Box(
                 modifier = Modifier.padding(top = 17.dp)
             ) {
-//                DefaultField(text = "Email:", message = login, change = component::onLoginChanged)
-                DefaultField(text = "Email:", message = "", change = {})
+                DefaultField(text = "Email:", message = login, change = component::onLoginChanged)
+//                DefaultField(text = "Email:", message = "", change = {})
 
             }
             Box(
                 modifier = Modifier.padding(top = 17.dp)
             ) {
-//                DefaultField(text = "Password:", message = password, change = component::onPasswordChanged)
-                DefaultField(text = "Password:", message = "", change = {})
+                DefaultField(text = "Password:", message = password, change = component::onPasswordChanged)
+//                DefaultField(text = "Password:", message = "", change = {})
             }
             Row(
                 modifier = Modifier
@@ -124,18 +123,17 @@ fun RegistrationScreen() {
 //                AuthorizationButton(component)
 //                ForwardButton(component)
 
-                AuthorizationButton()
-                ForwardButton()
+                AuthorizationButton(component)
+                ForwardButton(component)
             }
         }
     }
 }
 
 @Composable
-fun AuthorizationButton(/*component: Registration*/) {
+fun AuthorizationButton(component: Registration) {
     TextButton(
-//        onClick = component::onAuthorizationClick
-        onClick = {}
+        onClick = component::onAuthorizationClick
     ) {
         Text(
             text = "Authorization",

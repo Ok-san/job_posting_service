@@ -85,7 +85,7 @@ fun AuthorizationScreen(component: Authorization) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 RegistrationButton(component)
-                RecoverButton(component)
+//                RecoverButton(component)
                 ForwardButton(component)
             }
         }
@@ -139,18 +139,18 @@ fun RegistrationButton(component: Authorization) {
     }
 }
 
-@Composable
-fun RecoverButton(component: Authorization) {
-    TextButton(
-        onClick = component::onRecoverClick,
-    ) {
-        Text(
-            text = "Recover Password",
-            textDecoration = TextDecoration.Underline,
-            style = ProfileTypography.labelMedium
-        )
-    }
-}
+//@Composable
+//fun RecoverButton(component: Authorization) {
+//    TextButton(
+//        onClick = component::onRecoverClick,
+//    ) {
+//        Text(
+//            text = "Recover Password",
+//            textDecoration = TextDecoration.Underline,
+//            style = ProfileTypography.labelMedium
+//        )
+//    }
+//}
 
 
 //@Preview(showBackground = true)

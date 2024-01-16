@@ -11,5 +11,4 @@ interface Authorization {
     fun onPasswordChanged(password: String)
     fun onSignInClick()
     fun onRegistrationClick()
-    fun onRecoverClick()
 }

@@ -38,10 +38,6 @@ class AuthorizationComponent(
     override fun onRegistrationClick() {
         onRegistration()
     }
-
-    override fun onRecoverClick() {
-        TODO("Not yet implemented")
-    }
 }
 
 //fun ComponentContext.componentCoroutineScope(): CoroutineScope {
