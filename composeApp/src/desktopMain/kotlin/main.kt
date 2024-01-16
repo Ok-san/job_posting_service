@@ -4,6 +4,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import org.example.job_posting_service.screens.AuthorizationScreen
 import root.RootComponent
 import utils.runOnUiThread
 
@@ -15,7 +16,8 @@ fun main() {
 
     application {
         Window(onCloseRequest = ::exitApplication) {
-            App()
+            AuthorizationScreen()
+//            App()
 //            App(component = root)
         }
     }
