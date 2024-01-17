@@ -21,17 +21,17 @@ fun MainScreen(component: MainPage) {
             )
         },
         content = { padding ->
-            Box(modifier = Modifier.padding(padding))
-            Children(
-                stack = component.childStack,
-                animation = stackAnimation(slide())
-            ) {
-                when (val child = it.instance) {
-                    is MainPage.Child.Favorites -> FavoritesScreen()
-                    is MainPage.Child.Home -> HomeScreen(child.component)
-                    is MainPage.Child.Profile -> ProfileScreen()
+            Box(modifier = Modifier.padding(padding)) {
+                Children(
+                    stack = component.childStack,
+                    animation = stackAnimation(slide())
+                ) {
+                    when (val child = it.instance) {
+                        is MainPage.Child.Favorites -> FavoritesScreen()
+                        is MainPage.Child.Home -> HomeScreen(child.component)
+                        is MainPage.Child.Profile -> ProfileScreen()
+                    }
                 }
-
             }
         }
     )

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -21,7 +22,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -30,9 +30,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,18 +38,15 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import org.example.job_posting_service.R
 import data.CommentsModel
 import data.OrdersModel
-import data.comments
-import data.order1
 import org.example.job_posting_service.ui.theme.BackButtonTint
 import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
@@ -62,12 +56,10 @@ import org.example.job_posting_service.ui.theme.SecondLayerShape
 import org.example.job_posting_service.ui.theme.richYellow
 import org.example.job_posting_service.ui.theme.textGrey
 
-val item = order1
-
 @Composable
 fun OrderDetailsScreen(component: OrderDetails) {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
-
+    val model by component.model.subscribeAsState()
+    val order = model.order
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -106,7 +98,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
                 )
                 .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp)
         ) {
-            CardItem()
+            CardItem(order)
             Text(
                 text = "Comments:",
                 fontSize = 16.sp,
@@ -122,55 +114,52 @@ fun OrderDetailsScreen(component: OrderDetails) {
                     CommentItem(comment)
                 }
             }
-            TextField(
-                value = text,
-                shape = RoundedCornerShape(size = 10.dp),
+            Box(
                 modifier = Modifier
                     .padding(top = 7.dp)
+                    .fillMaxSize()
                     .fillMaxWidth()
-                    .height(117.dp)
-                    .background(
-                        color = Color(0x85FFFFFF),
-                        shape = RoundedCornerShape(size = 15.dp)
-                    ),
-                onValueChange = { newText ->
-                    text = newText
-                },
-                textStyle = TextStyle(
-                    fontSize = 16.sp,
+            ) {
+                TextField(
+                    value = model.commentText.toString(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(44.dp)
+                        .background(
+                            color = BaseLayer,
+                            shape = RoundedCornerShape(size = 15.dp)
+                        ),
+                    onValueChange = component::onChangeTextComment,
+                    textStyle = TextStyle(
+                        fontSize = 16.sp,
 
 //                fontFamily = FontFamily(Font(R.font.inter)),
-                    fontWeight = FontWeight(400),
-                    color = BaseFont
-                ),
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = Color(0x308A9994),
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent
-                ),
-                maxLines = 1,
-            )
-            Button(
-                onClick = { },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp)
-                    .padding(top = 5.dp),
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = BaseLayer,
-                    contentColor = BaseFont
+                        fontWeight = FontWeight(400),
+                        color = BaseFont
+                    ),
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = richYellow,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent
+                    ),
+                    maxLines = 1,
                 )
+                Button(
+                    onClick = component::onSendCommentClick,
+                    modifier = Modifier
+                        .width(44.dp)
+                        .height(44.dp)
+                        .padding(top = 5.dp),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = BaseLayer,
+                        contentColor = BaseFont
+                    )
+                ) {
 
-            ) {
-                Text(text = "Add comment")
+                }
             }
-            Divider(
-                modifier = Modifier.fillMaxWidth(),
-                color = BaseFont,
-                // thickness = 1.dp
-            )
         }
     }
 }
@@ -193,7 +182,7 @@ fun BackButton(component: OrderDetails) {
 }
 
 @Composable
-fun CardItem() {
+fun CardItem(order: OrdersModel) {
     Card(
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
@@ -224,7 +213,7 @@ fun CardItem() {
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = item.title,
+                text = order.title,
                 color = BaseFont,
                 fontSize = 18.sp,
                 fontWeight = FontWeight(600)
@@ -237,14 +226,14 @@ fun CardItem() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = item.description,
+                    text = order.description,
                     color = BaseFont,
                     fontSize = 14.sp,
                     modifier = Modifier.requiredWidth(202.dp)
                 )
-                if (item.price != null) {
+                if (order.price != null) {
                     Text(
-                        text = "${item.price} P",
+                        text = "${order.price} P",
                         fontWeight = FontWeight(700),
                         color = Color(0xFFE8B100),
                         textAlign = TextAlign.End
@@ -267,7 +256,7 @@ fun CardItem() {
             ) {
                 Column {
                     Text(
-                        text = "Deadline: ${item.deadline}",
+                        text = "Deadline: ${order.deadline}",
                         color = textGrey,
                         fontWeight = FontWeight(400),
                         fontSize = 14.sp,
@@ -275,7 +264,7 @@ fun CardItem() {
 
                     )
                     Text(
-                        text = "Published: ${item.publicationDate}",
+                        text = "Published: ${order.publicationDate}",
                         color = textGrey,
                         fontWeight = FontWeight(400),
                         fontSize = 14.sp,
@@ -283,7 +272,7 @@ fun CardItem() {
                     )
                 }
                 Text(
-                    text = item.city,
+                    text = order.city,
                     textAlign = TextAlign.End,
                     color = textGrey,
                     fontWeight = FontWeight(400),
@@ -339,7 +328,7 @@ fun CommentItem(comment: CommentsModel) {
             ) {
                 Column {
                     Text(
-                        text = "Published: ${item.publicationDate}",
+                        text = "Published: ${comment.publicationDate}",
                         color = textGrey,
                         fontWeight = FontWeight(400),
                         fontSize = 14.sp,

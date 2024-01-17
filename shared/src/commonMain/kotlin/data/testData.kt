@@ -1,7 +1,7 @@
 package data
 
 val orders: MutableList<OrdersModel>
-    get() = mutableListOf(order1, order2, order2, order2)
+    get() = mutableListOf(order1, order2, order3, order2)
 
 val comments: MutableList<CommentsModel> by lazy { mutableListOf(comment1, comment1) }
 
@@ -13,18 +13,20 @@ val order1 = OrdersModel(
     publicationDate = "Oct 22, 2023",
     specialization = "Manicure",
     city = "San Vicente de Tagua Tagua",
-    deadline = "Deadline: Nov 11, 2023"
+    deadline = "Nov 11, 2023"
 )
 val order2 = OrdersModel(
-    title = "I need help I need help I need help I need help",
+    title = "I need help",
     description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
-    price = "100 000 000",
+    price = "100 000",
     favorite = true,
-    publicationDate = "Oct 22, 2023",
+    publicationDate = "Oct 14, 2023",
     specialization = "Java",
-    city = "San Vicente de Tagua Tagua",
-    deadline = null
+    city = "Santiago",
+    deadline = "March 11, 2024"
 )
+val order3 = order2.copy(description = "")
+
 val profile1 = ProfileModel(
     id = 0,
     name = "Oksanus",

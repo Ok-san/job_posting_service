@@ -5,6 +5,7 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import data.CommentsModel
 import data.comments
+import data.orders
 
 class OrderDetailsComponent(
     componentContext: ComponentContext,
@@ -16,7 +17,9 @@ class OrderDetailsComponent(
         OrderDetails.Model(
 //            comments = database.getComments(id)
             comments = comments,
-            commentText = ""
+            commentText = "",
+//            order = database.getOrder(id)
+            order = orders[orderId!!.toInt()]
         )
     )
 

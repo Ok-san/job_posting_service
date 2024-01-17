@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrdersList
 import org.example.job_posting_service.R
 import data.OrdersModel
@@ -113,6 +114,9 @@ fun OrdersListScreen(component: OrdersList) {
 
 @Composable
 fun OrderItem(item: OrdersModel, component: OrdersList, index: Long) {
+    val model by component.model.subscribeAsState()
+    val favorite = model.ordersList.get(index.toInt()).favorite
+
     Card(
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
@@ -142,7 +146,7 @@ fun OrderItem(item: OrdersModel, component: OrdersList, index: Long) {
                     modifier = Modifier.requiredWidth(288.dp)
                 )
 
-                when (item.favorite) {
+                when (favorite) {
                     false ->
                         Image(
                             alignment = Alignment.TopEnd,
