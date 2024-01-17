@@ -1,6 +1,7 @@
 package data
 
-data class CommentModel (
+data class CommentsModel(
+    val id: Long,
     val author: String,
     val description: String,
     val publicationDate: String,

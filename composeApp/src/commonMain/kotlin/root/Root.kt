@@ -6,7 +6,7 @@ import page.identification.IdentificationPage
 import page.main.MainPage
 
 interface Root {
-    val route: Value<ChildStack<*, Child>>
+    val childStack: Value<ChildStack<*, Child>>
 
     sealed class Child {
         class Identification(val component: IdentificationPage) : Child()

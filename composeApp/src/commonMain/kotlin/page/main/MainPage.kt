@@ -7,7 +7,7 @@ import page.main.home.HomePage
 import page.main.profile.ProfilePage
 
 interface MainPage {
-    val route: Value<ChildStack<*, Child>>
+    val childStack: Value<ChildStack<*, Child>>
 
     fun onTabClick(tab: Tab)
 

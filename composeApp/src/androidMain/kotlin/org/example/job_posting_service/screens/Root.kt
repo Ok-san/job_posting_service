@@ -10,7 +10,7 @@ import root.RootComponent
 @Composable
 fun RootScreen(rootComponent: RootComponent) {
     Children(
-        stack = rootComponent.route,
+        stack = rootComponent.childStack,
         animation = stackAnimation(slide())
     ) {
         when (val child = it.instance) {

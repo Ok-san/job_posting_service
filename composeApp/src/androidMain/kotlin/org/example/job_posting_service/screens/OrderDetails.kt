@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,9 +22,12 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,20 +47,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import component.home.orderlist.OrderDetails
 import org.example.job_posting_service.R
-import data.CommentModel
-import data.comment1
+import data.CommentsModel
+import data.OrdersModel
+import data.comments
 import data.order1
+import org.example.job_posting_service.ui.theme.BackButtonTint
 import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
+import org.example.job_posting_service.ui.theme.ButtonBackground
 import org.example.job_posting_service.ui.theme.FirstLayer
+import org.example.job_posting_service.ui.theme.SecondLayerShape
 import org.example.job_posting_service.ui.theme.richYellow
 import org.example.job_posting_service.ui.theme.textGrey
 
 val item = order1
 
 @Composable
-fun OrderScreen() {
+fun OrderDetailsScreen(component: OrderDetails) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
@@ -69,7 +78,7 @@ fun OrderScreen() {
                 .fillMaxWidth()
                 .padding(top = 47.dp, start = 20.dp, end = 20.dp)
         ) {
-            BackButton()
+            BackButton(component)
         }
         Box(
             modifier = Modifier
@@ -97,7 +106,6 @@ fun OrderScreen() {
                 )
                 .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp)
         ) {
-
             CardItem()
             Text(
                 text = "Comments:",
@@ -109,7 +117,7 @@ fun OrderScreen() {
             )
             LazyColumn {
                 itemsIndexed(
-                    listOf(comment1, comment1)
+                    component.model.value.comments
                 ) { _, comment ->
                     CommentItem(comment)
                 }
@@ -168,6 +176,23 @@ fun OrderScreen() {
 }
 
 @Composable
+fun BackButton(component: OrderDetails) {
+    Button(
+        onClick = component::onBackClick,
+        modifier = Modifier.size(buttonSize),
+        shape = SecondLayerShape,
+        contentPadding = PaddingValues(0.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground)
+    ) {
+        Icon(
+            Icons.Default.ArrowBack,
+            contentDescription = "",
+            tint = BackButtonTint
+        )
+    }
+}
+
+@Composable
 fun CardItem() {
     Card(
         elevation = 5.dp,
@@ -184,7 +209,7 @@ fun CardItem() {
                 .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
         ) {
             Text(
-                text = "Author Name",
+                text = "AUTHOR",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(7.dp),
@@ -270,7 +295,7 @@ fun CardItem() {
 }
 
 @Composable
-fun CommentItem(comment: CommentModel) {
+fun CommentItem(comment: CommentsModel) {
     Card(
         elevation = 5.dp,
         shape = RoundedCornerShape(15.dp),
@@ -335,8 +360,8 @@ fun CommentItem(comment: CommentModel) {
     }
 }
 
-@Composable
-@Preview
-fun OrderScreenPreview() {
-    OrderScreen()
-}
+//@Composable
+//@Preview
+//fun OrderScreenPreview() {
+//    OrderDetailsScreen()
+//}

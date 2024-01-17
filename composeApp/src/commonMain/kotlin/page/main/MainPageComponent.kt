@@ -16,7 +16,7 @@ class MainPageComponent(
 ) : MainPage, ComponentContext by context {
     private val navigate = StackNavigation<Config>()
 
-    override val route: Value<ChildStack<*, MainPage.Child>> =
+    override val childStack: Value<ChildStack<*, MainPage.Child>> =
         childStack(
             source = navigate,
             initialConfiguration = Config.HomePageConfig,

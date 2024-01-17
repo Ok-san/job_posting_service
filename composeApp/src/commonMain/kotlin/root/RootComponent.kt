@@ -16,7 +16,7 @@ class RootComponent(
 
     private val navigate = StackNavigation<Config>()
 
-    override val route: Value<ChildStack<*, Root.Child>> =
+    override val childStack: Value<ChildStack<*, Root.Child>> =
         childStack(
             source = navigate,
             serializer = Config.serializer(),

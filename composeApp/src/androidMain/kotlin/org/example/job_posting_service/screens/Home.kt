@@ -11,18 +11,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,81 +30,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import org.example.job_posting_service.R
-import data.*
 import org.example.job_posting_service.ui.theme.BaseFont
 import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.FirstLayer
 import org.example.job_posting_service.ui.theme.richYellow
+import page.identification.IdentificationPage
 import page.main.home.HomePage
 
 @Composable
 fun HomeScreen(component: HomePage) {
-
-    var tabIndex by remember { mutableIntStateOf(0) }
-    val tabs = listOf("Orders", "Masters")
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BaseLayer)
+    Children(
+        stack = component.childStack,
+        animation = stackAnimation(slide())
     ) {
-        SettingBar()
-
-        TabRow(
-            modifier = Modifier
-                .padding(top = 42.dp, bottom = 12.dp)
-                .height(22.dp),
-            selectedTabIndex = tabIndex,
-            contentColor = richYellow,
-            divider = {},
-        ) {
-            tabs.forEachIndexed { index, title ->
-                Tab(text = {
-                    Text(
-                        title,
-                        color = BaseFont,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                },
-                    modifier = Modifier
-                        .background(color = BaseLayer),
-                    selected = tabIndex == index,
-                    onClick = { tabIndex = index }
-                )
-            }
-        }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    color = FirstLayer,
-                    shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp)
-                )
-                .padding(top = 22.dp, start = 20.dp, end = 20.dp),
-
-            ) {
-            when (tabIndex) {
-                0 -> {
-                    itemsIndexed(
-                        listOf(order1, order2, order2, order2)
-                    ) { _, item ->
-                        OrderItem(item = item)
-                    }
-                }
-
-                1 -> {
-                    itemsIndexed(
-                        listOf(service1, service2, service2, service2)
-                    ) { _, item ->
-                        MasterItem(item = item)
-                    }
-                }
-            }
+        when (val child = it.instance) {
+            is HomePage.Child.OrderListChild -> OrdersListScreen(component = child.component)
+            is HomePage.Child.OrderDetailsChild -> OrderDetailsScreen(component = child.component)
         }
     }
+
 }
+
 
 @Composable
 fun SettingBar() {

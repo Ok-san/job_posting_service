@@ -16,7 +16,7 @@ class IdentificationPageComponent(
 ) : IdentificationPage, ComponentContext by context {
     private val navigate = StackNavigation<Config>()
 
-    override val route: Value<ChildStack<*, IdentificationPage.Child>> =
+    override val childStack: Value<ChildStack<*, IdentificationPage.Child>> =
         childStack(
             source = navigate,
             initialConfiguration = Config.AuthorizationConfig,

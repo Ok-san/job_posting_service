@@ -41,8 +41,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import component.home.orderlist.OrderDetails
 import org.example.job_posting_service.R
 import org.example.job_posting_service.ui.theme.*
+import page.main.MainPage
 
 val mainIconSize = 100.dp
 val buttonSize = 40.dp
@@ -237,7 +239,7 @@ fun DefaultField(text: String, message: String, change: (String) -> Unit) {
 @Composable
 fun BackButton() {
     Button(
-        onClick = { },
+        onClick = {},
         modifier = Modifier.size(buttonSize),
         shape = SecondLayerShape,
         contentPadding = PaddingValues(0.dp),

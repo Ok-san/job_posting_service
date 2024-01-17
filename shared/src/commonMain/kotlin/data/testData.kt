@@ -1,5 +1,10 @@
 package data
 
+val orders: MutableList<OrdersModel>
+    get() = mutableListOf(order1, order2, order2, order2)
+
+val comments: MutableList<CommentsModel> by lazy { mutableListOf(comment1, comment1) }
+
 val order1 = OrdersModel(
     title = "I need help I need help I need help I need help",
     description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
@@ -21,6 +26,7 @@ val order2 = OrdersModel(
     deadline = null
 )
 val profile1 = ProfileModel(
+    id = 0,
     name = "Oksanus",
     city = "San Vicente de Tagua Tagua",
     address = null,
@@ -29,6 +35,7 @@ val profile1 = ProfileModel(
     services = null
 )
 val profile2 = ProfileModel(
+    id = 1,
     name = "Oksanus",
     city = "San Vicente de Tagua Tagua",
     address = null,
@@ -38,6 +45,7 @@ val profile2 = ProfileModel(
 )
 
 val service1 = ServicesModel(
+    id = 0,
     category = "Beauty",
     description = "I'm very smart and cool. I’ve been working for a thousand years and in general everything is great for me.\n" +
             "I prefer to work remotely. But I can also come to you. \n" +
@@ -48,6 +56,7 @@ val service1 = ServicesModel(
     publicationDate = "Oct 22, 2023"
 )
 val service2 = ServicesModel(
+    id = 1,
     category = "Beauty",
     description = "I'm very smart and cool. I’ve been working for a thousand years and in general everything is great for me.\n" +
             "I prefer to work remotely. But I can also come to you. \n" +
@@ -57,8 +66,9 @@ val service2 = ServicesModel(
     master = profile2,
     publicationDate = "Oct 22, 2023"
 )
-val comment1 = CommentModel(
+val comment1 = CommentsModel(
+    id = 0,
     author = "Oksanus",
     description = "I'll do it in an hour during the week",
-    publicationDate ="Oct 22, 2023"
+    publicationDate = "Oct 22, 2023"
 )

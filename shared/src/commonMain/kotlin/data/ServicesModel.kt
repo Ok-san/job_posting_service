@@ -1,7 +1,7 @@
 package data
 
-data class ServicesModel (
-    val profileId: Int = 0,
+data class ServicesModel(
+    val id: Long,
     val category: String,
     val specialization: String,
     val coast: String? = null,

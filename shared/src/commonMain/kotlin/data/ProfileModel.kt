@@ -1,6 +1,7 @@
 package data
 
 data class ProfileModel(
+    val id: Long,
     val name: String,
     val city: String,
     val address: String?,

@@ -23,7 +23,7 @@ fun MainScreen(component: MainPage) {
         content = { padding ->
             Box(modifier = Modifier.padding(padding))
             Children(
-                stack = component.route,
+                stack = component.childStack,
                 animation = stackAnimation(slide())
             ) {
                 when (val child = it.instance) {
