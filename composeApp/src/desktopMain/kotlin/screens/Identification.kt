@@ -10,7 +10,7 @@ import page.identification.IdentificationPage
 @Composable
 fun IdentificationScreen(component: IdentificationPage) {
     Children(
-        stack = component.route,
+        stack = component.childStack,
         animation = stackAnimation(slide())
     ) {
         when (val child = it.instance) {
