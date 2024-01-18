@@ -41,13 +41,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import component.home.orderlist.OrderDetails
 import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.*
-import page.main.MainPage
-
-val mainIconSize = 100.dp
-val buttonSize = 40.dp
+import org.example.job_posting_service.ui.theme.ProfileTypography
+import org.example.job_posting_service.ui.theme.buttonSize
+import org.example.job_posting_service.ui.theme.mainIconSize
+import theme.BackButtonTint
+import theme.BaseFont
+import theme.BaseLayer
+import theme.ButtonBackground
+import theme.FavoriteButtonTint
+import theme.FirstLayer
+import theme.FirstLayerShape
+import theme.PlaceholderBackground
+import theme.SecondLayer
+import theme.SecondLayerShape
 
 @Composable
 fun ProfileScreen() {

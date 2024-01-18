@@ -1,32 +1,37 @@
 package screens
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
+import navigation.NavigationBar
 import page.main.MainPage
+import ui.theme.navigationBarSize
 
 @Composable
 fun MainScreen(component: MainPage) {
-   /* Scaffold(
+    Scaffold(
         bottomBar = {
-            BottomNavigationBar(
+            NavigationBar(
                 onClick = component::onTabClick
             )
         },
-        content = { padding ->
-            Box(modifier = Modifier.padding(padding))
+        content = {
             Children(
-                stack = component.route,
+                modifier = Modifier.padding(start = navigationBarSize),
+                stack = component.childStack,
                 animation = stackAnimation(slide())
             ) {
                 when (val child = it.instance) {
-                    is MainPage.Child.Favorites -> FavoritesScreen()
+//            is MainPage.Child.Favorites -> FavoritesScreen()
                     is MainPage.Child.Home -> HomeScreen(child.component)
-                    is MainPage.Child.Profile -> ProfileScreen()
+//            is MainPage.Child.Profile -> ProfileScreen()
+                    else -> {}
                 }
-
             }
         }
-    )*/
+    )
 }

@@ -23,8 +23,9 @@ import androidx.compose.ui.unit.dp
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.BaseLayer
 import org.example.job_posting_service.ui.theme.ProfileTypography
+import org.example.job_posting_service.ui.theme.mainIconSize
+import theme.BaseLayer
 
 @Composable
 fun RegistrationScreen(component: Registration) {

@@ -1,6 +1,6 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 import org.jetbrains.compose.ExperimentalComposeLibrary
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -108,9 +108,6 @@ android {
         implementation("androidx.navigation:navigation-compose:2.7.4")
     }
 }
-//dependencies {
-//    implementation(libs.androidx.material3)
-//}
 
 compose.desktop {
     application {

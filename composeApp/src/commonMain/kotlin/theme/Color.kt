@@ -1,9 +1,6 @@
-package org.example.job_posting_service.ui.theme
+package theme
 
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
 
 // General
 val BaseLayer = Color(0xFFFFFFFF)
@@ -24,7 +21,3 @@ val PlaceholderBackground = Color(0xFFEDF1F6)
 val richYellow = Color(0xFFE8B100)
 val textGrey = Color(0xFF8A9994)
 //
-
-// Shapes
-val FirstLayerShape: Shape = RoundedCornerShape(20.dp)
-val SecondLayerShape: Shape = RoundedCornerShape(10.dp)

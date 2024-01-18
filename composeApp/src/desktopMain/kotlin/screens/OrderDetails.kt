@@ -46,10 +46,6 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import data.CommentsModel
 import data.OrdersModel
-import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.buttonSize
-import org.example.job_posting_service.ui.theme.mainIconSize
-
 import theme.BackButtonTint
 import theme.BaseFont
 import theme.BaseLayer
@@ -58,6 +54,8 @@ import theme.FirstLayer
 import theme.SecondLayerShape
 import theme.richYellow
 import theme.textGrey
+import ui.theme.buttonSize
+import ui.theme.mainIconSize
 
 
 @Composable
@@ -84,7 +82,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo),
+                painter = painterResource("drawable/logo.xml"),
                 contentDescription = null,
                 modifier = Modifier
                     .size(mainIconSize)
@@ -102,16 +100,19 @@ fun OrderDetailsScreen(component: OrderDetails) {
                 )
                 .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp)
         ) {
-            CardItem(order)
-            Text(
-                text = "Comments:",
-                fontSize = 16.sp,
-//        fontFamily = FontFamily(Font(R.font.inter)),
-                fontWeight = FontWeight(400),
-                color = Color(0xFF3F6359),
-                modifier = Modifier.padding(top = 12.dp, bottom = 12.dp)
-            )
             LazyColumn {
+                item { CardItem(order) }
+                item {
+                    Text(
+                        text = "Comments:",
+                        fontSize = 16.sp,
+//        fontFamily = FontFamily(Font(R.font.inter)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF3F6359),
+                        modifier = Modifier.padding(top = 12.dp, bottom = 12.dp)
+                    )
+                }
+
                 itemsIndexed(
                     component.model.value.comments
                 ) { _, comment ->

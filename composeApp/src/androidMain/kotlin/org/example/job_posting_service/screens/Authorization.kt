@@ -30,11 +30,13 @@ import component.identification.authorization.Authorization
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.BackButtonTint
-import org.example.job_posting_service.ui.theme.BaseLayer
-import org.example.job_posting_service.ui.theme.ButtonBackground
 import org.example.job_posting_service.ui.theme.ProfileTypography
-import org.example.job_posting_service.ui.theme.SecondLayerShape
+import org.example.job_posting_service.ui.theme.buttonSize
+import org.example.job_posting_service.ui.theme.mainIconSize
+import theme.BackButtonTint
+import theme.BaseLayer
+import theme.ButtonBackground
+import theme.SecondLayerShape
 
 @Composable
 fun AuthorizationScreen(component: Authorization) {
@@ -156,6 +158,5 @@ fun RegistrationButton(component: Authorization) {
 //@Preview(showBackground = true)
 //@Composable
 //fun IdentificationScreenPreview() {
-//
-//    IdentificationScreen(component = FakeSignInComponent())
+//    IdentificationScreen({})
 //}

@@ -3,7 +3,6 @@ package org.example.job_posting_service.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,12 +33,8 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.BaseFont
-import org.example.job_posting_service.ui.theme.BaseLayer
-import org.example.job_posting_service.ui.theme.FirstLayer
-import org.example.job_posting_service.ui.theme.richYellow
-import page.identification.IdentificationPage
 import page.main.home.HomePage
+import theme.BaseFont
 
 @Composable
 fun HomeScreen(component: HomePage) {
@@ -52,7 +47,6 @@ fun HomeScreen(component: HomePage) {
             is HomePage.Child.OrderDetailsChild -> OrderDetailsScreen(component = child.component)
         }
     }
-
 }
 
 
@@ -78,7 +72,6 @@ fun SettingBar() {
             },
             textStyle = TextStyle(
                 fontSize = 16.sp,
-
 //                fontFamily = FontFamily(Font(R.font.inter)),
                 fontWeight = FontWeight(400),
                 color = BaseFont

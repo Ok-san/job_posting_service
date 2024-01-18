@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screens
+package screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,16 +14,18 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.ServicesModel
-import org.example.job_posting_service.R
 import theme.BaseFont
 import theme.BaseLayer
 import theme.richYellow
@@ -59,23 +61,24 @@ fun MasterItem(item: ServicesModel) {
                     modifier = Modifier.requiredWidth(288.dp)
                 )
                 when (item.favorite) {
-                    false ->
-                        Image(
-                            alignment = Alignment.TopEnd,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .clickable { },
-                            painter = painterResource(id = R.drawable.ic_favorite_false),
-                            contentDescription = "favorite false",
-                            //contentScale = ContentScale.None
-                        )
+                    false -> Image(
+                        alignment = Alignment.TopEnd,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clickable { },
+                        painter = rememberVectorPainter(Icons.Default.Favorite),
+//                            painter = painterResource(id = R.drawable.ic_favorite_false),
+                        contentDescription = "favorite false",
+                        //contentScale = ContentScale.None
+                    )
 
                     true -> Image(
                         modifier = Modifier
                             .fillMaxSize()
                             .clickable { },
                         alignment = Alignment.TopEnd,
-                        painter = painterResource(id = R.drawable.ic_favorite_true),
+                        painter = rememberVectorPainter(Icons.Filled.Favorite),
+//                        painter = painterResource(id = R.drawable.ic_favorite_true),
                         contentDescription = "favorite true",
                         //contentScale = ContentScale.None
                     )
@@ -98,7 +101,8 @@ fun MasterItem(item: ServicesModel) {
                     modifier = Modifier
                         .requiredSize(50.dp)
                         .fillMaxSize(),
-                    painter = painterResource(id = R.drawable.logo),
+//                    painter = painterResource(id = R.drawable.logo),
+                    painter = painterResource("drawable/logo.png"),
                     contentDescription = "image description",
                 )
             }
