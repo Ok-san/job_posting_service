@@ -28,6 +28,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -102,18 +103,22 @@ fun OrderDetailsScreen(component: OrderDetails) {
                 )
                 .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp)
         ) {
-            CardItem(order)
-            Text(
-                text = "Comments:",
-                fontSize = 16.sp,
-//        fontFamily = FontFamily(Font(R.font.inter)),
-                fontWeight = FontWeight(400),
-                color = Color(0xFF3F6359),
-                modifier = Modifier.padding(top = 12.dp, bottom = 12.dp)
-            )
             LazyColumn {
+                item {
+                    CardItem(order)
+                }
+                item {
+                    Text(
+                        text = "Comments:",
+                        fontSize = 16.sp,
+//        fontFamily = FontFamily(Font(R.font.inter)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF3F6359),
+                        modifier = Modifier.padding(top = 12.dp, bottom = 12.dp)
+                    )
+                }
                 itemsIndexed(
-                    component.model.value.comments
+                    model.comments
                 ) { _, comment ->
                     CommentItem(comment)
                 }
@@ -142,7 +147,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
                         color = BaseFont
                     ),
                     colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = richYellow,
+                        backgroundColor = BaseLayer,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent
@@ -161,7 +166,11 @@ fun OrderDetailsScreen(component: OrderDetails) {
                         contentColor = BaseFont
                     )
                 ) {
-
+                    Icon(
+                        Icons.Default.ArrowForward,
+                        contentDescription = "",
+                        tint = BackButtonTint
+                    )
                 }
             }
         }

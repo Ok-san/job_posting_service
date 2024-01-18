@@ -19,7 +19,7 @@ class OrdersListComponent(
             ordersList = orders,
         )
     )
-    override val model: Value<OrdersList.Model> = _model
+    override val model: Value<OrdersList.Model> get() = _model
 
 
     override fun onLikeClicked(id: Long) {

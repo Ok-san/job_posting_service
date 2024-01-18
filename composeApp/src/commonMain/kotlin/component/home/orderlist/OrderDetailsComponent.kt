@@ -23,7 +23,7 @@ class OrderDetailsComponent(
         )
     )
 
-    override val model: Value<OrderDetails.Model> = _model
+    override val model: Value<OrderDetails.Model> get() = _model
 
     override fun onBackClick() {
         onBack()
