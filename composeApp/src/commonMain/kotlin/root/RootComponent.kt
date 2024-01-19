@@ -11,37 +11,40 @@ import page.identification.IdentificationPageComponent
 import page.main.MainPageComponent
 
 class RootComponent(
-    componentContext: ComponentContext,
+  componentContext: ComponentContext,
 ) : Root, ComponentContext by componentContext {
+  private val navigate = StackNavigation<Config>()
 
-    private val navigate = StackNavigation<Config>()
+  override val childStack: Value<ChildStack<*, Root.Child>> =
+    childStack(
+      source = navigate,
+      serializer = Config.serializer(),
+      initialConfiguration = Config.IdentificationScreenConfig,
+      childFactory = ::child,
+    )
 
-    override val childStack: Value<ChildStack<*, Root.Child>> =
-        childStack(
-            source = navigate,
-            serializer = Config.serializer(),
-            initialConfiguration = Config.IdentificationScreenConfig,
-            childFactory = ::child
+  private fun child(
+    config: Config,
+    context: ComponentContext,
+  ): Root.Child =
+    when (config) {
+      is Config.IdentificationScreenConfig ->
+        Root.Child.Identification(
+          IdentificationPageComponent(
+            context = context,
+            onSignIn = { navigate.replaceAll(Config.MainScreenConfig) },
+          ),
         )
 
-    private fun child(config: Config, context: ComponentContext): Root.Child =
-        when (config) {
-            is Config.IdentificationScreenConfig -> Root.Child.Identification(
-                IdentificationPageComponent(
-                    context = context,
-                    onSignIn = { navigate.replaceAll(Config.MainScreenConfig) },
-                )
-            )
+      is Config.MainScreenConfig -> Root.Child.Main(MainPageComponent(context = context))
+    }
 
-            is Config.MainScreenConfig -> Root.Child.Main(MainPageComponent(context = context))
-        }
+  @Serializable
+  private sealed interface Config {
+    @Serializable
+    data object IdentificationScreenConfig : Config
 
     @Serializable
-    private sealed interface Config {
-        @Serializable
-        data object IdentificationScreenConfig : Config
-
-        @Serializable
-        data object MainScreenConfig : Config
-    }
+    data object MainScreenConfig : Config
+  }
 }

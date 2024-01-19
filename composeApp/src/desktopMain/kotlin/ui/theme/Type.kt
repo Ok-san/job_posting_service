@@ -8,7 +8,8 @@ import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.sp
 import theme.BaseFont
 
-val InterFamily = FontFamily(
+val InterFamily =
+  FontFamily(
     Font("font/inter_black.ttf", FontWeight.Black),
     Font("font/inter_bold.ttf", FontWeight.Bold),
     Font("font/inter_extrabold.ttf", FontWeight.ExtraBold),
@@ -17,32 +18,37 @@ val InterFamily = FontFamily(
     Font("font/inter_medium.ttf", FontWeight.Medium),
     Font("font/inter_regular.ttf", FontWeight.Normal),
     Font("font/inter_semibold.ttf", FontWeight.SemiBold),
-    Font("font/inter_thin.ttf", FontWeight.Thin)
-)
+    Font("font/inter_thin.ttf", FontWeight.Thin),
+  )
 
-val ProfileTypography = Typography(
-    titleMedium = TextStyle(
+val ProfileTypography =
+  Typography(
+    titleMedium =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
-    ),
-    labelMedium = TextStyle(
+      ),
+    labelMedium =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
-    ),
-    labelSmall = TextStyle(
+      ),
+    labelSmall =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Light,
         fontSize = 14.sp,
-    ),
-    bodyMedium = TextStyle(
+      ),
+    bodyMedium =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
-    ),
-)
+      ),
+  )

@@ -19,23 +19,23 @@ import org.jetbrains.compose.resources.painterResource
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
-    MaterialTheme {
-        var greetingText by remember { mutableStateOf("Hello World!") }
-        var showImage by remember { mutableStateOf(false) }
-        val FavoriteButtonTint = Color(0xFFFDB3D7)
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = {
-                greetingText = "Compose: ${Greeting().greet()}"
-                showImage = !showImage
-            }) {
-                Text(greetingText, color=FavoriteButtonTint)
-            }
-            AnimatedVisibility(showImage) {
-                Image(
-                    painterResource("compose-multiplatform.xml"),
-                    null
-                )
-            }
-        }
+  MaterialTheme {
+    var greetingText by remember { mutableStateOf("Hello World!") }
+    var showImage by remember { mutableStateOf(false) }
+    val favoriteButtonTint = Color(0xFFFDB3D7)
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+      Button(onClick = {
+        greetingText = "Compose: ${Greeting().greet()}"
+        showImage = !showImage
+      }) {
+        Text(greetingText, color = favoriteButtonTint)
+      }
+      AnimatedVisibility(showImage) {
+        Image(
+          painterResource("compose-multiplatform.xml"),
+          null,
+        )
+      }
     }
+  }
 }

@@ -36,113 +36,117 @@ import org.example.job_posting_service.ui.theme.mainIconSize
 import theme.BackButtonTint
 import theme.BaseLayer
 import theme.ButtonBackground
-import theme.SecondLayerShape
+import theme.second_layer_shape
 
 @Composable
 fun AuthorizationScreen(component: Authorization) {
+  val login by component.login.collectAsState(Dispatchers.Main.immediate)
+  val password by component.password.collectAsState(Dispatchers.Main.immediate)
+  // val inProgress by component.inProgress.collectAsState()
 
-    val login by component.login.collectAsState(Dispatchers.Main.immediate)
-    val password by component.password.collectAsState(Dispatchers.Main.immediate)
-    //val inProgress by component.inProgress.collectAsState()
-
+  Column(
+    modifier =
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer)
+        .padding(20.dp),
+  ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BaseLayer)
-            .padding(20.dp)
+      modifier =
+        Modifier
+          .fillMaxWidth()
+          .fillMaxSize(0.4f),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.Center,
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize(0.4f),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(2.dp)
-                    .size(mainIconSize)
-            )
-            Text(
-                //"Тут будет название",
-                "Profi 2.0",
-                style = ProfileTypography.titleMedium
-            )
-        }
-        Column(modifier = Modifier.fillMaxSize()) {
-            DefaultField("Email:", login, component::onLoginChanged)
-            Box(
-                modifier = Modifier
-                    .padding(top = 17.dp)
-            ) {
-                DefaultField("Password:", password, component::onPasswordChanged)
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxSize(0.6f)
-                    .padding(top = 34.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                RegistrationButton(component)
-//                RecoverButton(component)
-                ForwardButton(component)
-            }
-        }
+      Image(
+        painter = painterResource(id = R.drawable.logo),
+        contentDescription = null,
+        modifier =
+          Modifier
+            .padding(2.dp)
+            .size(mainIconSize),
+      )
+      Text(
+        // "Тут будет название",
+        "Profi 2.0",
+        style = ProfileTypography.titleMedium,
+      )
     }
+    Column(modifier = Modifier.fillMaxSize()) {
+      DefaultField("Email:", login, component::onLoginChanged)
+      Box(
+        modifier =
+          Modifier
+            .padding(top = 17.dp),
+      ) {
+        DefaultField("Password:", password, component::onPasswordChanged)
+      }
+      Row(
+        modifier =
+          Modifier
+            .fillMaxWidth()
+            .fillMaxSize(0.6f)
+            .padding(top = 34.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+      ) {
+        RegistrationButton(component)
+//                RecoverButton(component)
+        ForwardButton(component)
+      }
+    }
+  }
 }
 
 @Composable
 fun ForwardButton(component: Authorization) {
-    Button(
-        onClick = component::onSignInClick,
-        modifier = Modifier.size(buttonSize),
-        shape = SecondLayerShape,
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground)
-    ) {
-        Icon(
-            Icons.Default.ArrowForward,
-            contentDescription = "",
-            tint = BackButtonTint
-        )
-    }
+  Button(
+    onClick = component::onSignInClick,
+    modifier = Modifier.size(buttonSize),
+    shape = second_layer_shape,
+    contentPadding = PaddingValues(0.dp),
+    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
+  ) {
+    Icon(
+      Icons.Default.ArrowForward,
+      contentDescription = "",
+      tint = BackButtonTint,
+    )
+  }
 }
 
 @Composable
 fun ForwardButton(component: Registration) {
-    Button(
-        onClick = component::onSignInClick,
-        modifier = Modifier.size(buttonSize),
-        shape = SecondLayerShape,
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground)
-    ) {
-        Icon(
-            Icons.Default.ArrowForward,
-            contentDescription = "",
-            tint = BackButtonTint
-        )
-    }
+  Button(
+    onClick = component::onSignInClick,
+    modifier = Modifier.size(buttonSize),
+    shape = second_layer_shape,
+    contentPadding = PaddingValues(0.dp),
+    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
+  ) {
+    Icon(
+      Icons.Default.ArrowForward,
+      contentDescription = "",
+      tint = BackButtonTint,
+    )
+  }
 }
 
 @Composable
 fun RegistrationButton(component: Authorization) {
-    TextButton(
-        onClick = component::onRegistrationClick
-    ) {
-        Text(
-            text = "Registration",
-            textDecoration = TextDecoration.Underline,
-            style = ProfileTypography.labelMedium
-        )
-    }
+  TextButton(
+    onClick = component::onRegistrationClick,
+  ) {
+    Text(
+      text = "Registration",
+      textDecoration = TextDecoration.Underline,
+      style = ProfileTypography.labelMedium,
+    )
+  }
 }
 
-//@Composable
-//fun RecoverButton(component: Authorization) {
+// @Composable
+// fun RecoverButton(component: Authorization) {
 //    TextButton(
 //        onClick = component::onRecoverClick,
 //    ) {
@@ -152,11 +156,10 @@ fun RegistrationButton(component: Authorization) {
 //            style = ProfileTypography.labelMedium
 //        )
 //    }
-//}
+// }
 
-
-//@Preview(showBackground = true)
-//@Composable
-//fun IdentificationScreenPreview() {
+// @Preview(showBackground = true)
+// @Composable
+// fun IdentificationScreenPreview() {
 //    IdentificationScreen({})
-//}
+// }

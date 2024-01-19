@@ -33,11 +33,11 @@ import androidx.compose.ui.unit.dp
 import component.identification.authorization.Authorization
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
+import theme.APPLICATION_TITLE
 import theme.BackButtonTint
 import theme.ButtonBackground
 import theme.PlaceholderBackground
-import theme.SecondLayerShape
-import theme.applicationTitle
+import theme.second_layer_shape
 import ui.theme.ProfileTypography
 import ui.theme.buttonSize
 import ui.theme.mainIconSize
@@ -46,124 +46,129 @@ import ui.theme.minAuthScreenWidth
 
 @Composable
 fun AuthorizationScreen(component: Authorization) {
+  val login by component.login.collectAsState(Dispatchers.Main.immediate)
+  val password by component.password.collectAsState(Dispatchers.Main.immediate)
 
-    val login by component.login.collectAsState(Dispatchers.Main.immediate)
-    val password by component.password.collectAsState(Dispatchers.Main.immediate)
-
+  Column(
+    modifier =
+      Modifier.fillMaxSize()
+        .padding(20.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center,
+  ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+      modifier = Modifier.widthIn(minAuthScreenWidth, maxAuthScreenWidth),
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            modifier = Modifier.widthIn(minAuthScreenWidth, maxAuthScreenWidth),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        )
-        {
-            Image(
-                painterResource("drawable/logo.xml"),
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(2.dp)
-                    .size(mainIconSize)
-            )
-            Text(
-                applicationTitle,
-                style = ProfileTypography.titleMedium
-            )
-            Column(modifier = Modifier.padding(top = 34.dp)) {
-                DefaultField("Email:", login, component::onLoginChanged)
-                Box(modifier = Modifier.padding(top = 17.dp)) {
-                    DefaultField("Password:", password, component::onPasswordChanged)
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 34.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    RegistrationButton(component)
-                    ForwardButton(component)
-                }
-            }
+      Image(
+        painterResource("drawable/logo.xml"),
+        contentDescription = null,
+        modifier =
+          Modifier
+            .padding(2.dp)
+            .size(mainIconSize),
+      )
+      Text(
+        APPLICATION_TITLE,
+        style = ProfileTypography.titleMedium,
+      )
+      Column(modifier = Modifier.padding(top = 34.dp)) {
+        DefaultField("Email:", login, component::onLoginChanged)
+        Box(modifier = Modifier.padding(top = 17.dp)) {
+          DefaultField("Password:", password, component::onPasswordChanged)
         }
+        Row(
+          modifier =
+            Modifier
+              .fillMaxWidth()
+              .padding(top = 34.dp),
+          horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+          RegistrationButton(component)
+          ForwardButton(component)
+        }
+      }
     }
+  }
 }
 
 @Composable
 fun ForwardButton(component: Authorization) {
-    Button(
-        onClick = component::onSignInClick,
-        modifier = Modifier.size(buttonSize),
-        shape = SecondLayerShape,
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground)
-
-    ) {
-        Icon(
-            Icons.Default.ArrowForward,
-            contentDescription = "",
-            tint = BackButtonTint
-        )
-    }
+  Button(
+    onClick = component::onSignInClick,
+    modifier = Modifier.size(buttonSize),
+    shape = second_layer_shape,
+    contentPadding = PaddingValues(0.dp),
+    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
+  ) {
+    Icon(
+      Icons.Default.ArrowForward,
+      contentDescription = "",
+      tint = BackButtonTint,
+    )
+  }
 }
 
 @Composable
 fun ForwardButton(component: Registration) {
-    Button(
-        onClick = component::onSignInClick,
-        modifier = Modifier.size(buttonSize),
-        shape = SecondLayerShape,
-        contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground)
-    ) {
-        Icon(
-            Icons.Default.ArrowForward,
-            contentDescription = "",
-            tint = BackButtonTint
-        )
-    }
+  Button(
+    onClick = component::onSignInClick,
+    modifier = Modifier.size(buttonSize),
+    shape = second_layer_shape,
+    contentPadding = PaddingValues(0.dp),
+    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
+  ) {
+    Icon(
+      Icons.Default.ArrowForward,
+      contentDescription = "",
+      tint = BackButtonTint,
+    )
+  }
 }
 
 @Composable
 fun RegistrationButton(component: Authorization) {
-    TextButton(
-        onClick = component::onRegistrationClick
-    ) {
-        Text(
-            text = "Registration",
-            textDecoration = TextDecoration.Underline,
-            style = ProfileTypography.labelMedium
-        )
-    }
+  TextButton(
+    onClick = component::onRegistrationClick,
+  ) {
+    Text(
+      text = "Registration",
+      textDecoration = TextDecoration.Underline,
+      style = ProfileTypography.labelMedium,
+    )
+  }
 }
 
 @Composable
-fun DefaultField(text: String, message: String, change: (String) -> Unit) {
-    Row(
-        Modifier.padding(top = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text,
-            modifier = Modifier
-                .padding(end = 10.dp),
-            style = ProfileTypography.bodyMedium
-        )
-        //val message = remember { mutableStateOf("") }
-        BasicTextField(
-            value = message,
-            onValueChange = change,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(40.dp))
-                .background(PlaceholderBackground)
-                .padding(12.dp, 6.dp),
-            textStyle = ProfileTypography.bodyMedium,
-            singleLine = true,
-            maxLines = 1
-        )
-    }
+fun DefaultField(
+  text: String,
+  message: String,
+  change: (String) -> Unit,
+) {
+  Row(
+    Modifier.padding(top = 8.dp),
+    verticalAlignment = Alignment.CenterVertically,
+  ) {
+    Text(
+      text,
+      modifier =
+        Modifier
+          .padding(end = 10.dp),
+      style = ProfileTypography.bodyMedium,
+    )
+    // val message = remember { mutableStateOf("") }
+    BasicTextField(
+      value = message,
+      onValueChange = change,
+      modifier =
+        Modifier
+          .fillMaxWidth()
+          .clip(RoundedCornerShape(40.dp))
+          .background(PlaceholderBackground)
+          .padding(12.dp, 6.dp),
+      textStyle = ProfileTypography.bodyMedium,
+      singleLine = true,
+      maxLines = 1,
+    )
+  }
 }

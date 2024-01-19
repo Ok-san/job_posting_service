@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
-import theme.applicationTitle
+import theme.APPLICATION_TITLE
 import ui.theme.ProfileTypography
 import ui.theme.mainIconSize
 import ui.theme.maxAuthScreenWidth
@@ -30,77 +30,78 @@ import ui.theme.minAuthScreenWidth
 
 @Composable
 fun RegistrationScreen(component: Registration) {
+  val name by component.login.collectAsState(Dispatchers.Main.immediate)
+  val login by component.login.collectAsState(Dispatchers.Main.immediate)
+  val password by component.password.collectAsState(Dispatchers.Main.immediate)
 
-    val name by component.login.collectAsState(Dispatchers.Main.immediate)
-    val login by component.login.collectAsState(Dispatchers.Main.immediate)
-    val password by component.password.collectAsState(Dispatchers.Main.immediate)
-
+  Column(
+    modifier =
+      Modifier
+        .fillMaxSize()
+        .padding(20.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center,
+  ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+      modifier = Modifier.widthIn(minAuthScreenWidth, maxAuthScreenWidth),
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            modifier = Modifier.widthIn(minAuthScreenWidth, maxAuthScreenWidth),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        )
-        {
-            Image(
-                painterResource("drawable/logo.xml"),
-                contentDescription = null,
-                modifier = Modifier
-                    .padding(2.dp)
-                    .size(mainIconSize)
-            )
-            Text(
-                applicationTitle,
-                style = ProfileTypography.titleMedium
-            )
-            Column(modifier = Modifier.padding(top = 34.dp)) {
-                DefaultField(text = "Name:", message = name, change = component::onNameChanged)
-                Box(
-                    modifier = Modifier.padding(top = 17.dp)
-                ) {
-                    DefaultField(
-                        text = "Email:",
-                        message = login,
-                        change = component::onLoginChanged
-                    )
-                }
-                Box(
-                    modifier = Modifier.padding(top = 17.dp)
-                ) {
-                    DefaultField(
-                        text = "Password:",
-                        message = password,
-                        change = component::onPasswordChanged
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 34.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    AuthorizationButton(component)
-                    ForwardButton(component)
-                }
-            }
+      Image(
+        painterResource("drawable/logo.xml"),
+        contentDescription = null,
+        modifier =
+          Modifier
+            .padding(2.dp)
+            .size(mainIconSize),
+      )
+      Text(
+        APPLICATION_TITLE,
+        style = ProfileTypography.titleMedium,
+      )
+      Column(modifier = Modifier.padding(top = 34.dp)) {
+        DefaultField(text = "Name:", message = name, change = component::onNameChanged)
+        Box(
+          modifier = Modifier.padding(top = 17.dp),
+        ) {
+          DefaultField(
+            text = "Email:",
+            message = login,
+            change = component::onLoginChanged,
+          )
         }
+        Box(
+          modifier = Modifier.padding(top = 17.dp),
+        ) {
+          DefaultField(
+            text = "Password:",
+            message = password,
+            change = component::onPasswordChanged,
+          )
+        }
+        Row(
+          modifier =
+            Modifier
+              .fillMaxWidth()
+              .padding(top = 34.dp),
+          horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+          AuthorizationButton(component)
+          ForwardButton(component)
+        }
+      }
     }
+  }
 }
 
 @Composable
 fun AuthorizationButton(component: Registration) {
-    TextButton(
-        onClick = component::onAuthorizationClick
-    ) {
-        Text(
-            text = "Authorization",
-            textDecoration = TextDecoration.Underline,
-            style = ProfileTypography.labelMedium
-        )
-    }
+  TextButton(
+    onClick = component::onAuthorizationClick,
+  ) {
+    Text(
+      text = "Authorization",
+      textDecoration = TextDecoration.Underline,
+      style = ProfileTypography.labelMedium,
+    )
+  }
 }

@@ -14,5 +14,5 @@ data class OrdersModel(
     val deadline: String?,
     val city: String,
     val specialization: String,
-    var favorite: Boolean = false
+    var favorite: Boolean = false,
 )

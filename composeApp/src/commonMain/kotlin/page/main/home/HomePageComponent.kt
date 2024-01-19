@@ -13,51 +13,52 @@ import kotlinx.serialization.Serializable
 import network.DefaultDatabase
 
 class HomePageComponent(
-    componentContext: ComponentContext
+  componentContext: ComponentContext,
 ) : ComponentContext by componentContext, HomePage {
+  private val database = DefaultDatabase()
+  private val navigate = StackNavigation<Config>()
 
-    private val database = DefaultDatabase()
-    private val navigate = StackNavigation<Config>()
+  override val childStack: Value<ChildStack<*, HomePage.Child>> =
+    childStack(
+      source = navigate,
+      serializer = Config.serializer(),
+      handleBackButton = true,
+      initialConfiguration = Config.List,
+      childFactory = ::child,
+    )
 
-    override val childStack: Value<ChildStack<*, HomePage.Child>> =
-        childStack(
-            source = navigate,
-            serializer = Config.serializer(),
-            handleBackButton = true,
-            initialConfiguration = Config.List,
-            childFactory = ::child
+  private fun child(
+    config: Config,
+    componentContext: ComponentContext,
+  ): HomePage.Child =
+    when (config) {
+      is Config.Details -> {
+        HomePage.Child.OrderDetailsChild(
+          OrderDetailsComponent(
+            componentContext = componentContext,
+            orderId = config.id,
+            onBack = { navigate.pop() },
+          ),
         )
+      }
 
-    private fun child(config: Config, componentContext: ComponentContext): HomePage.Child =
-        when (config) {
-            is Config.Details -> {
-                HomePage.Child.OrderDetailsChild(
-                    OrderDetailsComponent(
-                        componentContext = componentContext,
-                        orderId = config.id,
-                        onBack = { navigate.pop() }
-                    )
-                )
-            }
-
-            Config.List -> {
-                HomePage.Child.OrderListChild(
-                    OrdersListComponent(
-                        componentContext = componentContext,
-                        database = database,
-                        onSelected = { id -> navigate.push(Config.Details(id)) }
-                    )
-                )
-            }
-        }
-
-    @Serializable
-    private sealed interface Config {
-        @Serializable
-        data object List : Config
-
-        @Serializable
-        data class Details(val id: Long?) : Config
+      Config.List -> {
+        HomePage.Child.OrderListChild(
+          OrdersListComponent(
+            componentContext = componentContext,
+            database = database,
+            onSelected = { id -> navigate.push(Config.Details(id)) },
+          ),
+        )
+      }
     }
 
+  @Serializable
+  private sealed interface Config {
+    @Serializable
+    data object List : Config
+
+    @Serializable
+    data class Details(val id: Long?) : Config
+  }
 }

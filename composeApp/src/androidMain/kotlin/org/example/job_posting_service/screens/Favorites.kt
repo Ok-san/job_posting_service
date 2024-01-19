@@ -29,62 +29,68 @@ import theme.richYellow
 
 @Composable
 fun FavoritesScreen() {
-    var tabIndex by remember { mutableIntStateOf(0) }
-    val tabs = listOf("Orders", "Masters")
+  var tabIndex by remember { mutableIntStateOf(0) }
+  val tabs = listOf("Orders", "Masters")
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BaseLayer)
+  Column(
+    modifier =
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer),
+  ) {
+    Text(
+      text = "Favorites",
+      style =
+        TextStyle(
+          fontSize = 20.sp,
+          // fontFamily = FontFamily(Font(R.font.inter)),
+          fontWeight = FontWeight(700),
+          color = BaseFont,
+        ),
+      modifier =
+        Modifier
+          .padding(top = 47.dp, start = 20.dp, end = 20.dp)
+          .height(50.dp)
+          .fillMaxWidth(),
+    )
+
+    TabRow(
+      modifier =
+        Modifier
+          .padding(top = 42.dp, bottom = 12.dp)
+          .height(22.dp),
+      selectedTabIndex = tabIndex,
+      contentColor = richYellow,
+      divider = {},
     ) {
-        Text(
-            text = "Favorites",
-            style = TextStyle(
-                fontSize = 20.sp,
-                //fontFamily = FontFamily(Font(R.font.inter)),
-                fontWeight = FontWeight(700),
-                color = BaseFont,
-            ),
-            modifier = Modifier
-                .padding(top = 47.dp, start = 20.dp, end = 20.dp)
-                .height(50.dp)
-                .fillMaxWidth()
+      tabs.forEachIndexed { index, title ->
+        Tab(
+          text = {
+            Text(
+              title,
+              color = BaseFont,
+              fontSize = 16.sp,
+              modifier = Modifier.padding(bottom = 5.dp),
+            )
+          },
+          modifier =
+            Modifier
+              .background(color = BaseLayer),
+          selected = tabIndex == index,
+          onClick = { tabIndex = index },
         )
-
-        TabRow(
-            modifier = Modifier
-                .padding(top = 42.dp, bottom = 12.dp)
-                .height(22.dp),
-            selectedTabIndex = tabIndex,
-            contentColor = richYellow,
-            divider = {},
-        ) {
-            tabs.forEachIndexed { index, title ->
-                Tab(text = {
-                    Text(
-                        title,
-                        color = BaseFont,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                },
-                    modifier = Modifier
-                        .background(color = BaseLayer),
-                    selected = tabIndex == index,
-                    onClick = { tabIndex = index }
-                )
-            }
-        }
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    color = FirstLayer,
-                    shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp)
-                )
-                .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp),
-
-            ) {
+      }
+    }
+    LazyColumn(
+      modifier =
+        Modifier
+          .fillMaxSize()
+          .background(
+            color = FirstLayer,
+            shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp),
+          )
+          .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp),
+    ) {
 //            when (tabIndex) {
 //                0 -> {
 //                    itemsIndexed(
@@ -106,13 +112,12 @@ fun FavoritesScreen() {
 //                    }
 //                }
 //            }
-        }
     }
+  }
 }
-
 
 @Composable
 @Preview
 fun FavoritesScreenPreview() {
-    FavoritesScreen()
+  FavoritesScreen()
 }

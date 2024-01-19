@@ -1,6 +1,7 @@
 package page.main.favorites
 
 interface FavoritesPage {
-    fun onItemClick()
-    fun onHeartClick()
+  fun onItemClick()
+
+  fun onHeartClick()
 }

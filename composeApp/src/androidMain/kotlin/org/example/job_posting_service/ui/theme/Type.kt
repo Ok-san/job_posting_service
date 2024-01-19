@@ -9,7 +9,8 @@ import androidx.compose.ui.unit.sp
 import org.example.job_posting_service.R
 import theme.BaseFont
 
-val InterFamily = FontFamily(
+val InterFamily =
+  FontFamily(
     Font(R.font.inter_black, FontWeight.Black),
     Font(R.font.inter_bold, FontWeight.Bold),
     Font(R.font.inter_extrabold, FontWeight.ExtraBold),
@@ -18,19 +19,20 @@ val InterFamily = FontFamily(
     Font(R.font.inter_medium, FontWeight.Medium),
     Font(R.font.inter_regular, FontWeight.Normal),
     Font(R.font.inter_semibold, FontWeight.SemiBold),
-    Font(R.font.inter_thin, FontWeight.Thin)
-)
+    Font(R.font.inter_thin, FontWeight.Thin),
+  )
 
 // Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
+val Typography =
+  Typography(
+    bodyLarge =
+      TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    ),
-
+        letterSpacing = 0.5.sp,
+      ),
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
@@ -46,32 +48,34 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
-    */
-)
+     */
+  )
 
-val ProfileTypography = Typography(
-    titleMedium = TextStyle(
+val ProfileTypography =
+  Typography(
+    titleMedium =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
-    ),
-
-    labelMedium = TextStyle(
+      ),
+    labelMedium =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
-        //lineHeight = 28.sp,
-        //letterSpacing = 0.sp
-    ),
-
-    bodyMedium = TextStyle(
+        // lineHeight = 28.sp,
+        // letterSpacing = 0.sp
+      ),
+    bodyMedium =
+      TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
-        //lineHeight = 28.sp,
-        //letterSpacing = 0.sp
-    ),
-)
+        // lineHeight = 28.sp,
+        // letterSpacing = 0.sp
+      ),
+  )

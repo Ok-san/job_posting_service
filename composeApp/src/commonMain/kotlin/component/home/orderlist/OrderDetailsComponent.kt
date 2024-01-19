@@ -8,47 +8,48 @@ import data.comments
 import data.orders
 
 class OrderDetailsComponent(
-    componentContext: ComponentContext,
-    orderId: Long?,
-    private val onBack: () -> Unit
+  componentContext: ComponentContext,
+  orderId: Long?,
+  private val onBack: () -> Unit,
 ) : ComponentContext by componentContext, OrderDetails {
-
-    private val _model = MutableValue(
-        OrderDetails.Model(
+  private val _model =
+    MutableValue(
+      OrderDetails.Model(
 //            comments = database.getComments(id)
-            comments = comments,
-            commentText = "",
+        comments = comments,
+        commentText = "",
 //            order = database.getOrder(id)
-            order = orders[orderId!!.toInt()]
-        )
+        order = orders[orderId!!.toInt()],
+      ),
     )
 
-    override val model: Value<OrderDetails.Model> get() = _model
+  override val model: Value<OrderDetails.Model> get() = _model
 
-    override fun onBackClick() {
-        onBack()
-    }
+  override fun onBackClick() {
+    onBack()
+  }
 
 //    override fun onAnswerClick() {
 //        TODO("Not yet implemented")
 //    }
 
-    override fun onAuthorCommentClick(authorId: Long) {
-        TODO("Not yet implemented")
-    }
+  override fun onAuthorCommentClick(authorId: Long) {
+    TODO("Not yet implemented")
+  }
 
-    override fun onChangeTextComment(text: String) {
-        _model.value.commentText = text
-    }
+  override fun onChangeTextComment(text: String) {
+    _model.value.commentText = text
+  }
 
-    override fun onSendCommentClick() {
-        val newComment = CommentsModel(
-            id = 2,
-            author = "mav",
-            description = "jfjeifj",
-            publicationDate = "Nov 23, 2023"
-        )
-        comments.add(newComment)
+  override fun onSendCommentClick() {
+    val newComment =
+      CommentsModel(
+        id = 2,
+        author = "mav",
+        description = "jfjeifj",
+        publicationDate = "Nov 23, 2023",
+      )
+    comments.add(newComment)
 //        database.createComment(model.value.commentText)
-    }
+  }
 }

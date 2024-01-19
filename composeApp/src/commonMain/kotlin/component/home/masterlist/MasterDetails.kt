@@ -1,4 +1,3 @@
 package component.home.masterlist
 
-interface MasterDetails {
-}
+interface MasterDetails

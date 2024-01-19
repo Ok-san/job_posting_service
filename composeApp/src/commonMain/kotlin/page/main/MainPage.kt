@@ -7,17 +7,21 @@ import page.main.home.HomePage
 import page.main.profile.ProfilePage
 
 interface MainPage {
-    val childStack: Value<ChildStack<*, Child>>
+  val childStack: Value<ChildStack<*, Child>>
 
-    fun onTabClick(tab: Tab)
+  fun onTabClick(tab: Tab)
 
-    enum class Tab {
-        Home, Favorites, Profile
-    }
+  enum class Tab {
+    Home,
+    Favorites,
+    Profile,
+  }
 
-    sealed class Child {
-        class Home(val component: HomePage) : Child()
-        class Favorites(val component: FavoritesPage) : Child()
-        class Profile(val component: ProfilePage) : Child()
-    }
+  sealed class Child {
+    class Home(val component: HomePage) : Child()
+
+    class Favorites(val component: FavoritesPage) : Child()
+
+    class Profile(val component: ProfilePage) : Child()
+  }
 }

@@ -13,25 +13,25 @@ import ui.theme.navigationBarSize
 
 @Composable
 fun MainScreen(component: MainPage) {
-    Scaffold(
-        bottomBar = {
-            NavigationBar(
-                onClick = component::onTabClick
-            )
-        },
-        content = {
-            Children(
-                modifier = Modifier.padding(start = navigationBarSize),
-                stack = component.childStack,
-                animation = stackAnimation(slide())
-            ) {
-                when (val child = it.instance) {
+  Scaffold(
+    bottomBar = {
+      NavigationBar(
+        onClick = component::onTabClick,
+      )
+    },
+    content = {
+      Children(
+        modifier = Modifier.padding(start = navigationBarSize),
+        stack = component.childStack,
+        animation = stackAnimation(slide()),
+      ) {
+        when (val child = it.instance) {
 //            is MainPage.Child.Favorites -> FavoritesScreen()
-                    is MainPage.Child.Home -> HomeScreen(child.component)
+          is MainPage.Child.Home -> HomeScreen(child.component)
 //            is MainPage.Child.Profile -> ProfileScreen()
-                    else -> {}
-                }
-            }
+          else -> {}
         }
-    )
+      }
+    },
+  )
 }

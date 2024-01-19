@@ -6,11 +6,11 @@ import component.identification.authorization.Authorization
 import component.identification.registration.Registration
 
 interface IdentificationPage {
+  val childStack: Value<ChildStack<*, Child>>
 
-    val childStack: Value<ChildStack<*, Child>>
+  sealed class Child {
+    class AuthorizationChild(val component: Authorization) : Child()
 
-    sealed class Child {
-        class AuthorizationChild(val component: Authorization) : Child()
-        class RegistrationChild(val component: Registration) : Child()
-    }
+    class RegistrationChild(val component: Registration) : Child()
+  }
 }

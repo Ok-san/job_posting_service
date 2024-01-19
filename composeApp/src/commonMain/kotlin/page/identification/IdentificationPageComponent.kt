@@ -11,49 +11,50 @@ import component.identification.registration.RegistrationComponent
 import kotlinx.serialization.Serializable
 
 class IdentificationPageComponent(
-    context: ComponentContext,
-    val onSignIn: () -> Unit,
+  context: ComponentContext,
+  val onSignIn: () -> Unit,
 ) : IdentificationPage, ComponentContext by context {
-    private val navigate = StackNavigation<Config>()
+  private val navigate = StackNavigation<Config>()
 
-    override val childStack: Value<ChildStack<*, IdentificationPage.Child>> =
-        childStack(
-            source = navigate,
-            initialConfiguration = Config.AuthorizationConfig,
-            serializer = Config.serializer(),
-            handleBackButton = false,
-            childFactory = ::child
+  override val childStack: Value<ChildStack<*, IdentificationPage.Child>> =
+    childStack(
+      source = navigate,
+      initialConfiguration = Config.AuthorizationConfig,
+      serializer = Config.serializer(),
+      handleBackButton = false,
+      childFactory = ::child,
+    )
+
+  private fun child(
+    config: Config,
+    context: ComponentContext,
+  ): IdentificationPage.Child =
+    when (config) {
+      is Config.AuthorizationConfig ->
+        IdentificationPage.Child.AuthorizationChild(
+          AuthorizationComponent(
+            componentContext = context,
+            onSignIn = onSignIn,
+            onRegistration = { navigate.replaceAll(Config.RegistrationConfig) },
+          ),
         )
 
-    private fun child(
-        config: Config,
-        context: ComponentContext
-    ): IdentificationPage.Child =
-        when (config) {
-            is Config.AuthorizationConfig -> IdentificationPage.Child.AuthorizationChild(
-                AuthorizationComponent(
-                    componentContext = context,
-                    onSignIn = onSignIn,
-                    onRegistration = { navigate.replaceAll(Config.RegistrationConfig) }
-                )
-            )
+      Config.RegistrationConfig ->
+        IdentificationPage.Child.RegistrationChild(
+          RegistrationComponent(
+            componentContext = context,
+            onSignIn = onSignIn,
+            onAuthorization = { navigate.replaceAll(Config.AuthorizationConfig) },
+          ),
+        )
+    }
 
-            Config.RegistrationConfig -> IdentificationPage.Child.RegistrationChild(
-                RegistrationComponent(
-                    componentContext = context,
-                    onSignIn = onSignIn,
-                    onAuthorization = { navigate.replaceAll(Config.AuthorizationConfig) }
-                )
-            )
-        }
+  @Serializable
+  private sealed interface Config {
+    @Serializable
+    data object AuthorizationConfig : Config
 
     @Serializable
-    private sealed interface Config {
-        @Serializable
-        data object AuthorizationConfig : Config
-
-        @Serializable
-        data object RegistrationConfig : Config
-
-    }
+    data object RegistrationConfig : Config
+  }
 }

@@ -38,84 +38,85 @@ import theme.BaseFont
 
 @Composable
 fun HomeScreen(component: HomePage) {
-    Children(
-        stack = component.childStack,
-        animation = stackAnimation(slide())
-    ) {
-        when (val child = it.instance) {
-            is HomePage.Child.OrderListChild -> OrdersListScreen(component = child.component)
-            is HomePage.Child.OrderDetailsChild -> OrderDetailsScreen(component = child.component)
-        }
+  Children(
+    stack = component.childStack,
+    animation = stackAnimation(slide()),
+  ) {
+    when (val child = it.instance) {
+      is HomePage.Child.OrderListChild -> OrdersListScreen(component = child.component)
+      is HomePage.Child.OrderDetailsChild -> OrderDetailsScreen(component = child.component)
     }
+  }
 }
-
 
 @Composable
 fun SettingBar() {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
+  var text by remember { mutableStateOf(TextFieldValue("")) }
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-            .padding(top = 47.dp, start = 20.dp, end = 20.dp)
-            .height(50.dp)
-            .fillMaxWidth(),
-    ) {
-
-
-        TextField(
-            value = text,
-            shape = RoundedCornerShape(size = 10.dp),
-            onValueChange = { newText ->
-                text = newText
-            },
-            textStyle = TextStyle(
-                fontSize = 16.sp,
+  Row(
+    horizontalArrangement = Arrangement.SpaceBetween,
+    verticalAlignment = Alignment.CenterVertically,
+    modifier =
+      Modifier
+        .padding(top = 47.dp, start = 20.dp, end = 20.dp)
+        .height(50.dp)
+        .fillMaxWidth(),
+  ) {
+    TextField(
+      value = text,
+      shape = RoundedCornerShape(size = 10.dp),
+      onValueChange = { newText ->
+        text = newText
+      },
+      textStyle =
+        TextStyle(
+          fontSize = 16.sp,
 //                fontFamily = FontFamily(Font(R.font.inter)),
-                fontWeight = FontWeight(400),
-                color = BaseFont
-            ),
-
-            placeholder = {
-                Text(
-                    text = "Search",
-                    fontSize = 16.sp,
+          fontWeight = FontWeight(400),
+          color = BaseFont,
+        ),
+      placeholder = {
+        Text(
+          text = "Search",
+          fontSize = 16.sp,
 //                fontFamily = FontFamily(Font(R.font.inter)),
-                    fontWeight = FontWeight(400),
-                    color = BaseFont
-                )
-            },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color(0x308A9994),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
-            maxLines = 1,
+          fontWeight = FontWeight(400),
+          color = BaseFont,
         )
-        IconButton(
-            onClick = {},
-            modifier = Modifier
-                .width(39.dp)
-                .fillMaxSize()
-                .padding(6.dp)
-                .background(color = Color(0x308A9994), shape = RoundedCornerShape(size = 10.dp))
-        ) {
-            Image(
-                alignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(39.dp),
-                painter = painterResource(id = R.drawable.icon_filter),
-                contentDescription = "image description",
-            )
-        }
+      },
+      colors =
+        TextFieldDefaults.textFieldColors(
+          backgroundColor = Color(0x308A9994),
+          focusedIndicatorColor = Color.Transparent,
+          unfocusedIndicatorColor = Color.Transparent,
+          disabledIndicatorColor = Color.Transparent,
+        ),
+      maxLines = 1,
+    )
+    IconButton(
+      onClick = {},
+      modifier =
+        Modifier
+          .width(39.dp)
+          .fillMaxSize()
+          .padding(6.dp)
+          .background(color = Color(0x308A9994), shape = RoundedCornerShape(size = 10.dp)),
+    ) {
+      Image(
+        alignment = Alignment.Center,
+        modifier =
+          Modifier
+            .fillMaxHeight()
+            .width(39.dp),
+        painter = painterResource(id = R.drawable.icon_filter),
+        contentDescription = "image description",
+      )
     }
+  }
 }
 
-//@Preview
-//@Composable
-//fun HomeScreenPreview() {
+// @Preview
+// @Composable
+// fun HomeScreenPreview() {
 //    HomeScreen()
-//}
+// }

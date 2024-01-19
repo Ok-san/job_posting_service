@@ -26,46 +26,48 @@ import ui.theme.navigationBarSize
 
 @Composable
 fun NavigationBar(onClick: (MainPage.Tab) -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(navigationBarSize)
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painterResource("drawable/logo.xml"),
-            contentDescription = null,
-            modifier = Modifier
-                .padding(2.dp, 2.dp, 2.dp, 10.dp)
-                .size(65.dp)
-        )
-        navigationBar.forEach { tab ->
-            Box(
-                modifier = Modifier
-                    .padding(vertical = 10.dp)
-                    .align(Alignment.CenterHorizontally),
-            ) {
-                TextButton(
-                    contentPadding = PaddingValues(2.dp),
-                    onClick = { onClick(tab.tab) }
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            tab.icon,
-                            contentDescription = tab.title,
-                            tint = BackButtonTint
-                        )
-                        Text(
-                            text = tab.title,
-                            style = ProfileTypography.labelSmall
-                        )
-                    }
-                }
-            }
+  Column(
+    modifier =
+      Modifier
+        .fillMaxHeight()
+        .width(navigationBarSize)
+        .background(Color.White),
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+    Image(
+      painterResource("drawable/logo.xml"),
+      contentDescription = null,
+      modifier =
+        Modifier
+          .padding(2.dp, 2.dp, 2.dp, 10.dp)
+          .size(65.dp),
+    )
+    navigationBar.forEach { tab ->
+      Box(
+        modifier =
+          Modifier
+            .padding(vertical = 10.dp)
+            .align(Alignment.CenterHorizontally),
+      ) {
+        TextButton(
+          contentPadding = PaddingValues(2.dp),
+          onClick = { onClick(tab.tab) },
+        ) {
+          Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+          ) {
+            Icon(
+              tab.icon,
+              contentDescription = tab.title,
+              tint = BackButtonTint,
+            )
+            Text(
+              text = tab.title,
+              style = ProfileTypography.labelSmall,
+            )
+          }
         }
+      }
     }
+  }
 }
-

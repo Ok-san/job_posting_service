@@ -4,26 +4,25 @@ import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class AuthorizationComponent(
-    componentContext: ComponentContext,
-    val onSignIn: () -> Unit,
-    val onRegistration: () -> Unit,
-    //private val authorizationRepository: IdentificationRepository
+  componentContext: ComponentContext,
+  val onSignIn: () -> Unit,
+  val onRegistration: () -> Unit,
+  // private val authorizationRepository: IdentificationRepository
 ) : ComponentContext by componentContext, Authorization {
-
-    override val login = MutableStateFlow("")
-    override val password = MutableStateFlow("")
-    override val inProgress = MutableStateFlow(false)
+  override val login = MutableStateFlow("")
+  override val password = MutableStateFlow("")
+  override val inProgress = MutableStateFlow(false)
 //    private val coroutineScope = componentCoroutineScope()
 
-    override fun onLoginChanged(login: String) {
-        this.login.value = login
-    }
+  override fun onLoginChanged(login: String) {
+    this.login.value = login
+  }
 
-    override fun onPasswordChanged(password: String) {
-        this.password.value = password
-    }
+  override fun onPasswordChanged(password: String) {
+    this.password.value = password
+  }
 
-    override fun onSignInClick() {
+  override fun onSignInClick() {
 //        coroutineScope.launch {
 //            inProgress.value = true
 //            //authorizationRepository.signIn(login.value, password.value)
@@ -31,16 +30,15 @@ class AuthorizationComponent(
 //
 //            //переход к следующему эрану
 //        }
-        onSignIn()
-    }
+    onSignIn()
+  }
 
-
-    override fun onRegistrationClick() {
-        onRegistration()
-    }
+  override fun onRegistrationClick() {
+    onRegistration()
+  }
 }
 
-//fun ComponentContext.componentCoroutineScope(): CoroutineScope {
+// fun ComponentContext.componentCoroutineScope(): CoroutineScope {
 //    val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 //
 //    if (lifecycle.state != Lifecycle.State.DESTROYED) {
@@ -52,4 +50,4 @@ class AuthorizationComponent(
 //    }
 //
 //    return scope
-//}
+// }

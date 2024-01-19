@@ -17,28 +17,27 @@ import theme.richYellow
 
 @Composable
 fun BottomNavigationBar(onClick: (MainPage.Tab) -> Unit) {
-    BottomNavigation(
-        modifier = Modifier.height(52.dp),
-        backgroundColor = Color.White,
-        contentColor = richYellow,
-    ) {
-        navigationBar.forEach { tab ->
-            BottomNavigationItem(
-                icon = {
-                    Icon(
-                        tab.icon,
-                        modifier = Modifier.size(30.dp),
-                        contentDescription = null,
-                        tint = BackButtonTint
-                    )
-                },
-                selected = true,
-                selectedContentColor = BaseFont,
-                onClick = {
-                    onClick(tab.tab)
-                }
-            )
-        }
+  BottomNavigation(
+    modifier = Modifier.height(52.dp),
+    backgroundColor = Color.White,
+    contentColor = richYellow,
+  ) {
+    navigationBar.forEach { tab ->
+      BottomNavigationItem(
+        icon = {
+          Icon(
+            tab.icon,
+            modifier = Modifier.size(30.dp),
+            contentDescription = null,
+            tint = BackButtonTint,
+          )
+        },
+        selected = true,
+        selectedContentColor = BaseFont,
+        onClick = {
+          onClick(tab.tab)
+        },
+      )
     }
+  }
 }
-

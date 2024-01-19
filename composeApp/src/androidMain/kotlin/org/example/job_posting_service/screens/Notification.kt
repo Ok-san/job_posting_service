@@ -14,24 +14,24 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun NotificationScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Magenta),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Fav",
-            fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-    }
+  Box(
+    modifier =
+      Modifier
+        .fillMaxSize()
+        .background(Color.Magenta),
+    contentAlignment = Alignment.Center,
+  ) {
+    Text(
+      text = "Fav",
+      fontSize = MaterialTheme.typography.headlineLarge.fontSize,
+      fontWeight = FontWeight.Bold,
+      color = Color.White,
+    )
+  }
 }
 
 @Composable
 @Preview
 fun NotificationScreenPreview() {
-    NotificationScreen()
+  NotificationScreen()
 }
-

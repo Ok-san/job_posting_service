@@ -5,19 +5,20 @@ import data.CommentsModel
 import data.OrdersModel
 
 interface OrderDetails {
-    val model: Value<Model>
+  val model: Value<Model>
 
-    data class Model(
-        var order: OrdersModel,
-        var comments: List<CommentsModel> = emptyList(),
-        var commentText: String? = null
-    )
+  data class Model(
+    var order: OrdersModel,
+    var comments: List<CommentsModel> = emptyList(),
+    var commentText: String? = null,
+  )
 
-    fun onChangeTextComment(text: String)
-    fun onSendCommentClick()
-    fun onBackClick()
+  fun onChangeTextComment(text: String)
 
-    //    fun onAnswerClick()
-    fun onAuthorCommentClick(authorId: Long)
+  fun onSendCommentClick()
 
+  fun onBackClick()
+
+  //    fun onAnswerClick()
+  fun onAuthorCommentClick(authorId: Long)
 }

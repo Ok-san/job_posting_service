@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screens
+package screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,7 +37,6 @@ import component.home.orderlist.OrdersList
 import data.OrdersModel
 import data.service1
 import data.service2
-import screens.MasterItem
 import theme.BaseFont
 import theme.BaseLayer
 import theme.FirstLayer
@@ -46,173 +45,186 @@ import theme.textGrey
 
 @Composable
 fun OrdersListScreen(component: OrdersList) {
-    var tabIndex by remember { mutableIntStateOf(0) }
-    val tabs = listOf("Orders", "Masters")
+  var tabIndex by remember { mutableIntStateOf(0) }
+  val tabs = listOf("Orders", "Masters")
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BaseLayer)
-    ) {
-
+  Column(
+    modifier =
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer),
+  ) {
 //        SettingBar()
 
-        TabRow(
-            modifier = Modifier
-                .padding(top = 0.dp, bottom = 12.dp)
-                .height(40.dp),
-            selectedTabIndex = tabIndex,
-            contentColor = richYellow,
-            divider = {},
-        ) {
-            tabs.forEachIndexed { index, title ->
-                Tab(text = {
-                    Text(
-                        title,
-                        color = BaseFont,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(bottom = 5.dp)
-                    )
-                },
-                    modifier = Modifier
-                        .background(color = BaseLayer),
-                    selected = tabIndex == index,
-                    onClick = { tabIndex = index }
-                )
-            }
-        }
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    color = FirstLayer,
-                    shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp)
-                )
-                .padding(top = 22.dp, start = 20.dp, end = 20.dp),
-
-            ) {
-            when (tabIndex) {
-                0 -> {
-                    itemsIndexed(
-                        component.model.value.ordersList
-                    ) { index, item ->
-                        OrderItem(item, component, index.toLong())
-                    }
-                }
-
-                1 -> {
-                    itemsIndexed(
-                        listOf(service1, service2, service2, service2)
-                    ) { _, item ->
-                        MasterItem(item = item)
-                    }
-                }
-            }
-        }
+    TabRow(
+      modifier =
+        Modifier.padding(top = 0.dp, bottom = 12.dp)
+          .height(40.dp),
+      selectedTabIndex = tabIndex,
+      contentColor = richYellow,
+      divider = {},
+    ) {
+      tabs.forEachIndexed { index, title ->
+        Tab(
+          text = {
+            Text(
+              title,
+              color = BaseFont,
+              fontSize = 16.sp,
+              modifier = Modifier.padding(bottom = 5.dp),
+            )
+          },
+          modifier =
+            Modifier
+              .background(color = BaseLayer),
+          selected = tabIndex == index,
+          onClick = { tabIndex = index },
+        )
+      }
     }
+
+    LazyColumn(
+      modifier =
+        Modifier
+          .fillMaxSize()
+          .background(
+            color = FirstLayer,
+            shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp),
+          )
+          .padding(top = 22.dp, start = 20.dp, end = 20.dp),
+    ) {
+      when (tabIndex) {
+        0 -> {
+          itemsIndexed(
+            component.model.value.ordersList,
+          ) { index, item ->
+            OrderItem(item, component, index.toLong())
+          }
+        }
+
+        1 -> {
+          itemsIndexed(
+            listOf(service1, service2, service2, service2),
+          ) { _, item ->
+            MasterItem(item = item)
+          }
+        }
+      }
+    }
+  }
 }
 
 @Composable
-fun OrderItem(item: OrdersModel, component: OrdersList, index: Long) {
-    val model by component.model.subscribeAsState()
-    val favorite = model.ordersList[index.toInt()].favorite
+fun OrderItem(
+  item: OrdersModel,
+  component: OrdersList,
+  index: Long,
+) {
+  val model by component.model.subscribeAsState()
+  val favorite = model.ordersList[index.toInt()].favorite
 
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
-        elevation = 5.dp,
-        shape = RoundedCornerShape(15.dp),
+  Card(
+    modifier =
+      Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp),
+    elevation = 5.dp,
+    shape = RoundedCornerShape(15.dp),
+  ) {
+    Column(
+      modifier =
+        Modifier
+          .fillMaxSize()
+          .background(BaseLayer)
+          .clickable { component.onItemClicked(index) }
+          .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(BaseLayer)
-                .clickable { component.onItemClicked(index) }
-                .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp)
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = item.title,
-                    color = BaseFont,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight(600),
-                )
-                when (favorite) {
-                    false -> Box() {
-                        Image(
-                            modifier = Modifier
-                                .clickable { component.onLikeClicked(item.orderId) },
-                            painter = rememberVectorPainter(Icons.Default.Favorite),
-                            contentDescription = "favorite false",
-                            //contentScale = ContentScale.None
-                        )
-                    }
-
-                    true -> Box() {
-                        Image(
-                            modifier = Modifier
-                                .clickable { component.onLikeClicked(item.orderId) },
-                            painter = rememberVectorPainter(Icons.Filled.Favorite),
-                            contentDescription = "favorite true",
-                            //contentScale = ContentScale.None
-                        )
-                    }
-                }
+      Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+          Modifier
+            .fillMaxWidth(),
+      ) {
+        Text(
+          text = item.title,
+          color = BaseFont,
+          fontSize = 18.sp,
+          fontWeight = FontWeight(600),
+        )
+        when (favorite) {
+          false ->
+            Box {
+              Image(
+                modifier =
+                  Modifier
+                    .clickable { component.onLikeClicked(item.orderId) },
+                painter = rememberVectorPainter(Icons.Default.Favorite),
+                contentDescription = "favorite false",
+                // contentScale = ContentScale.None
+              )
             }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 7.dp, bottom = 7.dp)
-            ) {
-                Text(
-                    modifier = Modifier.fillMaxSize(0.8f),
-                    text = item.description,
-                    color = BaseFont,
-                    fontSize = 14.sp,
-                )
-                Text(
-                    text = "${item.price} P",
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFFE8B100)
-                )
 
-            }
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                Column {
-                    Text(
-                        modifier = Modifier.fillMaxSize(0.7f),
-                        text = "Deadline: ${item.deadline}",
-                        color = textGrey,
-                        fontWeight = FontWeight(400),
-                        fontSize = 14.sp,
-                    )
-                    Text(
-                        text = "Published: ${item.publicationDate}",
-                        color = textGrey,
-                        fontWeight = FontWeight(400),
-                        fontSize = 14.sp,
-                    )
-                }
-                Text(
-                    text = item.city,
-                    textAlign = TextAlign.End,
-                    color = textGrey,
-                    fontWeight = FontWeight(400),
-                    fontSize = 14.sp
-                )
+          true ->
+            Box {
+              Image(
+                modifier =
+                  Modifier
+                    .clickable { component.onLikeClicked(item.orderId) },
+                painter = rememberVectorPainter(Icons.Filled.Favorite),
+                contentDescription = "favorite true",
+                // contentScale = ContentScale.None
+              )
             }
         }
+      }
+      Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+          Modifier
+            .fillMaxSize()
+            .padding(top = 7.dp, bottom = 7.dp),
+      ) {
+        Text(
+          modifier = Modifier.fillMaxSize(0.8f),
+          text = item.description,
+          color = BaseFont,
+          fontSize = 14.sp,
+        )
+        Text(
+          text = "${item.price} P",
+          fontWeight = FontWeight(700),
+          color = Color(0xFFE8B100),
+        )
+      }
+      Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+          Modifier
+            .fillMaxSize(),
+      ) {
+        Column {
+          Text(
+            modifier = Modifier.fillMaxSize(0.7f),
+            text = "Deadline: ${item.deadline}",
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+          Text(
+            text = "Published: ${item.publicationDate}",
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
+        Text(
+          text = item.city,
+          textAlign = TextAlign.End,
+          color = textGrey,
+          fontWeight = FontWeight(400),
+          fontSize = 14.sp,
+        )
+      }
     }
+  }
 }

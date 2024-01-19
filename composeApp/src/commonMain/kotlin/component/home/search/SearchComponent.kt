@@ -3,13 +3,13 @@ package component.home.search
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class SearchComponent : Search {
-    override val searchText = MutableStateFlow("")
+  override val searchText = MutableStateFlow("")
 
-    override fun onSearchTextChange(searchText: String) {
-        this.searchText.value = searchText
-    }
+  override fun onSearchTextChange(searchText: String) {
+    this.searchText.value = searchText
+  }
 
-    override fun onSearchClick() {
-        TODO("поиск по введеной строке")
-    }
+  override fun onSearchClick() {
+    TODO("поиск по введеной строке")
+  }
 }
