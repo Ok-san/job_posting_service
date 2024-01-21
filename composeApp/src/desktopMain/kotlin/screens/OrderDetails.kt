@@ -260,7 +260,7 @@ fun CardItem(order: OrdersModel) {
         }
       }
       Text(
-        text = "Specialization: Item Specialization",
+        text = order.specialization,
         style =
           TextStyle(
             fontSize = 14.sp,

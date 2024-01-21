@@ -20,6 +20,7 @@ import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -98,7 +99,7 @@ fun OrdersListScreen(component: OrdersList) {
           itemsIndexed(
             component.model.value.ordersList,
           ) { index, item ->
-            OrderItem(item, component, index.toLong())
+            OrderItem(item, component, index)
           }
         }
 
@@ -118,10 +119,10 @@ fun OrdersListScreen(component: OrdersList) {
 fun OrderItem(
   item: OrdersModel,
   component: OrdersList,
-  index: Long,
+  index: Int,
 ) {
   val model by component.model.subscribeAsState()
-  val favorite = model.ordersList[index.toInt()].favorite
+  val favorite = model.ordersList[index].favorite
 
   Card(
     modifier =
@@ -158,7 +159,7 @@ fun OrderItem(
                 modifier =
                   Modifier
                     .clickable { component.onLikeClicked(item.orderId) },
-                painter = rememberVectorPainter(Icons.Default.Favorite),
+                painter = rememberVectorPainter(Icons.Default.FavoriteBorder),
                 contentDescription = "favorite false",
                 // contentScale = ContentScale.None
               )
@@ -170,7 +171,7 @@ fun OrderItem(
                 modifier =
                   Modifier
                     .clickable { component.onLikeClicked(item.orderId) },
-                painter = rememberVectorPainter(Icons.Filled.Favorite),
+                painter = rememberVectorPainter(Icons.Default.Favorite),
                 contentDescription = "favorite true",
                 // contentScale = ContentScale.None
               )

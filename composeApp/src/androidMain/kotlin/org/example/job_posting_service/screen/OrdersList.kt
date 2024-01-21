@@ -99,7 +99,7 @@ fun OrdersListScreen(component: OrdersList) {
           itemsIndexed(
             component.model.value.ordersList,
           ) { index, item ->
-            OrderItem(item, component, index.toLong())
+            OrderItem(item, component, index)
           }
         }
 
@@ -119,10 +119,10 @@ fun OrdersListScreen(component: OrdersList) {
 fun OrderItem(
   item: OrdersModel,
   component: OrdersList,
-  index: Long,
+  index: Int,
 ) {
   val model by component.model.subscribeAsState()
-  val favorite = model.ordersList[index.toInt()].favorite
+  val favorite = model.ordersList[index].favorite
 
   Card(
     modifier =
@@ -166,7 +166,6 @@ fun OrderItem(
                     .clickable { component.onLikeClicked(item.orderId) },
                 painter = painterResource(R.drawable.ic_favorite_false),
                 contentDescription = "favorite false",
-                // contentScale = ContentScale.None
               )
             }
 
@@ -178,7 +177,6 @@ fun OrderItem(
                     .clickable { component.onLikeClicked(item.orderId) },
                 painter = painterResource(R.drawable.ic_favorite_true),
                 contentDescription = "favorite true",
-                // contentScale = ContentScale.None
               )
             }
         }

@@ -1,7 +1,7 @@
 package data
 
 data class ServicesModel(
-    val id: Long,
+    val id: Int,
     val category: String,
     val specialization: String,
     val coast: String? = null,

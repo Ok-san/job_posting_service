@@ -64,43 +64,42 @@ import theme.second_layer_shape
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun ViewableProfileScreen() {
-
-  /// вот тут чтото нормальное должно быть
+  // / вот тут чтото нормальное должно быть
   val user: ProfileModel = profile1
   val services: ArrayList<ServicesModel> = arrayListOf(service1, service2)
   val orders: ArrayList<OrdersModel> = arrayListOf(order1, order2)
-  ///
+  // /
 
   val message = remember { mutableStateOf("") }
 
   Box(
     modifier =
-    Modifier
-      .background(BaseLayer),
+      Modifier
+        .background(BaseLayer),
   ) {
     Box(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .zIndex(1f),
+        Modifier
+          .fillMaxWidth()
+          .zIndex(1f),
       contentAlignment = Alignment.Center,
     ) {
       Image(
         painter = painterResource(id = R.drawable.logo),
         contentDescription = null,
         modifier =
-        Modifier
-          .size(mainIconSize)
-          .offset(y = 80.dp)
-          .clip(RoundedCornerShape(mainIconSize / 2)),
+          Modifier
+            .size(mainIconSize)
+            .offset(y = 80.dp)
+            .clip(RoundedCornerShape(mainIconSize / 2)),
       )
     }
     Column {
       Row(
         modifier =
-        Modifier
-          .padding(20.dp)
-          .fillMaxWidth(),
+          Modifier
+            .padding(20.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
         BackButton({})
@@ -110,30 +109,30 @@ fun ViewableProfileScreen() {
       }
       Column(
         modifier =
-        Modifier
-          .fillMaxSize()
-          .padding(top = mainIconSize / 2 - 10.dp)
-          .clip(RoundedCornerShape(40.dp, 40.dp))
-          .background(FirstLayer)
-          .padding(20.dp),
+          Modifier
+            .fillMaxSize()
+            .padding(top = mainIconSize / 2 - 10.dp)
+            .clip(RoundedCornerShape(40.dp, 40.dp))
+            .background(FirstLayer)
+            .padding(20.dp),
       ) {
         Column(
           modifier =
-          Modifier
-            .shadow(
-              elevation = 6.dp,
-              shape = first_layer_shape,
-              spotColor = Color.Black,
-            )
-            .clip(first_layer_shape)
-            .background(SecondLayer)
-            .padding(10.dp),
+            Modifier
+              .shadow(
+                elevation = 6.dp,
+                shape = first_layer_shape,
+                spotColor = Color.Black,
+              )
+              .clip(first_layer_shape)
+              .background(SecondLayer)
+              .padding(10.dp),
         ) {
           Box(
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(top = mainIconSize / 2 - 20.dp),
+              Modifier
+                .fillMaxWidth()
+                .padding(top = mainIconSize / 2 - 20.dp),
             contentAlignment = Alignment.Center,
           ) {
             Text(
@@ -151,9 +150,9 @@ fun ViewableProfileScreen() {
 
         Row(
           modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
+            Modifier
+              .fillMaxWidth()
+              .padding(vertical = 6.dp),
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.SpaceBetween,
         ) {
@@ -163,10 +162,10 @@ fun ViewableProfileScreen() {
               checked = checkedState.value,
               onCheckedChange = { checkedState.value = it },
               colors =
-              CheckboxDefaults.colors(
-                checkedColor = SecondLayer,
-                checkmarkColor = BaseFont,
-              ),
+                CheckboxDefaults.colors(
+                  checkedColor = SecondLayer,
+                  checkmarkColor = BaseFont,
+                ),
             )
             Text(
               "I'm a master",
@@ -179,25 +178,22 @@ fun ViewableProfileScreen() {
 
 //        orders payment
 
-        services?.forEach() { service ->
+        services?.forEach { service ->
           Column(
             modifier =
-            Modifier
-              .padding(bottom = 10.dp)
-              .shadow(
-                elevation = 6.dp,
-                shape = first_layer_shape,
-                spotColor = Color.Black,
-              )
-              .clip(first_layer_shape)
-              .background(SecondLayer)
-              .padding(10.dp),
+              Modifier
+                .padding(bottom = 10.dp)
+                .shadow(
+                  elevation = 6.dp,
+                  shape = first_layer_shape,
+                  spotColor = Color.Black,
+                )
+                .clip(first_layer_shape)
+                .background(SecondLayer)
+                .padding(10.dp),
           ) {
             Column {
-
-
-              Column()
-              {
+              Column {
                 Row {
                   PersonalInfoField(service.category)
                   PersonalInfoField(service.specialization)
@@ -221,9 +217,9 @@ fun ViewableProfileScreen() {
 
             Row(
               modifier =
-              Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
+                Modifier
+                  .fillMaxWidth()
+                  .padding(top = 10.dp),
               horizontalArrangement = Arrangement.SpaceBetween,
             ) {
               BasicTextButton("Save", {})
@@ -275,10 +271,11 @@ fun ViewableProfileScreen() {
 fun PersonalInfoField(text: String) {
   Text(
     text = text,
-    modifier = Modifier
-      .clip(RoundedCornerShape(20.dp))
-      .background(PlaceholderBackground)
-      .padding(12.dp, 4.dp),
+    modifier =
+      Modifier
+        .clip(RoundedCornerShape(20.dp))
+        .background(PlaceholderBackground)
+        .padding(12.dp, 4.dp),
     style = ProfileTypography.bodyMedium,
   )
 }

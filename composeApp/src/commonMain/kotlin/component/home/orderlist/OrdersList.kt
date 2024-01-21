@@ -8,10 +8,10 @@ interface OrdersList {
 
   data class Model(
     val ordersList: List<OrdersModel> = emptyList(),
-    val selectedId: Long? = null,
+    val selectedId: Int? = null,
   )
 
-  fun onLikeClicked(id: Long)
+  fun onLikeClicked(id: Int)
 
-  fun onItemClicked(id: Long)
+  fun onItemClicked(id: Int)
 }

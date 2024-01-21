@@ -38,6 +38,7 @@ class HomePageComponent(
             componentContext = componentContext,
             orderId = config.id,
             onBack = { navigate.pop() },
+            database = database,
           ),
         )
       }
@@ -59,6 +60,6 @@ class HomePageComponent(
     data object List : Config
 
     @Serializable
-    data class Details(val id: Long?) : Config
+    data class Details(val id: Int) : Config
   }
 }

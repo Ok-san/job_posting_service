@@ -7,12 +7,16 @@ val orders: MutableList<OrdersModel>
 
 val comments: MutableList<CommentsModel> by lazy { mutableListOf(comment1, comment1) }
 
+val services: MutableList<ServicesModel>
+  get() = mutableListOf(service1, service2, service2)
+
 val order1 =
   OrdersModel(
+    orderId = 0,
     title = "I need help I need help I need help I need help",
     description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
     price = "100 000 000",
-    favorite = true,
+    favorite = false,
     publicationDate = "Oct 22, 2023",
     specialization = "Manicure",
     city = "San Vicente de Tagua Tagua",
@@ -21,6 +25,7 @@ val order1 =
 
 val order2 =
   OrdersModel(
+    orderId = 1,
     title = "I need help",
     description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
     price = "100 000",
@@ -31,7 +36,7 @@ val order2 =
     deadline = "March 11, 2024",
   )
 
-val order3 = order2.copy(description = "")
+val order3 = order2.copy(description = "", orderId = 2)
 
 val profile1 =
   ProfileModel(
@@ -68,7 +73,7 @@ val service1 =
       "I prefer to work remotely. But I can also come to you. \n" +
       "Call and write any time",
     specialization = "Manicure",
-    city = null,
+    city = "null",
     master = profile1,
     publicationDate = "Oct 22, 2023",
   )
@@ -81,7 +86,7 @@ val service2 =
       "I prefer to work remotely. But I can also come to you. \n" +
       "Call and write any time",
     specialization = "Manicure",
-    city = null,
+    city = "null",
     master = profile2,
     publicationDate = "Oct 22, 2023",
   )

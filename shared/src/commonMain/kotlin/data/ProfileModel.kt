@@ -3,11 +3,11 @@ package data
 import java.time.LocalDate
 
 data class ProfileModel(
-  val id: Long,
+  val id: Int,
   val name: String,
   val phoneNumber: String,
   val email: String?,
-  val city: String?,
+  val city: String,
   val birthdate: LocalDate?,
   val address: String?,
   val avatar: String?,

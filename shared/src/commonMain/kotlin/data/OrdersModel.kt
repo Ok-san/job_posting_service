@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class OrdersModel(
-    @SerialName("id") val orderId: Long = 0,
-    @SerialName("user_id") val userId: Long = 0,
+    @SerialName("id") val orderId: Int = 0,
+    @SerialName("user_id") val userId: Int = 0,
     val title: String,
     val description: String,
     val price: String?,

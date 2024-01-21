@@ -4,22 +4,22 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import data.CommentsModel
-import data.comments
-import data.orders
+import network.Database
 
 class OrderDetailsComponent(
   componentContext: ComponentContext,
-  orderId: Long?,
+  database: Database,
+  orderId: Int,
   private val onBack: () -> Unit,
 ) : ComponentContext by componentContext, OrderDetails {
+  private val _database = database
+  private val _orderId = orderId
   private val _model =
     MutableValue(
       OrderDetails.Model(
-//            comments = database.getComments(id)
-        comments = comments,
+        comments = _database.getComments(orderId),
         commentText = "",
-//            order = database.getOrder(id)
-        order = orders[orderId!!.toInt()],
+        order = _database.getOrdersById(orderId),
       ),
     )
 
@@ -33,7 +33,7 @@ class OrderDetailsComponent(
 //        TODO("Not yet implemented")
 //    }
 
-  override fun onAuthorCommentClick(authorId: Long) {
+  override fun onAuthorCommentClick(authorId: Int) {
     TODO("Not yet implemented")
   }
 
@@ -46,10 +46,10 @@ class OrderDetailsComponent(
       CommentsModel(
         id = 2,
         author = "mav",
-        description = "jfjeifj",
+        description = _model.value.commentText.toString(),
         publicationDate = "Nov 23, 2023",
       )
-    comments.add(newComment)
-//        database.createComment(model.value.commentText)
+
+    _database.createComment(_orderId, newComment)
   }
 }

@@ -1,9 +1,10 @@
-package org.example.job_posting_service.screen
+package screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,16 +15,18 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.ServicesModel
-import org.example.job_posting_service.R
 import theme.BaseFont
 import theme.BaseLayer
 import theme.richYellow
@@ -55,36 +58,36 @@ fun MasterItem(item: ServicesModel) {
             .fillMaxSize(),
       ) {
         Text(
+          modifier = Modifier.fillMaxSize(0.7f),
           text = item.master.name,
           color = BaseFont,
           fontSize = 18.sp,
           fontWeight = FontWeight(600),
-          modifier = Modifier.requiredWidth(288.dp),
         )
         when (item.favorite) {
           false ->
-            Image(
-              alignment = Alignment.TopEnd,
-              modifier =
-                Modifier
-                  .fillMaxSize()
-                  .clickable { },
-              painter = painterResource(id = R.drawable.ic_favorite_false),
-              contentDescription = "favorite false",
-              // contentScale = ContentScale.None
-            )
+            Box {
+              Image(
+                modifier =
+                  Modifier
+                    .clickable { },
+                alignment = Alignment.TopEnd,
+                painter = rememberVectorPainter(Icons.Default.Favorite),
+                contentDescription = "favorite false",
+              )
+            }
 
           true ->
-            Image(
-              modifier =
-                Modifier
-                  .fillMaxSize()
-                  .clickable { },
-              alignment = Alignment.TopEnd,
-              painter = painterResource(id = R.drawable.ic_favorite_true),
-              contentDescription = "favorite true",
-              // contentScale = ContentScale.None
-            )
+            Box {
+              Image(
+                modifier =
+                  Modifier
+                    .clickable { },
+                alignment = Alignment.TopEnd,
+                painter = rememberVectorPainter(Icons.Filled.Favorite),
+                contentDescription = "favorite true",
+              )
+            }
         }
       }
       Row(
@@ -95,10 +98,10 @@ fun MasterItem(item: ServicesModel) {
             .padding(top = 7.dp, bottom = 7.dp),
       ) {
         Text(
+          modifier = Modifier.fillMaxSize(0.7f),
           text = item.description,
           color = BaseFont,
           fontSize = 14.sp,
-          modifier = Modifier.requiredWidth(202.dp),
         )
         Image(
           alignment = Alignment.CenterEnd,
@@ -106,7 +109,8 @@ fun MasterItem(item: ServicesModel) {
             Modifier
               .requiredSize(50.dp)
               .fillMaxSize(),
-          painter = painterResource(id = R.drawable.logo),
+          //                    painter = painterResource(id = R.drawable.logo),
+          painter = painterResource("drawable/logo.png"),
           contentDescription = "image description",
         )
       }

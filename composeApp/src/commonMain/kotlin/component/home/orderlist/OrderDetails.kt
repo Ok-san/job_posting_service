@@ -20,5 +20,5 @@ interface OrderDetails {
   fun onBackClick()
 
   //    fun onAnswerClick()
-  fun onAuthorCommentClick(authorId: Long)
+  fun onAuthorCommentClick(authorId: Int)
 }
