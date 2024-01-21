@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screens
+package org.example.job_posting_service.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -134,13 +134,15 @@ fun MasterItem(item: ServicesModel) {
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
-        Text(
-          text = item.city,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-          textAlign = TextAlign.End,
-        )
+        item.city?.let {
+          Text(
+            text = it,
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+            textAlign = TextAlign.End,
+          )
+        }
       }
     }
   }

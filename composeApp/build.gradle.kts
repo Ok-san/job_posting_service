@@ -26,6 +26,7 @@ kotlin {
     val desktopMain by getting
 
     androidMain.dependencies {
+      implementation(libs.coil)
       implementation(libs.compose.ui)
       implementation(libs.compose.ui.tooling.preview)
       implementation(libs.androidx.activity.compose)
@@ -87,6 +88,9 @@ android {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
   }
+}
+dependencies {
+  debugImplementation(libs.androidx.ui.tooling)
 }
 
 compose.desktop {

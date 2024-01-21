@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screens
+package org.example.job_posting_service.screen.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,11 +18,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
+import org.example.job_posting_service.screen.profile.DefaultField
 import org.example.job_posting_service.ui.theme.ProfileTypography
 import org.example.job_posting_service.ui.theme.mainIconSize
 import theme.BaseLayer
@@ -58,8 +60,7 @@ fun RegistrationScreen(component: Registration) {
             .size(mainIconSize),
       )
       Text(
-        // "Тут будет название",
-        "Profi 2.0",
+        text = stringResource(R.string.app_name),
         style = ProfileTypography.titleMedium,
       )
     }
@@ -110,9 +111,3 @@ fun AuthorizationButton(component: Registration) {
     )
   }
 }
-
-/*@Preview
-@Composable
-fun RegistrationScreenPrev(){
-    RegistrationScreen()
-}*/

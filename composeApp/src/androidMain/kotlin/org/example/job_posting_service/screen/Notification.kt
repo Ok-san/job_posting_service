@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screens
+package org.example.job_posting_service.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

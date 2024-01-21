@@ -9,5 +9,5 @@ data class ServicesModel(
     val master: ProfileModel,
     val favorite: Boolean = false,
     val publicationDate: String,
-    val city: String,
+    val city: String?,
 )

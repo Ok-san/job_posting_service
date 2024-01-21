@@ -1,4 +1,4 @@
-package org.example.job_posting_service.navigation
+package org.example.job_posting_service.screen.navigation
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size

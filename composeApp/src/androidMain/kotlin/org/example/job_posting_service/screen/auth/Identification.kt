@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screens
+package org.example.job_posting_service.screen.auth
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children

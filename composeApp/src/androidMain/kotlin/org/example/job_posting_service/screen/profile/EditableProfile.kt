@@ -1,33 +1,24 @@
-package org.example.job_posting_service.screens
+package org.example.job_posting_service.screen.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.AddCircleOutline
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,35 +27,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import org.example.job_posting_service.R
+import org.example.job_posting_service.module.BackButton
+import org.example.job_posting_service.module.BasicTextButton
+import org.example.job_posting_service.module.CompoundButton
 import org.example.job_posting_service.ui.theme.ProfileTypography
-import org.example.job_posting_service.ui.theme.buttonSize
 import org.example.job_posting_service.ui.theme.mainIconSize
-import theme.BackButtonTint
 import theme.BaseFont
 import theme.BaseLayer
-import theme.ButtonBackground
-import theme.FavoriteButtonTint
 import theme.FirstLayer
 import theme.PlaceholderBackground
 import theme.SecondLayer
 import theme.first_layer_shape
-import theme.second_layer_shape
 
 @Composable
-fun ProfileScreen() {
+fun EditableProfileScreen() {
   val message = remember { mutableStateOf("") }
 
   Box(
     modifier =
       Modifier
-        .background(BaseLayer)
-        .verticalScroll(rememberScrollState()),
+        .background(BaseLayer),
+//      .verticalScroll(rememberScrollState())
   ) {
     Box(
       modifier =
@@ -91,15 +79,13 @@ fun ProfileScreen() {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        BackButton()
-        LogOutButton()
-        EditButton()
-        FavoritesButton()
+        BackButton({})
+        BasicTextButton("Save", {})
       }
-
       Column(
         modifier =
           Modifier
+            .fillMaxSize()
             .padding(top = mainIconSize / 2 - 10.dp)
             .clip(RoundedCornerShape(40.dp, 40.dp))
             .background(FirstLayer)
@@ -130,49 +116,41 @@ fun ProfileScreen() {
             )
           }
           Column {
-            DefaultField("Name:", message.value, { newText -> message.value = newText })
-            DefaultField(
-              "Date of birth:",
-              message.value,
-              { newText -> message.value = newText },
-            )
-            DefaultField("City:", message.value, { newText -> message.value = newText })
-            DefaultField(
-              "Address",
-              message.value,
-              { newText -> message.value = newText },
-            )
-            DefaultField(
-              "Phone number:",
-              message.value,
-              { newText -> message.value = newText },
-            )
-            DefaultField(
-              "Email:",
-              message.value,
-              { newText -> message.value = newText },
-            )
+            DefaultField("Name:", message.value) { newText -> message.value = newText }
+            DefaultField("Date of birth:", message.value) { newText -> message.value = newText }
+            DefaultField("City:", message.value) { newText -> message.value = newText }
+            DefaultField("Address", message.value) { newText -> message.value = newText }
+            DefaultField("Phone number:", message.value) { newText -> message.value = newText }
+            DefaultField("Email:", message.value) { newText -> message.value = newText }
           }
         }
 
         Row(
+          modifier =
+            Modifier
+              .fillMaxWidth()
+              .padding(vertical = 6.dp),
           verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-          val checkedState = remember { mutableStateOf(true) }
-          Checkbox(
-            checked = checkedState.value,
-            onCheckedChange = { checkedState.value = it },
-            colors =
-              CheckboxDefaults.colors(
-                checkedColor = SecondLayer,
-                checkmarkColor = BaseFont,
-              ),
-          )
+          Row(verticalAlignment = Alignment.CenterVertically) {
+            val checkedState = remember { mutableStateOf(true) }
+            Checkbox(
+              checked = checkedState.value,
+              onCheckedChange = { checkedState.value = it },
+              colors =
+                CheckboxDefaults.colors(
+                  checkedColor = SecondLayer,
+                  checkmarkColor = BaseFont,
+                ),
+            )
+            Text(
+              "I'm a master",
+              style = ProfileTypography.labelMedium,
+            )
+          }
 
-          Text(
-            "I'm a master",
-            style = ProfileTypography.labelMedium,
-          )
+          CompoundButton("Add service", Icons.Default.AddCircleOutline, {}, BaseLayer)
         }
 
         Column(
@@ -191,18 +169,15 @@ fun ProfileScreen() {
             DefaultField(
               "Category:",
               message.value,
-              { newText -> message.value = newText },
-            )
+            ) { newText -> message.value = newText }
             DefaultField(
               "Specialization",
               message.value,
-              { newText -> message.value = newText },
-            )
+            ) { newText -> message.value = newText }
             DefaultField(
               "Coast:",
               message.value,
-              { newText -> message.value = newText },
-            )
+            ) { newText -> message.value = newText }
           }
           Text(
             "Tell us more details:",
@@ -223,9 +198,20 @@ fun ProfileScreen() {
             minLines = 2,
             maxLines = 10,
           )
+
+          Row(
+            modifier =
+              Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+          ) {
+            BasicTextButton("Save", {})
+            BasicTextButton("Edit", {})
+            CompoundButton("Delete", Icons.Default.Delete, {})
+          }
         }
       }
-      SaveButton()
     }
   }
 }
@@ -264,120 +250,8 @@ fun DefaultField(
   }
 }
 
-@Composable
-fun BackButton() {
-  Button(
-    onClick = {},
-    modifier = Modifier.size(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(0.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Icon(
-      Icons.Default.ArrowBack,
-      contentDescription = "",
-      tint = BackButtonTint,
-    )
-  }
-}
-
-@Composable
-fun LogOutButton() {
-  Button(
-    onClick = { },
-    modifier = Modifier.height(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(horizontal = 10.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Text(text = "Log Out", style = ProfileTypography.labelMedium)
-  }
-}
-
-@Composable
-fun EditButton() {
-  Button(
-    onClick = { },
-    modifier = Modifier.height(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(horizontal = 10.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Text(text = "Edit", style = ProfileTypography.labelMedium)
-  }
-}
-
-@Composable
-fun FavoritesButton() {
-  Button(
-    onClick = { },
-    modifier = Modifier.size(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(0.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Icon(
-      Icons.Default.Favorite,
-      contentDescription = "",
-      modifier = Modifier.padding(0.dp),
-      tint = FavoriteButtonTint,
-    )
-  }
-}
-
-@Composable
-fun SaveButton() {
-  Button(
-    onClick = { },
-    modifier =
-      Modifier
-        .fillMaxWidth()
-        .height(52.dp),
-    shape = RectangleShape,
-    colors =
-      ButtonDefaults.buttonColors(
-        backgroundColor = BaseLayer,
-        contentColor = BaseFont,
-      ),
-  ) {
-    Text(text = "Save".uppercase(), style = ProfileTypography.titleMedium)
-  }
-  Divider(
-    modifier = Modifier.fillMaxWidth(),
-    color = BaseFont,
-    thickness = 1.dp,
-  )
-}
-
-@Composable
-fun BottomBar() {
-  BottomAppBar(
-    contentPadding = PaddingValues(0.dp),
-    modifier = Modifier.zIndex(2f),
-  ) {
-    Button(
-      onClick = { },
-      modifier = Modifier.fillMaxSize(),
-      shape = RectangleShape,
-      colors =
-        ButtonDefaults.buttonColors(
-          backgroundColor = BaseLayer,
-          contentColor = BaseFont,
-        ),
-    ) {
-      Text(text = "Save".uppercase(), style = ProfileTypography.titleMedium)
-    }
-  }
-}
-
 @Preview
 @Composable
-fun ProfileScreenPreview() {
-  ProfileScreen()
-}
-
-@Preview(showBackground = true)
-@Composable
-fun BottomBarPreview() {
-  BottomBar()
+fun EditableProfileScreenPreview() {
+  EditableProfileScreen()
 }

@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
-import org.example.job_posting_service.screens.RootScreen
+import org.example.job_posting_service.screen.navigation.RootScreen
 import org.example.job_posting_service.ui.theme.Job_posting_serviceTheme
 import root.RootComponent
 
