@@ -46,7 +46,7 @@ import androidx.compose.ui.zIndex
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import data.CommentsModel
-import data.OrdersModel
+import data.OrderModel
 import org.example.job_posting_service.R
 import org.example.job_posting_service.ui.theme.buttonSize
 import org.example.job_posting_service.ui.theme.mainIconSize
@@ -65,46 +65,46 @@ fun OrderDetailsScreen(component: OrderDetails) {
   val order = model.order
   Column(
     modifier =
-      Modifier
-        .fillMaxSize()
-        .background(BaseLayer),
+    Modifier
+      .fillMaxSize()
+      .background(BaseLayer),
   ) {
     Box(
       modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(top = 47.dp, start = 20.dp, end = 20.dp),
+      Modifier
+        .fillMaxWidth()
+        .padding(top = 47.dp, start = 20.dp, end = 20.dp),
     ) {
       BackButton(component)
     }
     Box(
       modifier =
-        Modifier
+      Modifier
 //                .height(mainIconSize/2)
-          .fillMaxWidth()
-          .zIndex(1f),
+        .fillMaxWidth()
+        .zIndex(1f),
       contentAlignment = Alignment.Center,
     ) {
       Image(
         painter = painterResource(id = R.drawable.logo),
         contentDescription = null,
         modifier =
-          Modifier
-            .size(mainIconSize)
-            .offset(y = 40.dp)
-            .clip(RoundedCornerShape(mainIconSize / 2)),
+        Modifier
+          .size(mainIconSize)
+          .offset(y = 40.dp)
+          .clip(RoundedCornerShape(mainIconSize / 2)),
       )
     }
     Column(
       modifier =
-        Modifier
-          .fillMaxSize()
-          // .padding(top = 27.dp)
-          .background(
-            color = FirstLayer,
-            shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp),
-          )
-          .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp),
+      Modifier
+        .fillMaxSize()
+        // .padding(top = 27.dp)
+        .background(
+          color = FirstLayer,
+          shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp),
+        )
+        .padding(top = 22.dp, start = 20.dp, end = 20.dp, bottom = 8.dp),
     ) {
       LazyColumn {
         item {
@@ -128,51 +128,51 @@ fun OrderDetailsScreen(component: OrderDetails) {
       }
       Box(
         modifier =
-          Modifier
-            .padding(top = 7.dp)
-            .fillMaxSize()
-            .fillMaxWidth(),
+        Modifier
+          .padding(top = 7.dp)
+          .fillMaxSize()
+          .fillMaxWidth(),
       ) {
         TextField(
           value = model.commentText.toString(),
           modifier =
-            Modifier
-              .fillMaxWidth()
-              .height(44.dp)
-              .background(
-                color = BaseLayer,
-                shape = RoundedCornerShape(size = 15.dp),
-              ),
+          Modifier
+            .fillMaxWidth()
+            .height(44.dp)
+            .background(
+              color = BaseLayer,
+              shape = RoundedCornerShape(size = 15.dp),
+            ),
           onValueChange = component::onChangeTextComment,
           textStyle =
-            TextStyle(
-              fontSize = 16.sp,
+          TextStyle(
+            fontSize = 16.sp,
 //                fontFamily = FontFamily(Font(R.font.inter)),
-              fontWeight = FontWeight(400),
-              color = BaseFont,
-            ),
+            fontWeight = FontWeight(400),
+            color = BaseFont,
+          ),
           colors =
-            TextFieldDefaults.textFieldColors(
-              backgroundColor = BaseLayer,
-              focusedIndicatorColor = Color.Transparent,
-              unfocusedIndicatorColor = Color.Transparent,
-              disabledIndicatorColor = Color.Transparent,
-            ),
+          TextFieldDefaults.textFieldColors(
+            backgroundColor = BaseLayer,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+          ),
           maxLines = 1,
         )
         Button(
           onClick = component::onSendCommentClick,
           modifier =
-            Modifier
-              .width(44.dp)
-              .height(44.dp)
-              .padding(top = 5.dp),
+          Modifier
+            .width(44.dp)
+            .height(44.dp)
+            .padding(top = 5.dp),
           shape = RectangleShape,
           colors =
-            ButtonDefaults.buttonColors(
-              backgroundColor = BaseLayer,
-              contentColor = BaseFont,
-            ),
+          ButtonDefaults.buttonColors(
+            backgroundColor = BaseLayer,
+            contentColor = BaseFont,
+          ),
         ) {
           Icon(
             Icons.Default.ArrowForward,
@@ -203,42 +203,42 @@ fun BackButton(component: OrderDetails) {
 }
 
 @Composable
-fun CardItem(order: OrdersModel) {
+fun CardItem(order: OrderModel) {
   Card(
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
     modifier =
-      Modifier
-        .fillMaxWidth()
-        .padding(bottom = 8.dp)
-        .background(color = BaseLayer, RoundedCornerShape(15.dp)),
+    Modifier
+      .fillMaxWidth()
+      .padding(bottom = 8.dp)
+      .background(color = BaseLayer, RoundedCornerShape(15.dp)),
   ) {
     Column(
       // horizontalArrangement = Arrangement.SpaceBetween,
       modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
+      Modifier
+        .fillMaxWidth()
+        .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
     ) {
       Text(
         text = "AUTHOR",
         modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(7.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(7.dp),
         style =
-          TextStyle(
-            fontSize = 18.sp,
+        TextStyle(
+          fontSize = 18.sp,
 //                                fontFamily = FontFamily(Font(R.font.inter)),
-            fontWeight = FontWeight(700),
-            color = Color(0xFF3F6359),
-            textAlign = TextAlign.Center,
-          ),
+          fontWeight = FontWeight(700),
+          color = Color(0xFF3F6359),
+          textAlign = TextAlign.Center,
+        ),
       )
       Text(
         modifier =
-          Modifier
-            .fillMaxWidth(),
+        Modifier
+          .fillMaxWidth(),
         text = order.title,
         color = BaseFont,
         fontSize = 18.sp,
@@ -246,18 +246,20 @@ fun CardItem(order: OrdersModel) {
       )
       Row(
         modifier =
-          Modifier
-            .wrapContentWidth()
-            .fillMaxWidth()
-            .padding(top = 7.dp, bottom = 7.dp),
+        Modifier
+          .wrapContentWidth()
+          .fillMaxWidth()
+          .padding(top = 7.dp, bottom = 7.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        Text(
-          text = order.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-          modifier = Modifier.requiredWidth(202.dp),
-        )
+        order.description?.let {
+          Text(
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+            modifier = Modifier.requiredWidth(202.dp),
+          )
+        }
         if (order.price != null) {
           Text(
             text = "${order.price} P",
@@ -270,12 +272,12 @@ fun CardItem(order: OrdersModel) {
       Text(
         text = order.specialization,
         style =
-          TextStyle(
-            fontSize = 14.sp,
+        TextStyle(
+          fontSize = 14.sp,
 //                                fontFamily = FontFamily(Font(R.font.inter)),
-            fontWeight = FontWeight(400),
-            color = Color(0xFF3F6359),
-          ),
+          fontWeight = FontWeight(400),
+          color = Color(0xFF3F6359),
+        ),
         modifier = Modifier.fillMaxWidth(),
       )
       Row(
@@ -298,13 +300,15 @@ fun CardItem(order: OrdersModel) {
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
-        Text(
-          text = order.city,
-          textAlign = TextAlign.End,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-        )
+        order.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
       }
     }
   }
@@ -316,48 +320,48 @@ fun CommentItem(comment: CommentsModel) {
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
     modifier =
-      Modifier
-        .fillMaxWidth()
-        // .requiredWidth(350.dp)
-        .padding(bottom = 8.dp)
-        .background(color = BaseFont, RoundedCornerShape(15.dp)),
+    Modifier
+      .fillMaxWidth()
+      // .requiredWidth(350.dp)
+      .padding(bottom = 8.dp)
+      .background(color = BaseFont, RoundedCornerShape(15.dp)),
     // .clickable { OrderScreen(item) }
   ) {
     Column(
       // horizontalArrangement = Arrangement.SpaceBetween,
       modifier =
-        Modifier
-          .fillMaxSize()
-          .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
+      Modifier
+        .fillMaxSize()
+        .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
     ) {
       Text(
         text = comment.author,
         modifier =
-          Modifier
-            .fillMaxWidth(),
+        Modifier
+          .fillMaxWidth(),
         style =
-          TextStyle(
-            fontSize = 16.sp,
+        TextStyle(
+          fontSize = 16.sp,
 //                    fontFamily = FontFamily(Font(R.font.inter)),
-            fontWeight = FontWeight(700),
-            color = Color(0xFF3F6359),
-          ),
+          fontWeight = FontWeight(700),
+          color = Color(0xFF3F6359),
+        ),
       )
       Text(
         text = comment.description,
         color = BaseFont,
         fontSize = 14.sp,
         modifier =
-          Modifier
-            .padding(top = 7.dp)
-            .fillMaxWidth(),
+        Modifier
+          .padding(top = 7.dp)
+          .fillMaxWidth(),
       )
 
       Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier =
-          Modifier
-            .fillMaxSize(),
+        Modifier
+          .fillMaxSize(),
       ) {
         Column {
           Text(
@@ -380,8 +384,8 @@ fun CommentItem(comment: CommentsModel) {
   }
 }
 
-// @Composable
-// @Preview
-// fun OrderScreenPreview() {
-//    OrderDetailsScreen()
-// }
+//@Composable
+//@Preview
+//fun OrderScreenPreview() {
+//  OrderDetailsScreen()
+//}

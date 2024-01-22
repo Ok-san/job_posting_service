@@ -1,13 +1,13 @@
 package data
 
-data class ServicesModel(
+data class ServiceModel(
     val id: Int,
     val category: String,
     val specialization: String,
-    val coast: String? = null,
-    val description: String,
-    val master: ProfileModel,
-    val favorite: Boolean = false,
     val publicationDate: String,
-    val city: String?,
+    val coast: String? = null,
+    val description: String? = null,
+    val master: ProfileModel,
+    val city: String? = null,
+    val favorite: Boolean = false,
 )

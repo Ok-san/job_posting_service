@@ -2,16 +2,16 @@ package data
 
 import java.time.LocalDate
 
-val orders: MutableList<OrdersModel>
+val orders: MutableList<OrderModel>
   get() = mutableListOf(order1, order2, order3, order2)
 
 val comments: MutableList<CommentsModel> by lazy { mutableListOf(comment1, comment1) }
 
-val services: MutableList<ServicesModel>
+val services: MutableList<ServiceModel>
   get() = mutableListOf(service1, service2, service2)
 
 val order1 =
-  OrdersModel(
+  OrderModel(
     orderId = 0,
     title = "I need help I need help I need help I need help",
     description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
@@ -24,7 +24,7 @@ val order1 =
   )
 
 val order2 =
-  OrdersModel(
+  OrderModel(
     orderId = 1,
     title = "I need help",
     description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
@@ -65,7 +65,7 @@ val profile2 =
   )
 
 val service1 =
-  ServicesModel(
+  ServiceModel(
     id = 0,
     category = "Beauty",
     description =
@@ -73,12 +73,12 @@ val service1 =
       "I prefer to work remotely. But I can also come to you. \n" +
       "Call and write any time",
     specialization = "Manicure",
-    city = "null",
+    city = null,
     master = profile1,
     publicationDate = "Oct 22, 2023",
   )
 val service2 =
-  ServicesModel(
+  ServiceModel(
     id = 1,
     category = "Beauty",
     description =
@@ -86,7 +86,7 @@ val service2 =
       "I prefer to work remotely. But I can also come to you. \n" +
       "Call and write any time",
     specialization = "Manicure",
-    city = "null",
+    city = null,
     master = profile2,
     publicationDate = "Oct 22, 2023",
   )

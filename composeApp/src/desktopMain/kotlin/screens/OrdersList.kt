@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrdersList
-import data.OrdersModel
+import data.OrderModel
 import data.service1
 import data.service2
 import theme.BaseFont
@@ -117,9 +117,9 @@ fun OrdersListScreen(component: OrdersList) {
 
 @Composable
 fun OrderItem(
-  item: OrdersModel,
-  component: OrdersList,
-  index: Int,
+    item: OrderModel,
+    component: OrdersList,
+    index: Int,
 ) {
   val model by component.model.subscribeAsState()
   val favorite = model.ordersList[index].favorite

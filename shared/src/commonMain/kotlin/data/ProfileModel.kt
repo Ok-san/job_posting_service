@@ -12,7 +12,7 @@ data class ProfileModel(
   val address: String?,
   val avatar: String?,
   val isMaster: Boolean = false,
-  val services: ArrayList<ServicesModel>?,
+  val services: ArrayList<ServiceModel>?,
 //    val orders: ArrayList<OrdersModel>?,
 //    val comment: ArrayList<CommentModel>?
 )

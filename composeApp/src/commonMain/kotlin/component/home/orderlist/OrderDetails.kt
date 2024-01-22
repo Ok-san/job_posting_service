@@ -2,13 +2,13 @@ package component.home.orderlist
 
 import com.arkivanov.decompose.value.Value
 import data.CommentsModel
-import data.OrdersModel
+import data.OrderModel
 
 interface OrderDetails {
   val model: Value<Model>
 
   data class Model(
-    var order: OrdersModel,
+    var order: OrderModel,
     var comments: List<CommentsModel> = emptyList(),
     var commentText: String? = null,
   )

@@ -26,14 +26,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import data.ServicesModel
+import data.ServiceModel
 import theme.BaseFont
 import theme.BaseLayer
 import theme.richYellow
 import theme.textGrey
 
 @Composable
-fun MasterItem(item: ServicesModel) {
+fun MasterItem(item: ServiceModel) {
   Card(
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),

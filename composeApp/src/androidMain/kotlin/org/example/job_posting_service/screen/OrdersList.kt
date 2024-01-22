@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrdersList
-import data.OrdersModel
+import data.OrderModel
 import data.service1
 import data.service2
 import org.example.job_posting_service.R
@@ -117,7 +117,7 @@ fun OrdersListScreen(component: OrdersList) {
 
 @Composable
 fun OrderItem(
-  item: OrdersModel,
+  item: OrderModel,
   component: OrdersList,
   index: Int,
 ) {
@@ -188,12 +188,14 @@ fun OrderItem(
             .fillMaxSize()
             .padding(top = 7.dp, bottom = 7.dp),
       ) {
-        Text(
-          modifier = Modifier.fillMaxSize(0.7f),
-          text = item.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-        )
+        item.description?.let {
+          Text(
+            modifier = Modifier.fillMaxSize(0.7f),
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
         Text(
           text = "${item.price} P",
           fontWeight = FontWeight(700),
@@ -222,13 +224,15 @@ fun OrderItem(
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
-        Text(
-          text = item.city,
-          textAlign = TextAlign.End,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-        )
+        item.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
       }
     }
   }

@@ -45,7 +45,7 @@ import androidx.compose.ui.zIndex
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import data.CommentsModel
-import data.OrdersModel
+import data.OrderModel
 import theme.BackButtonTint
 import theme.BaseFont
 import theme.BaseLayer
@@ -195,7 +195,7 @@ fun BackButton(component: OrderDetails) {
 }
 
 @Composable
-fun CardItem(order: OrdersModel) {
+fun CardItem(order: OrderModel) {
   Card(
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),

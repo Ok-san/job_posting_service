@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import data.ServicesModel
+import data.ServiceModel
 import org.example.job_posting_service.R
 import theme.BaseFont
 import theme.BaseLayer
@@ -31,7 +31,7 @@ import theme.richYellow
 import theme.textGrey
 
 @Composable
-fun MasterItem(item: ServicesModel) {
+fun MasterItem(item: ServiceModel) {
   Card(
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
@@ -56,7 +56,10 @@ fun MasterItem(item: ServicesModel) {
             .fillMaxSize(),
       ) {
         Text(
-          modifier = Modifier.fillMaxSize(0.7f),
+          modifier = Modifier
+//            .fillMaxSize(0.7f)
+            .weight(1f)
+          ,
           text = item.master.name,
           color = BaseFont,
           fontSize = 18.sp,
@@ -93,12 +96,17 @@ fun MasterItem(item: ServicesModel) {
             .fillMaxSize()
             .padding(top = 7.dp, bottom = 7.dp),
       ) {
-        Text(
-          modifier = Modifier.fillMaxSize(0.7f),
-          text = item.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-        )
+        item.description?.let {
+          Text(
+            modifier = Modifier
+//              .fillMaxSize(0.7f)
+              .weight(1f)
+            ,
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
         Image(
           alignment = Alignment.CenterEnd,
           modifier =

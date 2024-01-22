@@ -60,6 +60,13 @@ val ProfileTypography =
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
       ),
+    titleSmall =
+    TextStyle(
+      color = BaseFont,
+      fontFamily = InterFamily,
+      fontWeight = FontWeight.Bold,
+      fontSize = 16.sp,
+    ),
     labelMedium =
       TextStyle(
         color = BaseFont,
