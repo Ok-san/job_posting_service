@@ -25,7 +25,7 @@ import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
 import org.example.job_posting_service.screen.profile.DefaultField
-import org.example.job_posting_service.ui.theme.ProfileTypography
+import org.example.job_posting_service.ui.theme.Typography
 import org.example.job_posting_service.ui.theme.mainIconSize
 import theme.BaseLayer
 
@@ -61,7 +61,7 @@ fun RegistrationScreen(component: Registration) {
       )
       Text(
         text = stringResource(R.string.app_name),
-        style = ProfileTypography.titleMedium,
+        style = Typography.titleMedium,
       )
     }
     Column(modifier = Modifier.fillMaxSize()) {
@@ -107,7 +107,7 @@ fun AuthorizationButton(component: Registration) {
     Text(
       text = "Authorization",
       textDecoration = TextDecoration.Underline,
-      style = ProfileTypography.labelMedium,
+      style = Typography.labelMedium,
     )
   }
 }

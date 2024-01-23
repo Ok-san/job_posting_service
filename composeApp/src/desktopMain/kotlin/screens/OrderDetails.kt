@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,12 +21,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -46,15 +42,12 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import data.CommentsModel
 import data.OrderModel
-import theme.BackButtonTint
+import org.example.job_posting_service.module.BackButton
 import theme.BaseFont
 import theme.BaseLayer
-import theme.ButtonBackground
 import theme.FirstLayer
-import theme.richYellow
-import theme.second_layer_shape
-import theme.textGrey
-import ui.theme.buttonSize
+import theme.SecondFont
+import ui.theme.ProfileTypography
 import ui.theme.mainIconSize
 
 @Composable
@@ -73,7 +66,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
           .fillMaxWidth()
           .padding(top = 47.dp, start = 20.dp, end = 20.dp),
     ) {
-      BackButton(component)
+      BackButton(component::onBackClick)
     }
     Box(
       modifier =
@@ -109,10 +102,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
         item {
           Text(
             text = "Comments:",
-            fontSize = 16.sp,
-//        fontFamily = FontFamily(Font(R.font.inter)),
-            fontWeight = FontWeight(400),
-            color = Color(0xFF3F6359),
+            style = ProfileTypography.titleMedium,
             modifier = Modifier.padding(top = 12.dp, bottom = 12.dp),
           )
         }
@@ -150,7 +140,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
             ),
           colors =
             TextFieldDefaults.textFieldColors(
-              backgroundColor = richYellow,
+              backgroundColor = SecondFont,
               focusedIndicatorColor = Color.Transparent,
               unfocusedIndicatorColor = Color.Transparent,
               disabledIndicatorColor = Color.Transparent,
@@ -177,22 +167,22 @@ fun OrderDetailsScreen(component: OrderDetails) {
   }
 }
 
-@Composable
-fun BackButton(component: OrderDetails) {
-  Button(
-    onClick = component::onBackClick,
-    modifier = Modifier.size(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(0.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Icon(
-      Icons.Default.ArrowBack,
-      contentDescription = "",
-      tint = BackButtonTint,
-    )
-  }
-}
+//@Composable
+//fun BackButton(component: OrderDetails) {
+//  Button(
+//    onClick = component::onBackClick,
+//    modifier = Modifier.size(buttonSize),
+//    shape = second_layer_shape,
+//    contentPadding = PaddingValues(0.dp),
+//    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
+//  ) {
+//    Icon(
+//      Icons.Default.ArrowBack,
+//      contentDescription = "",
+//      tint = BackButtonTint,
+//    )
+//  }
+//}
 
 @Composable
 fun CardItem(order: OrderModel) {
@@ -221,7 +211,6 @@ fun CardItem(order: OrderModel) {
         style =
           TextStyle(
             fontSize = 18.sp,
-//                                fontFamily = FontFamily(Font(R.font.inter)),
             fontWeight = FontWeight(700),
             color = Color(0xFF3F6359),
             textAlign = TextAlign.Center,
@@ -244,12 +233,14 @@ fun CardItem(order: OrderModel) {
             .padding(top = 7.dp, bottom = 7.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        Text(
-          text = order.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-          modifier = Modifier.requiredWidth(202.dp),
-        )
+        order.description?.let {
+          Text(
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+            modifier = Modifier.requiredWidth(202.dp),
+          )
+        }
         if (order.price != null) {
           Text(
             text = "${order.price} P",
@@ -261,13 +252,7 @@ fun CardItem(order: OrderModel) {
       }
       Text(
         text = order.specialization,
-        style =
-          TextStyle(
-            fontSize = 14.sp,
-//                                fontFamily = FontFamily(Font(R.font.inter)),
-            fontWeight = FontWeight(400),
-            color = Color(0xFF3F6359),
-          ),
+        style = ProfileTypography.bodyMedium,
         modifier = Modifier.fillMaxWidth(),
       )
       Row(
@@ -277,26 +262,22 @@ fun CardItem(order: OrderModel) {
         Column {
           Text(
             text = "Deadline: ${order.deadline}",
-            color = textGrey,
-            fontWeight = FontWeight(400),
-            fontSize = 14.sp,
+            style = ProfileTypography.bodyMedium,
             modifier = Modifier.requiredWidth(169.dp),
           )
           Text(
             text = "Published: ${order.publicationDate}",
-            color = textGrey,
-            fontWeight = FontWeight(400),
-            fontSize = 14.sp,
+            style = ProfileTypography.bodyMedium,
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
-        Text(
-          text = order.city,
-          textAlign = TextAlign.End,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-        )
+        order.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            style = ProfileTypography.bodyMedium,
+          )
+        }
       }
     }
   }
@@ -354,16 +335,14 @@ fun CommentItem(comment: CommentsModel) {
         Column {
           Text(
             text = "Published: ${comment.publicationDate}",
-            color = textGrey,
-            fontWeight = FontWeight(400),
-            fontSize = 14.sp,
+            style = ProfileTypography.bodyMedium,
             modifier = Modifier.requiredWidth(158.dp),
           )
         }
         Text(
           text = "To answer",
           textAlign = TextAlign.End,
-          color = richYellow,
+          color = SecondFont,
           fontWeight = FontWeight(400),
           fontSize = 14.sp,
         )

@@ -1,10 +1,8 @@
 package screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +19,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -28,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,9 +38,10 @@ import data.service1
 import data.service2
 import theme.BaseFont
 import theme.BaseLayer
+import theme.FavoriteButtonTint
 import theme.FirstLayer
-import theme.richYellow
-import theme.textGrey
+import theme.FirstFont
+import theme.SecondFont
 
 @Composable
 fun OrdersListScreen(component: OrdersList) {
@@ -62,7 +61,7 @@ fun OrdersListScreen(component: OrdersList) {
         Modifier.padding(top = 0.dp, bottom = 12.dp)
           .height(40.dp),
       selectedTabIndex = tabIndex,
-      contentColor = richYellow,
+      contentColor = SecondFont,
       divider = {},
     ) {
       tabs.forEachIndexed { index, title ->
@@ -117,9 +116,9 @@ fun OrdersListScreen(component: OrdersList) {
 
 @Composable
 fun OrderItem(
-    item: OrderModel,
-    component: OrdersList,
-    index: Int,
+  item: OrderModel,
+  component: OrdersList,
+  index: Int,
 ) {
   val model by component.model.subscribeAsState()
   val favorite = model.ordersList[index].favorite
@@ -154,30 +153,23 @@ fun OrderItem(
         )
         when (favorite) {
           false ->
-            Box {
-              Image(
-                modifier =
-                  Modifier
-                    .clickable { component.onLikeClicked(item.orderId) },
-                painter = rememberVectorPainter(Icons.Default.FavoriteBorder),
-                contentDescription = "favorite false",
-                // contentScale = ContentScale.None
-              )
-            }
+            Icon(
+              Icons.Default.FavoriteBorder,
+              contentDescription = null,
+              tint = FavoriteButtonTint,
+              modifier = Modifier.clickable { component.onLikeClicked(item.orderId) },
+            )
 
           true ->
-            Box {
-              Image(
-                modifier =
-                  Modifier
-                    .clickable { component.onLikeClicked(item.orderId) },
-                painter = rememberVectorPainter(Icons.Default.Favorite),
-                contentDescription = "favorite true",
-                // contentScale = ContentScale.None
-              )
-            }
+            Icon(
+              Icons.Default.Favorite,
+              contentDescription = null,
+              tint = FavoriteButtonTint,
+              modifier = Modifier.clickable { component.onLikeClicked(item.orderId) },
+            )
         }
       }
+
       Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier =
@@ -185,12 +177,14 @@ fun OrderItem(
             .fillMaxSize()
             .padding(top = 7.dp, bottom = 7.dp),
       ) {
-        Text(
-          modifier = Modifier.fillMaxSize(0.8f),
-          text = item.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-        )
+        item.description?.let {
+          Text(
+            modifier = Modifier.fillMaxSize(0.8f),
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
         Text(
           text = "${item.price} P",
           fontWeight = FontWeight(700),
@@ -207,24 +201,26 @@ fun OrderItem(
           Text(
             modifier = Modifier.fillMaxSize(0.7f),
             text = "Deadline: ${item.deadline}",
-            color = textGrey,
+            color = FirstFont,
             fontWeight = FontWeight(400),
             fontSize = 14.sp,
           )
           Text(
             text = "Published: ${item.publicationDate}",
-            color = textGrey,
+            color = FirstFont,
             fontWeight = FontWeight(400),
             fontSize = 14.sp,
           )
         }
-        Text(
-          text = item.city,
-          textAlign = TextAlign.End,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-        )
+        item.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            color = FirstFont,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
       }
     }
   }

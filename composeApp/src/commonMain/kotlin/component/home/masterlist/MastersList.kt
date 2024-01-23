@@ -7,7 +7,7 @@ interface MastersList {
   val model: Value<Model>
 
   data class Model(
-      val orders: List<ServiceModel>,
-      val selectOrderId: Long?,
+    val orders: List<ServiceModel>,
+    val selectOrderId: Long?,
   )
 }

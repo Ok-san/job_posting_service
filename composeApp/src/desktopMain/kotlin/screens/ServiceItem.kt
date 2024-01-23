@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +16,10 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -29,8 +28,9 @@ import androidx.compose.ui.unit.sp
 import data.ServiceModel
 import theme.BaseFont
 import theme.BaseLayer
-import theme.richYellow
-import theme.textGrey
+import theme.FavoriteButtonTint
+import theme.FirstFont
+import theme.SecondFont
 
 @Composable
 fun MasterItem(item: ServiceModel) {
@@ -66,50 +66,43 @@ fun MasterItem(item: ServiceModel) {
         )
         when (item.favorite) {
           false ->
-            Box {
-              Image(
-                modifier =
-                  Modifier
-                    .clickable { },
-                alignment = Alignment.TopEnd,
-                painter = rememberVectorPainter(Icons.Default.Favorite),
-                contentDescription = "favorite false",
-              )
-            }
+            Icon(
+              Icons.Default.Favorite,
+              contentDescription = null,
+              tint = FavoriteButtonTint,
+              modifier = Modifier.clickable { },
+            )
 
           true ->
-            Box {
-              Image(
-                modifier =
-                  Modifier
-                    .clickable { },
-                alignment = Alignment.TopEnd,
-                painter = rememberVectorPainter(Icons.Filled.Favorite),
-                contentDescription = "favorite true",
-              )
-            }
+            Icon(
+              Icons.Filled.Favorite,
+              contentDescription = null,
+              tint = FavoriteButtonTint,
+              modifier = Modifier.clickable { },
+            )
         }
       }
       Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier =
           Modifier
             .fillMaxSize()
-            .padding(top = 7.dp, bottom = 7.dp),
+            .padding(vertical = 7.dp),
       ) {
-        Text(
-          modifier = Modifier.fillMaxSize(0.7f),
-          text = item.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-        )
+        item.description?.let {
+          Text(
+            modifier = Modifier.weight(1f),
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
         Image(
           alignment = Alignment.CenterEnd,
           modifier =
             Modifier
               .requiredSize(50.dp)
               .fillMaxSize(),
-          //                    painter = painterResource(id = R.drawable.logo),
           painter = painterResource("drawable/logo.png"),
           contentDescription = "image description",
         )
@@ -126,13 +119,13 @@ fun MasterItem(item: ServiceModel) {
               text = "${item.coast} P",
               fontSize = 14.sp,
               fontWeight = FontWeight(700),
-              color = richYellow,
+              color = SecondFont,
               modifier = Modifier.requiredWidth(175.dp),
             )
           }
           Text(
             text = "Published: ${item.publicationDate}",
-            color = textGrey,
+            color = FirstFont,
             fontWeight = FontWeight(400),
             fontSize = 14.sp,
             modifier = Modifier.requiredWidth(169.dp),
@@ -141,7 +134,7 @@ fun MasterItem(item: ServiceModel) {
         item.city?.let {
           Text(
             text = it,
-            color = textGrey,
+            color = FirstFont,
             fontWeight = FontWeight(400),
             fontSize = 14.sp,
             textAlign = TextAlign.End,

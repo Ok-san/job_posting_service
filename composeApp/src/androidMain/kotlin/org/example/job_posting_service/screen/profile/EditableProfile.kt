@@ -35,7 +35,7 @@ import org.example.job_posting_service.R
 import org.example.job_posting_service.module.BackButton
 import org.example.job_posting_service.module.BasicTextButton
 import org.example.job_posting_service.module.CompoundButton
-import org.example.job_posting_service.ui.theme.ProfileTypography
+import org.example.job_posting_service.ui.theme.Typography
 import org.example.job_posting_service.ui.theme.mainIconSize
 import theme.BaseFont
 import theme.BaseLayer
@@ -112,7 +112,7 @@ fun EditableProfileScreen() {
           ) {
             Text(
               "About You",
-              style = ProfileTypography.titleMedium,
+              style = Typography.titleMedium,
             )
           }
           Column {
@@ -146,7 +146,7 @@ fun EditableProfileScreen() {
             )
             Text(
               "I'm a master",
-              style = ProfileTypography.labelMedium,
+              style = Typography.labelMedium,
             )
           }
 
@@ -182,7 +182,7 @@ fun EditableProfileScreen() {
           Text(
             "Tell us more details:",
             modifier = Modifier.padding(vertical = 6.dp),
-            style = ProfileTypography.bodyMedium,
+            style = Typography.bodyMedium,
           )
 
           BasicTextField(
@@ -194,7 +194,7 @@ fun EditableProfileScreen() {
                 .clip(RoundedCornerShape(20.dp))
                 .background(PlaceholderBackground)
                 .padding(12.dp, 6.dp),
-            textStyle = ProfileTypography.bodyMedium,
+            textStyle = Typography.bodyMedium,
             minLines = 2,
             maxLines = 10,
           )
@@ -231,7 +231,7 @@ fun DefaultField(
       modifier =
         Modifier
           .padding(end = 10.dp),
-      style = ProfileTypography.bodyMedium,
+      style = Typography.bodyMedium,
     )
     // val message = remember { mutableStateOf("") }
     BasicTextField(
@@ -243,7 +243,7 @@ fun DefaultField(
           .clip(RoundedCornerShape(40.dp))
           .background(PlaceholderBackground)
           .padding(12.dp, 6.dp),
-      textStyle = ProfileTypography.bodyMedium,
+      textStyle = Typography.bodyMedium,
       singleLine = true,
       maxLines = 1,
     )

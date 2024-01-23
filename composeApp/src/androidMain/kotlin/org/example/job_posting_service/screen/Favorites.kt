@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import theme.BaseFont
 import theme.BaseLayer
 import theme.FirstLayer
-import theme.richYellow
+import theme.SecondFont
 
 @Composable
 fun FavoritesScreen() {
@@ -60,7 +60,7 @@ fun FavoritesScreen() {
           .padding(top = 42.dp, bottom = 12.dp)
           .height(22.dp),
       selectedTabIndex = tabIndex,
-      contentColor = richYellow,
+      contentColor = SecondFont,
       divider = {},
     ) {
       tabs.forEachIndexed { index, title ->

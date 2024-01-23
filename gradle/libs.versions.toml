@@ -16,6 +16,7 @@ coroutine = "1.7.3"
 ktlint = "12.1.0"
 uiTooling = "1.5.4"
 coil = "2.5.0"
+sqldelight = "2.0.1"
 
 [libraries]
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -49,3 +50,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }

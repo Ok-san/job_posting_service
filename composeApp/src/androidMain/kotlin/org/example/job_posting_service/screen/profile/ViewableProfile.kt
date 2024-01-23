@@ -41,26 +41,21 @@ import data.profile1
 import data.service1
 import data.service2
 import org.example.job_posting_service.R
-import org.example.job_posting_service.module.BackButton
 import org.example.job_posting_service.module.BasicTextButton
 import org.example.job_posting_service.module.CompoundButton
 import org.example.job_posting_service.module.FavoritesButton
-import org.example.job_posting_service.ui.theme.ProfileTypography
+import org.example.job_posting_service.ui.theme.Typography
 import org.example.job_posting_service.ui.theme.mainIconSize
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import theme.BaseLayer
 import theme.FirstLayer
 import theme.PlaceholderBackground
 import theme.SecondLayer
 import theme.first_layer_shape
 
-
-@OptIn(ExperimentalResourceApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun ViewableProfileScreen() {
   // / вот тут чтото нормальное должно быть
   val user: ProfileModel = profile1
-//  val services: ArrayList<ServicesModel> = arrayListOf()
   val services: ArrayList<ServiceModel> = arrayListOf(service1, service2)
   val orders: ArrayList<OrderModel> = arrayListOf(order1, order2)
   // /
@@ -69,73 +64,72 @@ fun ViewableProfileScreen() {
 
   Box(
     modifier =
-    Modifier
-      .fillMaxSize()
-      .background(BaseLayer)
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer),
   ) {
     Box(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .zIndex(1f),
+        Modifier
+          .fillMaxWidth()
+          .zIndex(1f),
       contentAlignment = Alignment.Center,
     ) {
       Image(
         painter = painterResource(id = R.drawable.logo),
         contentDescription = null,
         modifier =
-        Modifier
-          .size(mainIconSize)
-          .offset(y = 80.dp)
-          .clip(RoundedCornerShape(mainIconSize / 2)),
+          Modifier
+            .size(mainIconSize)
+            .offset(y = 80.dp)
+            .clip(RoundedCornerShape(mainIconSize / 2)),
       )
     }
     Column {
       Row(
         modifier =
-        Modifier
-          .padding(20.dp)
-          .fillMaxWidth(),
+          Modifier
+            .padding(20.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        BackButton({})
         BasicTextButton("Log Out", {})
         BasicTextButton("Edit", {})
         FavoritesButton()
       }
       Column(
         modifier =
-        Modifier
-          .fillMaxSize()
-          .padding(top = mainIconSize / 2 - 10.dp)
-          .clip(RoundedCornerShape(40.dp, 40.dp))
-          .background(FirstLayer)
-          .padding(20.dp)
+          Modifier
+            .fillMaxSize()
+            .padding(top = mainIconSize / 2 - 10.dp)
+            .clip(RoundedCornerShape(40.dp, 40.dp))
+            .background(FirstLayer)
+            .padding(20.dp),
       ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
           Column(
             modifier =
-            Modifier
-              .padding(bottom = 10.dp)
-              .shadow(
-                elevation = 6.dp,
-                shape = first_layer_shape,
-                spotColor = Color.Black,
-              )
-              .clip(first_layer_shape)
-              .background(SecondLayer)
-              .padding(10.dp),
+              Modifier
+                .padding(bottom = 10.dp)
+                .shadow(
+                  elevation = 6.dp,
+                  shape = first_layer_shape,
+                  spotColor = Color.Black,
+                )
+                .clip(first_layer_shape)
+                .background(SecondLayer)
+                .padding(10.dp),
           ) {
             Box(
               modifier =
-              Modifier
-                .fillMaxWidth()
-                .padding(top = mainIconSize / 2 - 20.dp),
+                Modifier
+                  .fillMaxWidth()
+                  .padding(top = mainIconSize / 2 - 20.dp),
               contentAlignment = Alignment.Center,
             ) {
               Text(
                 text = user.name,
-                style = ProfileTypography.titleMedium,
+                style = Typography.titleMedium,
               )
             }
             Column {
@@ -148,24 +142,25 @@ fun ViewableProfileScreen() {
 
           Row(
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(bottom = 10.dp),
+              Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
           ) {
             Text(
               "Order",
-              modifier = Modifier
-                .shadow(
-                  elevation = 6.dp,
-                  shape = first_layer_shape,
-                  spotColor = Color.Black,
-                )
-                .clip(first_layer_shape)
-                .background(BaseLayer)
-                .padding(20.dp, 6.dp),
-              style = ProfileTypography.titleMedium,
+              modifier =
+                Modifier
+                  .shadow(
+                    elevation = 6.dp,
+                    shape = first_layer_shape,
+                    spotColor = Color.Black,
+                  )
+                  .clip(first_layer_shape)
+                  .background(BaseLayer)
+                  .padding(20.dp, 6.dp),
+              style = Typography.titleMedium,
             )
             CompoundButton("Add order", Icons.Default.AddCircleOutline, {}, BaseLayer)
           }
@@ -176,24 +171,25 @@ fun ViewableProfileScreen() {
 
           Row(
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(bottom = 10.dp),
+              Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
           ) {
             Text(
               "Services",
-              modifier = Modifier
-                .shadow(
-                  elevation = 6.dp,
-                  shape = first_layer_shape,
-                  spotColor = Color.Black,
-                )
-                .clip(first_layer_shape)
-                .background(BaseLayer)
-                .padding(20.dp, 6.dp),
-              style = ProfileTypography.titleMedium,
+              modifier =
+                Modifier
+                  .shadow(
+                    elevation = 6.dp,
+                    shape = first_layer_shape,
+                    spotColor = Color.Black,
+                  )
+                  .clip(first_layer_shape)
+                  .background(BaseLayer)
+                  .padding(20.dp, 6.dp),
+              style = Typography.titleMedium,
             )
 
             CompoundButton("Add service", Icons.Default.AddCircleOutline, {}, BaseLayer)
@@ -213,34 +209,32 @@ fun ViewableProfileScreen() {
 fun OrderItem(order: OrderModel) {
   Column(
     modifier =
-    Modifier
-      .padding(bottom = 10.dp)
-      .shadow(
-        elevation = 6.dp,
-        shape = first_layer_shape,
-        spotColor = Color.Black,
-      )
-      .clip(first_layer_shape)
-      .background(SecondLayer)
-      .padding(10.dp),
+      Modifier
+        .padding(bottom = 10.dp)
+        .shadow(
+          elevation = 6.dp,
+          shape = first_layer_shape,
+          spotColor = Color.Black,
+        )
+        .clip(first_layer_shape)
+        .background(SecondLayer)
+        .padding(10.dp),
   ) {
-
-
     Column {
       Row(
         modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp),
-        verticalAlignment = Alignment.CenterVertically
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(
           text = order.title,
           modifier =
-          Modifier
-            .padding(horizontal = 6.dp)
-            .weight(1f),
-          style = ProfileTypography.titleSmall,
+            Modifier
+              .padding(horizontal = 6.dp)
+              .weight(1f),
+          style = Typography.titleSmall,
         )
         FavoritesButton()
       }
@@ -248,9 +242,10 @@ fun OrderItem(order: OrderModel) {
       FlowRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp)
+        modifier =
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
       ) {
         OrderInfoField(order.specialization)
         order.city?.let {
@@ -271,9 +266,9 @@ fun OrderItem(order: OrderModel) {
 
     Row(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .padding(top = 10.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(top = 10.dp),
       horizontalArrangement = Arrangement.SpaceBetween,
     ) {
       BasicTextButton("Edit", {})
@@ -287,24 +282,25 @@ fun OrderItem(order: OrderModel) {
 fun ServiceItem(service: ServiceModel) {
   Column(
     modifier =
-    Modifier
-      .padding(bottom = 10.dp)
-      .shadow(
-        elevation = 6.dp,
-        shape = first_layer_shape,
-        spotColor = Color.Black,
-      )
-      .clip(first_layer_shape)
-      .background(SecondLayer)
-      .padding(10.dp),
+      Modifier
+        .padding(bottom = 10.dp)
+        .shadow(
+          elevation = 6.dp,
+          shape = first_layer_shape,
+          spotColor = Color.Black,
+        )
+        .clip(first_layer_shape)
+        .background(SecondLayer)
+        .padding(10.dp),
   ) {
     Column {
       FlowRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp)
+        modifier =
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
       ) {
         OrderInfoField(service.category)
         OrderInfoField(service.specialization)
@@ -323,9 +319,9 @@ fun ServiceItem(service: ServiceModel) {
 
     Row(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .padding(top = 10.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(top = 10.dp),
       horizontalArrangement = Arrangement.SpaceBetween,
     ) {
       BasicTextButton("Edit", {})
@@ -339,7 +335,7 @@ fun PersonalInfoField(text: String) {
   Text(
     text = text,
     modifier = Modifier.padding(6.dp, 2.dp),
-    style = ProfileTypography.bodyMedium,
+    style = Typography.bodyMedium,
   )
 }
 
@@ -348,11 +344,11 @@ fun OrderInfoField(text: String) {
   Text(
     text = text,
     modifier =
-    Modifier
-      .clip(RoundedCornerShape(20.dp))
-      .background(PlaceholderBackground)
-      .padding(12.dp, 4.dp),
-    style = ProfileTypography.bodyMedium,
+      Modifier
+        .clip(RoundedCornerShape(20.dp))
+        .background(PlaceholderBackground)
+        .padding(12.dp, 4.dp),
+    style = Typography.bodyMedium,
   )
 }
 

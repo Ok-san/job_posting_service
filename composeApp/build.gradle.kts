@@ -89,6 +89,7 @@ android {
     targetCompatibility = JavaVersion.VERSION_1_8
   }
 }
+
 dependencies {
   debugImplementation(libs.androidx.ui.tooling)
 }
@@ -107,7 +108,6 @@ compose.desktop {
 
 ktlint {
   version = "1.1.1"
-
   verbose.set(true)
   debug.set(true)
   outputToConsole.set(true)

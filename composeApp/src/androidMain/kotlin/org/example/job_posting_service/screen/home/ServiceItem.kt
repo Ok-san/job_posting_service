@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screen
+package org.example.job_posting_service.screen.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.ServiceModel
 import org.example.job_posting_service.R
+import org.example.job_posting_service.ui.theme.Typography
 import theme.BaseFont
 import theme.BaseLayer
-import theme.richYellow
-import theme.textGrey
+import theme.SecondFont
 
 @Composable
 fun MasterItem(item: ServiceModel) {
@@ -38,7 +38,6 @@ fun MasterItem(item: ServiceModel) {
     modifier =
       Modifier
         .fillMaxWidth()
-        // .requiredWidth(350.dp)
         .padding(bottom = 8.dp)
         .background(color = BaseLayer, shape = RoundedCornerShape(15.dp)),
   ) {
@@ -56,10 +55,10 @@ fun MasterItem(item: ServiceModel) {
             .fillMaxSize(),
       ) {
         Text(
-          modifier = Modifier
+          modifier =
+            Modifier
 //            .fillMaxSize(0.7f)
-            .weight(1f)
-          ,
+              .weight(1f),
           text = item.master.name,
           color = BaseFont,
           fontSize = 18.sp,
@@ -98,10 +97,10 @@ fun MasterItem(item: ServiceModel) {
       ) {
         item.description?.let {
           Text(
-            modifier = Modifier
+            modifier =
+              Modifier
 //              .fillMaxSize(0.7f)
-              .weight(1f)
-            ,
+                .weight(1f),
             text = it,
             color = BaseFont,
             fontSize = 14.sp,
@@ -129,24 +128,20 @@ fun MasterItem(item: ServiceModel) {
               text = "${item.coast} P",
               fontSize = 14.sp,
               fontWeight = FontWeight(700),
-              color = richYellow,
+              color = SecondFont,
               modifier = Modifier.requiredWidth(175.dp),
             )
           }
           Text(
             text = "Published: ${item.publicationDate}",
-            color = textGrey,
-            fontWeight = FontWeight(400),
-            fontSize = 14.sp,
+            style = Typography.bodyMedium,
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
         item.city?.let {
           Text(
             text = it,
-            color = textGrey,
-            fontWeight = FontWeight(400),
-            fontSize = 14.sp,
+            style = Typography.bodyMedium,
             textAlign = TextAlign.End,
           )
         }

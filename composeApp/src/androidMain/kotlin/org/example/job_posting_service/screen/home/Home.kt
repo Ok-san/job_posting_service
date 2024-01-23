@@ -1,4 +1,4 @@
-package org.example.job_posting_service.screen
+package org.example.job_posting_service.screen.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,17 +24,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import org.example.job_posting_service.R
+import org.example.job_posting_service.ui.theme.Typography
 import page.main.home.HomePage
-import theme.BaseFont
 
 @Composable
 fun HomeScreen(component: HomePage) {
@@ -58,7 +55,7 @@ fun SettingBar() {
     verticalAlignment = Alignment.CenterVertically,
     modifier =
       Modifier
-        .padding(top = 47.dp, start = 20.dp, end = 20.dp)
+        .padding(top = 20.dp, start = 20.dp, end = 20.dp)
         .height(50.dp)
         .fillMaxWidth(),
   ) {
@@ -68,20 +65,11 @@ fun SettingBar() {
       onValueChange = { newText ->
         text = newText
       },
-      textStyle =
-        TextStyle(
-          fontSize = 16.sp,
-//                fontFamily = FontFamily(Font(R.font.inter)),
-          fontWeight = FontWeight(400),
-          color = BaseFont,
-        ),
+      textStyle = Typography.labelMedium,
       placeholder = {
         Text(
           text = "Search",
-          fontSize = 16.sp,
-//                fontFamily = FontFamily(Font(R.font.inter)),
-          fontWeight = FontWeight(400),
-          color = BaseFont,
+          style = Typography.labelMedium,
         )
       },
       colors =
@@ -114,9 +102,3 @@ fun SettingBar() {
     }
   }
 }
-
-// @Preview
-// @Composable
-// fun HomeScreenPreview() {
-//    HomeScreen()
-// }

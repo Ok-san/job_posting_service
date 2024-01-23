@@ -13,14 +13,14 @@ import page.main.MainPage
 import page.main.navigationBar
 import theme.BackButtonTint
 import theme.BaseFont
-import theme.richYellow
+import theme.SecondFont
 
 @Composable
 fun BottomNavigationBar(onClick: (MainPage.Tab) -> Unit) {
   BottomNavigation(
     modifier = Modifier.height(52.dp),
     backgroundColor = Color.White,
-    contentColor = richYellow,
+    contentColor = SecondFont,
   ) {
     navigationBar.forEach { tab ->
       BottomNavigationItem(
