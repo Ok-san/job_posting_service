@@ -45,8 +45,8 @@ val Typography =
         fontFamily = InterFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
-      ),
-
+      )
+      
     labelMedium =
       TextStyle(
         color = BaseFont,

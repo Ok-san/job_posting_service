@@ -10,7 +10,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slid
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import org.example.job_posting_service.screen.home.HomeScreen
 import org.example.job_posting_service.screen.navigation.BottomNavigationBar
-import org.example.job_posting_service.screen.profile.ViewableProfileScreen
+import org.example.job_posting_service.screen.profile.PersonalScreen
 import page.main.MainPage
 
 @Composable
@@ -27,12 +27,10 @@ fun MainScreen(component: MainPage) {
           stack = component.childStack,
           animation = stackAnimation(slide()),
         ) {
-          when (val child = it.instance) {
-            is MainPage.Child.Home -> HomeScreen(child.component)
-            is MainPage.Child.Favorites -> FavoritesScreen()
-//            is MainPage.Child.Profile -> ProfileScreen()
-            is MainPage.Child.Profile -> ViewableProfileScreen()
-          }
+        when (val child = it.instance) {
+          is MainPage.Child.Home -> HomeScreen(child.component)
+          is MainPage.Child.Favorites -> FavoritesScreen()
+          is MainPage.Child.Profile -> PersonalScreen(child.component)
         }
       }
     },

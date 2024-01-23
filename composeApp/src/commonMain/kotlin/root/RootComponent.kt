@@ -7,6 +7,7 @@ import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
+import network.DefaultDatabase
 import page.identification.IdentificationPageComponent
 import page.main.MainPageComponent
 
@@ -14,6 +15,7 @@ class RootComponent(
   componentContext: ComponentContext,
 ) : Root, ComponentContext by componentContext {
   private val navigate = StackNavigation<Config>()
+  private val database = DefaultDatabase()
 
   override val childStack: Value<ChildStack<*, Root.Child>> =
     childStack(
@@ -32,11 +34,23 @@ class RootComponent(
         Root.Child.Identification(
           IdentificationPageComponent(
             context = context,
-            onSignIn = { navigate.replaceAll(Config.MainScreenConfig) },
+            onSignIn = { userId ->
+              if (userId != null) {
+                navigate.replaceAll(Config.MainScreenConfig(userId))
+              }
+            },
+            database = database,
           ),
         )
 
-      is Config.MainScreenConfig -> Root.Child.Main(MainPageComponent(context = context))
+      is Config.MainScreenConfig ->
+        Root.Child.Main(
+          MainPageComponent(
+            context = context,
+            userId = config.userId,
+            database = database,
+          ),
+        )
     }
 
   @Serializable
@@ -45,6 +59,6 @@ class RootComponent(
     data object IdentificationScreenConfig : Config
 
     @Serializable
-    data object MainScreenConfig : Config
+    data class MainScreenConfig(val userId: Int) : Config
   }
 }

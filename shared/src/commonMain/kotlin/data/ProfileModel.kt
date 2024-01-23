@@ -2,8 +2,9 @@ package data
 
 import java.time.LocalDate
 
+
 data class ProfileModel(
-  val id: Int,
+  val userId: Int,
   val name: String,
   val phoneNumber: String,
   val email: String?,
@@ -12,7 +13,6 @@ data class ProfileModel(
   val address: String?,
   val avatar: String?,
   val isMaster: Boolean = false,
-  val services: ArrayList<ServiceModel>?,
-//    val orders: ArrayList<OrdersModel>?,
-//    val comment: ArrayList<CommentModel>?
+  val services: List<Int>?,
+  val orders: List<Int>?,
 )

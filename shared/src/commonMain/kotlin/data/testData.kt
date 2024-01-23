@@ -9,6 +9,11 @@ val comments: MutableList<CommentsModel> by lazy { mutableListOf(comment1, comme
 
 val services: MutableList<ServiceModel>
   get() = mutableListOf(service1, service2, service2)
+val users: MutableList<UserModel>
+  get() = mutableListOf(user1, user2)
+
+val profiles: MutableList<ProfileModel>
+  get() = mutableListOf(profile1, profile2)
 
 val order1 =
   OrderModel(
@@ -21,6 +26,7 @@ val order1 =
     specialization = "Manicure",
     city = "San Vicente de Tagua Tagua",
     deadline = "Nov 11, 2023",
+    comments = mutableListOf(0,0)
   )
 
 val order2 =
@@ -40,7 +46,7 @@ val order3 = order2.copy(description = "", orderId = 2)
 
 val profile1 =
   ProfileModel(
-    id = 0,
+    userId = 0,
     name = "Oksanus",
     phoneNumber = "+70123456789",
     email = "example@gmail.com",
@@ -48,13 +54,14 @@ val profile1 =
     birthdate = LocalDate.parse("2000-12-12"),
     address = null,
     avatar = null,
-    services = null
+    services = mutableListOf(0, 1),
+    orders = mutableListOf(0, 1),
   )
 
 val profile2 =
   ProfileModel(
-    id = 1,
-    name = "aboba",
+    userId = 1,
+    name = "Vladboba",
     phoneNumber = "+79990123456",
     email = "example1@gmail.com",
     city = "Santiago",
@@ -62,6 +69,7 @@ val profile2 =
     address = null,
     avatar = null,
     services = null,
+    orders = listOf(2),
   )
 
 val service1 =
@@ -98,3 +106,14 @@ val comment1 =
     description = "I'll do it in an hour during the week",
     publicationDate = "Oct 22, 2023",
   )
+
+val user1 = UserModel(
+  userId = 0,
+  login = "user1",
+  password = "user1"
+)
+val user2 = UserModel(
+  userId = 1,
+  login = "user2",
+  password = "user2"
+)

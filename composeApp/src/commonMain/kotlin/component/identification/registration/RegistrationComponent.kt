@@ -3,11 +3,13 @@ package component.identification.registration
 import com.arkivanov.decompose.ComponentContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import network.DefaultDatabase
 
 class RegistrationComponent(
   componentContext: ComponentContext,
-  val onSignIn: () -> Unit,
+  val onSignIn: (userId: Int?) -> Unit,
   val onAuthorization: () -> Unit,
+  private val database: DefaultDatabase,
 ) : Registration, ComponentContext by componentContext {
   override val name: StateFlow<String> = MutableStateFlow("")
   override val login: StateFlow<String> = MutableStateFlow("")
@@ -27,7 +29,7 @@ class RegistrationComponent(
   }
 
   override fun onSignInClick() {
-    onSignIn()
+    onSignIn(0)
   }
 
   override fun onAuthorizationClick() {

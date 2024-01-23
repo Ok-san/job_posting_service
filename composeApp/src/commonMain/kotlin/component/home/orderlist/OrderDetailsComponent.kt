@@ -4,22 +4,22 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import data.CommentsModel
+import java.time.LocalDate
 import network.Database
 
 class OrderDetailsComponent(
   componentContext: ComponentContext,
-  database: Database,
-  orderId: Int,
+  private val database: Database,
+  private val orderId: Int,
+  private val userId: Int,
   private val onBack: () -> Unit,
 ) : ComponentContext by componentContext, OrderDetails {
-  private val _database = database
-  private val _orderId = orderId
   private val _model =
     MutableValue(
       OrderDetails.Model(
-        comments = _database.getComments(orderId),
+        comments = database.getComments(orderId),
         commentText = "",
-        order = _database.getOrdersById(orderId),
+        order = database.getOrdersById(orderId),
       ),
     )
 
@@ -45,11 +45,11 @@ class OrderDetailsComponent(
     val newComment =
       CommentsModel(
         id = 2,
-        author = "mav",
+        author = database.getUserName(userId),
         description = _model.value.commentText.toString(),
-        publicationDate = "Nov 23, 2023",
+        publicationDate = LocalDate.now().toString(),
       )
 
-    _database.createComment(_orderId, newComment)
+    database.createComment(orderId, newComment)
   }
 }
