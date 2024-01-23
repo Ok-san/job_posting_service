@@ -7,8 +7,8 @@ interface OrdersList {
   val model: Value<Model>
 
   data class Model(
-      val ordersList: List<OrderModel> = emptyList(),
-      val selectedId: Int? = null,
+    val ordersList: List<OrderModel> = emptyList(),
+    val selectedId: Int? = null,
   )
 
   fun onLikeClicked(id: Int)

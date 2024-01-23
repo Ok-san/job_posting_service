@@ -8,7 +8,7 @@ import network.Database
 
 class OrdersListComponent(
   componentContext: ComponentContext,
-  database: Database,
+  private val database: Database,
   private val onSelected: (id: Int) -> Unit,
 ) : ComponentContext by componentContext, OrdersList {
   private val _model =

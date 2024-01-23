@@ -117,9 +117,9 @@ fun OrdersListScreen(component: OrdersList) {
 
 @Composable
 fun OrderItem(
-    item: OrderModel,
-    component: OrdersList,
-    index: Int,
+  item: OrderModel,
+  component: OrdersList,
+  index: Int,
 ) {
   val model by component.model.subscribeAsState()
   val favorite = model.ordersList[index].favorite
@@ -185,12 +185,14 @@ fun OrderItem(
             .fillMaxSize()
             .padding(top = 7.dp, bottom = 7.dp),
       ) {
-        Text(
-          modifier = Modifier.fillMaxSize(0.8f),
-          text = item.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-        )
+        item.description?.let {
+          Text(
+            modifier = Modifier.fillMaxSize(0.8f),
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
         Text(
           text = "${item.price} P",
           fontWeight = FontWeight(700),
@@ -218,13 +220,15 @@ fun OrderItem(
             fontSize = 14.sp,
           )
         }
-        Text(
-          text = item.city,
-          textAlign = TextAlign.End,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-        )
+        item.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
       }
     }
   }

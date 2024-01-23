@@ -97,12 +97,14 @@ fun MasterItem(item: ServiceModel) {
             .fillMaxSize()
             .padding(top = 7.dp, bottom = 7.dp),
       ) {
-        Text(
-          modifier = Modifier.fillMaxSize(0.7f),
-          text = item.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-        )
+        item.description?.let {
+          Text(
+            modifier = Modifier.fillMaxSize(0.7f),
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
         Image(
           alignment = Alignment.CenterEnd,
           modifier =

@@ -244,12 +244,14 @@ fun CardItem(order: OrderModel) {
             .padding(top = 7.dp, bottom = 7.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        Text(
-          text = order.description,
-          color = BaseFont,
-          fontSize = 14.sp,
-          modifier = Modifier.requiredWidth(202.dp),
-        )
+        order.description?.let {
+          Text(
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+            modifier = Modifier.requiredWidth(202.dp),
+          )
+        }
         if (order.price != null) {
           Text(
             text = "${order.price} P",
@@ -290,13 +292,15 @@ fun CardItem(order: OrderModel) {
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
-        Text(
-          text = order.city,
-          textAlign = TextAlign.End,
-          color = textGrey,
-          fontWeight = FontWeight(400),
-          fontSize = 14.sp,
-        )
+        order.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            color = textGrey,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
       }
     }
   }

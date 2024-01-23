@@ -9,10 +9,12 @@ import com.arkivanov.decompose.value.Value
 import component.identification.authorization.AuthorizationComponent
 import component.identification.registration.RegistrationComponent
 import kotlinx.serialization.Serializable
+import network.DefaultDatabase
 
 class IdentificationPageComponent(
   context: ComponentContext,
-  val onSignIn: () -> Unit,
+  private val database: DefaultDatabase,
+  val onSignIn: (userId: Int?) -> Unit,
 ) : IdentificationPage, ComponentContext by context {
   private val navigate = StackNavigation<Config>()
 
@@ -36,6 +38,7 @@ class IdentificationPageComponent(
             componentContext = context,
             onSignIn = onSignIn,
             onRegistration = { navigate.replaceAll(Config.RegistrationConfig) },
+            database = database,
           ),
         )
 
@@ -45,6 +48,7 @@ class IdentificationPageComponent(
             componentContext = context,
             onSignIn = onSignIn,
             onAuthorization = { navigate.replaceAll(Config.AuthorizationConfig) },
+            database = database,
           ),
         )
     }

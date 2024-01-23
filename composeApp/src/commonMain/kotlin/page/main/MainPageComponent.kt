@@ -7,12 +7,15 @@ import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
+import network.DefaultDatabase
 import page.main.favorites.FavoritesPageComponent
 import page.main.home.HomePageComponent
-import page.main.profile.ProfilePageComponent
+import page.main.profile.PersonalPageComponent
 
 class MainPageComponent(
-  context: ComponentContext,
+  val context: ComponentContext,
+  val userId: Int,
+  private val database: DefaultDatabase,
 ) : MainPage, ComponentContext by context {
   private val navigate = StackNavigation<Config>()
 
@@ -45,9 +48,31 @@ class MainPageComponent(
     context: ComponentContext,
   ): MainPage.Child =
     when (config) {
-      is Config.HomePageConfig -> MainPage.Child.Home(HomePageComponent(context))
-      is Config.FavoritesPageConfig -> MainPage.Child.Favorites(FavoritesPageComponent(context))
-      is Config.ProfilePageConfig -> MainPage.Child.Profile(ProfilePageComponent(context))
+      is Config.HomePageConfig ->
+        MainPage.Child.Home(
+          HomePageComponent(
+            componentContext = context,
+            database = database,
+            userId = userId,
+          ),
+        )
+      is Config.FavoritesPageConfig ->
+        MainPage.Child.Favorites(
+          FavoritesPageComponent(
+            context = context,
+            userId = userId,
+            database = database,
+          ),
+        )
+
+      is Config.ProfilePageConfig ->
+        MainPage.Child.Profile(
+          PersonalPageComponent(
+            context = context,
+            userId = userId,
+            database = database,
+          ),
+        )
     }
 
   @Serializable

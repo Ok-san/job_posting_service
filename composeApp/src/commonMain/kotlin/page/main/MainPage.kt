@@ -4,7 +4,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import page.main.favorites.FavoritesPage
 import page.main.home.HomePage
-import page.main.profile.ProfilePage
+import page.main.profile.PersonalPage
 
 interface MainPage {
   val childStack: Value<ChildStack<*, Child>>
@@ -22,6 +22,6 @@ interface MainPage {
 
     class Favorites(val component: FavoritesPage) : Child()
 
-    class Profile(val component: ProfilePage) : Child()
+    class Profile(val component: PersonalPage) : Child()
   }
 }

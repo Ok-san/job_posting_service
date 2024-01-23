@@ -56,10 +56,10 @@ fun MasterItem(item: ServiceModel) {
             .fillMaxSize(),
       ) {
         Text(
-          modifier = Modifier
+          modifier =
+            Modifier
 //            .fillMaxSize(0.7f)
-            .weight(1f)
-          ,
+              .weight(1f),
           text = item.master.name,
           color = BaseFont,
           fontSize = 18.sp,
@@ -98,10 +98,10 @@ fun MasterItem(item: ServiceModel) {
       ) {
         item.description?.let {
           Text(
-            modifier = Modifier
+            modifier =
+              Modifier
 //              .fillMaxSize(0.7f)
-              .weight(1f)
-            ,
+                .weight(1f),
             text = it,
             color = BaseFont,
             fontSize = 14.sp,

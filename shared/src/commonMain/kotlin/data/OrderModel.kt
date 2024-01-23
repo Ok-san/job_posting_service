@@ -14,6 +14,6 @@ data class OrderModel(
   val deadline: String? = null,
   val city: String? = null,
   val description: String? = null,
-  val comments: List<Int> = emptyList(),
+  val comments: MutableList<Int>? = null,
   var favorite: Boolean = false,
 )

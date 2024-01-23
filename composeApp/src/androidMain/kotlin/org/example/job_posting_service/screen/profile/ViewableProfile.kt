@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircleOutline
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -32,14 +33,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import component.profile.ViewableProfile
 import data.OrderModel
-import data.ProfileModel
 import data.ServiceModel
-import data.order1
-import data.order2
-import data.profile1
-import data.service1
-import data.service2
 import org.example.job_posting_service.R
 import org.example.job_posting_service.module.BackButton
 import org.example.job_posting_service.module.BasicTextButton
@@ -54,15 +51,19 @@ import theme.PlaceholderBackground
 import theme.SecondLayer
 import theme.first_layer_shape
 
-
 @OptIn(ExperimentalResourceApi::class, ExperimentalLayoutApi::class)
 @Composable
-fun ViewableProfileScreen() {
+fun ViewableProfileScreen(component: ViewableProfile) {
+  val model by component.model.subscribeAsState()
+  val user = model.profileInfo
+  val services = model.servicesList
+  val orders = model.ordersList
   // / вот тут чтото нормальное должно быть
-  val user: ProfileModel = profile1
-//  val services: ArrayList<ServicesModel> = arrayListOf()
-  val services: ArrayList<ServiceModel> = arrayListOf(service1, service2)
-  val orders: ArrayList<OrderModel> = arrayListOf(order1, order2)
+//  Я заменила но если что разблочь
+//  val user: ProfileModel = profile1
+////  val services: ArrayList<ServicesModel> = arrayListOf()
+//  val services: ArrayList<ServiceModel> = arrayListOf(service1, service2)
+//  val orders: ArrayList<OrderModel> = arrayListOf(order1, order2)
   // /
 
   val message = remember { mutableStateOf("") }
@@ -71,7 +72,7 @@ fun ViewableProfileScreen() {
     modifier =
     Modifier
       .fillMaxSize()
-      .background(BaseLayer)
+      .background(BaseLayer),
   ) {
     Box(
       modifier =
@@ -99,8 +100,8 @@ fun ViewableProfileScreen() {
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
         BackButton({})
-        BasicTextButton("Log Out", {})
-        BasicTextButton("Edit", {})
+        BasicTextButton("Log Out", component::onClickLogOut)
+        BasicTextButton("Edit", component::onClickEditProfile)
         FavoritesButton()
       }
       Column(
@@ -110,7 +111,7 @@ fun ViewableProfileScreen() {
           .padding(top = mainIconSize / 2 - 10.dp)
           .clip(RoundedCornerShape(40.dp, 40.dp))
           .background(FirstLayer)
-          .padding(20.dp)
+          .padding(20.dp),
       ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
           Column(
@@ -156,7 +157,8 @@ fun ViewableProfileScreen() {
           ) {
             Text(
               "Order",
-              modifier = Modifier
+              modifier =
+              Modifier
                 .shadow(
                   elevation = 6.dp,
                   shape = first_layer_shape,
@@ -170,7 +172,7 @@ fun ViewableProfileScreen() {
             CompoundButton("Add order", Icons.Default.AddCircleOutline, {}, BaseLayer)
           }
 
-          orders?.forEach { order ->
+          orders.forEach { order ->
             OrderItem(order = order)
           }
 
@@ -184,7 +186,8 @@ fun ViewableProfileScreen() {
           ) {
             Text(
               "Services",
-              modifier = Modifier
+              modifier =
+              Modifier
                 .shadow(
                   elevation = 6.dp,
                   shape = first_layer_shape,
@@ -199,7 +202,7 @@ fun ViewableProfileScreen() {
             CompoundButton("Add service", Icons.Default.AddCircleOutline, {}, BaseLayer)
           }
 
-          services?.forEach { service ->
+          services.forEach { service ->
             ServiceItem(service = service)
           }
         }
@@ -224,15 +227,13 @@ fun OrderItem(order: OrderModel) {
       .background(SecondLayer)
       .padding(10.dp),
   ) {
-
-
     Column {
       Row(
         modifier =
         Modifier
           .fillMaxWidth()
           .padding(bottom = 10.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(
           text = order.title,
@@ -248,9 +249,10 @@ fun OrderItem(order: OrderModel) {
       FlowRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier
+        modifier =
+        Modifier
           .fillMaxWidth()
-          .padding(bottom = 10.dp)
+          .padding(bottom = 10.dp),
       ) {
         OrderInfoField(order.specialization)
         order.city?.let {
@@ -302,9 +304,10 @@ fun ServiceItem(service: ServiceModel) {
       FlowRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier
+        modifier =
+        Modifier
           .fillMaxWidth()
-          .padding(bottom = 10.dp)
+          .padding(bottom = 10.dp),
       ) {
         OrderInfoField(service.category)
         OrderInfoField(service.specialization)
@@ -356,8 +359,8 @@ fun OrderInfoField(text: String) {
   )
 }
 
-@Preview
-@Composable
-fun ViewableProfileScreenPreview() {
-  ViewableProfileScreen()
-}
+//@Preview
+//@Composable
+//fun ViewableProfileScreenPreview() {
+//  ViewableProfileScreen()
+//}

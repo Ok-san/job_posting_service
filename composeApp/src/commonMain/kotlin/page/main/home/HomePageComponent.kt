@@ -14,8 +14,9 @@ import network.DefaultDatabase
 
 class HomePageComponent(
   componentContext: ComponentContext,
+  private val userId: Int,
+  private val database: DefaultDatabase,
 ) : ComponentContext by componentContext, HomePage {
-  private val database = DefaultDatabase()
   private val navigate = StackNavigation<Config>()
 
   override val childStack: Value<ChildStack<*, HomePage.Child>> =
@@ -39,6 +40,7 @@ class HomePageComponent(
             orderId = config.id,
             onBack = { navigate.pop() },
             database = database,
+            userId = userId,
           ),
         )
       }
