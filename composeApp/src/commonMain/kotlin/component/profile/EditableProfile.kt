@@ -7,10 +7,10 @@ interface EditableProfile {
   val model: Value<Model>
 
   data class Model(
-    val profileInfo: ProfileModel
+    val profileInfo: ProfileModel,
   )
 
   fun onClickBack()
-  fun onClickSave(newData: ProfileModel)
 
+  fun onClickSave(newData: ProfileModel)
 }

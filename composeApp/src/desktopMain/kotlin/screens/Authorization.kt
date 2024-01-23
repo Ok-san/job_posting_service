@@ -37,9 +37,9 @@ import theme.APPLICATION_TITLE
 import theme.BackButtonTint
 import theme.ButtonBackground
 import theme.PlaceholderBackground
+import theme.Typography
+import theme.buttonSize
 import theme.second_layer_shape
-import ui.theme.ProfileTypography
-import ui.theme.buttonSize
 import ui.theme.mainIconSize
 import ui.theme.maxAuthScreenWidth
 import ui.theme.minAuthScreenWidth
@@ -70,7 +70,7 @@ fun AuthorizationScreen(component: Authorization) {
       )
       Text(
         APPLICATION_TITLE,
-        style = ProfileTypography.titleMedium,
+        style = Typography.titleMedium,
       )
       Column(modifier = Modifier.padding(top = 34.dp)) {
         DefaultField("Email:", login, component::onLoginChanged)
@@ -134,7 +134,7 @@ fun RegistrationButton(component: Authorization) {
     Text(
       text = "Registration",
       textDecoration = TextDecoration.Underline,
-      style = ProfileTypography.labelMedium,
+      style = Typography.labelMedium,
     )
   }
 }
@@ -154,7 +154,7 @@ fun DefaultField(
       modifier =
         Modifier
           .padding(end = 10.dp),
-      style = ProfileTypography.bodyMedium,
+      style = Typography.bodyMedium,
     )
     // val message = remember { mutableStateOf("") }
     BasicTextField(
@@ -166,7 +166,7 @@ fun DefaultField(
           .clip(RoundedCornerShape(40.dp))
           .background(PlaceholderBackground)
           .padding(12.dp, 6.dp),
-      textStyle = ProfileTypography.bodyMedium,
+      textStyle = Typography.bodyMedium,
       singleLine = true,
       maxLines = 1,
     )

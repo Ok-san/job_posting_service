@@ -27,10 +27,11 @@ fun MainScreen(component: MainPage) {
           stack = component.childStack,
           animation = stackAnimation(slide()),
         ) {
-        when (val child = it.instance) {
-          is MainPage.Child.Home -> HomeScreen(child.component)
-          is MainPage.Child.Favorites -> FavoritesScreen()
-          is MainPage.Child.Profile -> PersonalScreen(child.component)
+          when (val child = it.instance) {
+            is MainPage.Child.Home -> HomeScreen(child.component)
+            is MainPage.Child.Favorites -> FavoritesScreen()
+            is MainPage.Child.Profile -> PersonalScreen(child.component)
+          }
         }
       }
     },

@@ -1,4 +1,4 @@
-package ui.theme
+package theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.platform.Font
 import androidx.compose.ui.unit.sp
-import theme.BaseFont
 
 val InterFamily =
   FontFamily(
@@ -21,14 +20,28 @@ val InterFamily =
     Font("font/inter_thin.ttf", FontWeight.Thin),
   )
 
-val ProfileTypography =
+val Typography =
   Typography(
+    titleLarge =
+      TextStyle(
+        color = BaseFont,
+        fontFamily = InterFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+      ),
     titleMedium =
       TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp,
+      ),
+    titleSmall =
+      TextStyle(
+        color = BaseFont,
+        fontFamily = InterFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp,
       ),
     labelMedium =
       TextStyle(
@@ -41,12 +54,19 @@ val ProfileTypography =
       TextStyle(
         color = BaseFont,
         fontFamily = InterFamily,
-        fontWeight = FontWeight.Light,
+        fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
       ),
     bodyMedium =
       TextStyle(
         color = BaseFont,
+        fontFamily = InterFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+      ),
+    bodySmall =
+      TextStyle(
+        color = FirstFont,
         fontFamily = InterFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,

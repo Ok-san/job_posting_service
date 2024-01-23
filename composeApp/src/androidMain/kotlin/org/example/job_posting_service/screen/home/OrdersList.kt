@@ -43,9 +43,9 @@ fun OrdersListScreen(component: OrdersList) {
 
   Column(
     modifier =
-    Modifier
-      .fillMaxSize()
-      .background(BaseLayer),
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer),
   ) {
 //        SettingBar()
 
@@ -60,12 +60,12 @@ fun OrdersListScreen(component: OrdersList) {
           text = {
             Text(
               title,
-              style = Typography.titleMedium
+              style = Typography.titleMedium,
             )
           },
           modifier =
-          Modifier
-            .background(color = BaseLayer),
+            Modifier
+              .background(color = BaseLayer),
           selected = tabIndex == index,
           onClick = { tabIndex = index },
         )
@@ -74,13 +74,13 @@ fun OrdersListScreen(component: OrdersList) {
 
     LazyColumn(
       modifier =
-      Modifier
-        .fillMaxSize()
-        .background(
-          color = FirstLayer,
-          shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
-        )
-        .padding(top = 20.dp, start = 20.dp, end = 20.dp),
+        Modifier
+          .fillMaxSize()
+          .background(
+            color = FirstLayer,
+            shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
+          )
+          .padding(top = 20.dp, start = 20.dp, end = 20.dp),
     ) {
       when (tabIndex) {
         0 -> {
@@ -114,25 +114,25 @@ fun OrderItem(
 
   Card(
     modifier =
-    Modifier
-      .fillMaxWidth()
-      .padding(bottom = 8.dp)
-      .background(color = BaseLayer, RoundedCornerShape(15.dp))
-      .clickable { component.onItemClicked(index) },
+      Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp)
+        .background(color = BaseLayer, RoundedCornerShape(15.dp))
+        .clickable { component.onItemClicked(index) },
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
   ) {
     Column(
       modifier =
-      Modifier
-        .fillMaxSize()
-        .padding(10.dp),
+        Modifier
+          .fillMaxSize()
+          .padding(10.dp),
     ) {
       Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier =
-        Modifier
-          .fillMaxWidth(),
+          Modifier
+            .fillMaxWidth(),
       ) {
         Text(
           modifier = Modifier.weight(1f),
@@ -144,16 +144,16 @@ fun OrderItem(
           false ->
             Image(
               modifier =
-              Modifier
-                .clickable { component.onLikeClicked(item.orderId) },
+                Modifier
+                  .clickable { component.onLikeClicked(item.orderId) },
               painter = painterResource(R.drawable.ic_favorite_false),
               contentDescription = "favorite false",
             )
           true ->
             Image(
               modifier =
-              Modifier
-                .clickable { component.onLikeClicked(item.orderId) },
+                Modifier
+                  .clickable { component.onLikeClicked(item.orderId) },
               painter = painterResource(R.drawable.ic_favorite_true),
               contentDescription = "favorite true",
             )
@@ -174,7 +174,7 @@ fun OrderItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth(),
       ) {
-        Column() {
+        Column {
           Text(
             text = "Deadline: ${item.deadline}",
             style = Typography.bodySmall,

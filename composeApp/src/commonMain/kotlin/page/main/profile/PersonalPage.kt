@@ -10,6 +10,7 @@ interface PersonalPage {
 
   sealed class Child {
     class ViewableProfileChild(val component: ViewableProfile) : Child()
+
     class EditableProfileChild(val component: EditableProfile) : Child()
   }
 }

@@ -26,12 +26,12 @@ val InterFamily =
 val Typography =
   Typography(
     titleLarge =
-    TextStyle(
-      color = BaseFont,
-      fontFamily = InterFamily,
-      fontWeight = FontWeight.Bold,
-      fontSize = 20.sp,
-    ),
+      TextStyle(
+        color = BaseFont,
+        fontFamily = InterFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+      ),
     titleMedium =
       TextStyle(
         color = BaseFont,
@@ -45,8 +45,7 @@ val Typography =
         fontFamily = InterFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
-      )
-      
+      ),
     labelMedium =
       TextStyle(
         color = BaseFont,
@@ -54,7 +53,6 @@ val Typography =
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
       ),
-
     bodyMedium =
       TextStyle(
         color = BaseFont,

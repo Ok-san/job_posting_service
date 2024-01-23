@@ -15,10 +15,13 @@ interface ViewableProfile {
   )
 
   fun onClickLogOut()
+
   fun onClickEditProfile()
+
   fun onClickEditOrder(orderId: Int)
 
   fun onClickAddOrder(newOrder: OrderModel)
+
   fun onClickDeleteOrder(orderId: Int)
 //  fun onClickFavoriteProfile()
 //  fun onClickOrder(idOrder: Int)

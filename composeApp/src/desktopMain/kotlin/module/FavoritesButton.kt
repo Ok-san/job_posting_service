@@ -1,4 +1,4 @@
-package org.example.job_posting_service.module
+package module
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -11,9 +11,9 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.job_posting_service.ui.theme.buttonSize
 import theme.ButtonBackground
 import theme.FavoriteButtonTint
+import theme.buttonSize
 import theme.second_layer_shape
 
 @Composable

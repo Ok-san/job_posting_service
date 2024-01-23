@@ -154,7 +154,7 @@ fun RegistrationButton(component: Authorization) {
 //        Text(
 //            text = "Recover Password",
 //            textDecoration = TextDecoration.Underline,
-//            style = ProfileTypography.labelMedium
+//            style = Typography.labelMedium
 //        )
 //    }
 // }

@@ -58,26 +58,26 @@ fun OrderDetailsScreen(component: OrderDetails) {
 
   Column(
     modifier =
-    Modifier
-      .fillMaxSize()
-      .background(BaseLayer),
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer),
   ) {
     Box(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .padding(20.dp)
+        Modifier
+          .fillMaxWidth()
+          .padding(20.dp),
     ) {
       BackButton(component::onBackClick)
     }
     Column(
       modifier =
-      Modifier
-        .background(
-          color = FirstLayer,
-          shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
-        )
-        .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
+        Modifier
+          .background(
+            color = FirstLayer,
+            shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
+          )
+          .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
     ) {
       LazyColumn {
         item {
@@ -97,26 +97,27 @@ fun OrderDetailsScreen(component: OrderDetails) {
             elevation = 5.dp,
             shape = RoundedCornerShape(15.dp),
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(bottom = 10.dp)
-              .background(color = BaseFont, RoundedCornerShape(15.dp))
+              Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp)
+                .background(color = BaseFont, RoundedCornerShape(15.dp)),
           ) {
-            Row(verticalAlignment = Alignment.CenterVertically
+            Row(
+              verticalAlignment = Alignment.CenterVertically,
             ) {
               TextField(
                 value = model.commentText.toString(),
                 modifier = Modifier.weight(1f),
                 placeholder = { Text(text = "Оставьте свой комментарий...") },
                 onValueChange = component::onChangeTextComment,
-                textStyle = Typography.labelMedium,
+                textStyle = Typography.bodyMedium,
                 colors =
-                TextFieldDefaults.textFieldColors(
-                  backgroundColor = Color.Transparent,
-                  focusedIndicatorColor = Color.Transparent,
-                  unfocusedIndicatorColor = Color.Transparent,
-                  disabledIndicatorColor = Color.Transparent,
-                ),
+                  TextFieldDefaults.textFieldColors(
+                    backgroundColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                  ),
                 maxLines = 1,
               )
 
@@ -153,42 +154,42 @@ fun CardItem(order: OrderModel) {
     elevation = 5.dp,
     shape = first_layer_shape,
     modifier =
-    Modifier
-      .fillMaxWidth()
-      .padding(bottom = 8.dp)
-      .shadow(
-        elevation = 6.dp,
-        shape = first_layer_shape,
-        spotColor = Color.Black,
-      )
+      Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp)
+        .shadow(
+          elevation = 6.dp,
+          shape = first_layer_shape,
+          spotColor = Color.Black,
+        ),
   ) {
     Column(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .padding(20.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(20.dp),
     ) {
       Row(
         modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp),
-        verticalAlignment = Alignment.CenterVertically
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
       ) {
         Image(
           painter = painterResource(id = R.drawable.logo),
           contentDescription = null,
           modifier =
-          Modifier
-            .size(mainIconSize)
-            .clip(RoundedCornerShape(mainIconSize / 2)),
+            Modifier
+              .size(mainIconSize)
+              .clip(RoundedCornerShape(mainIconSize / 2)),
         )
         Text(
           text = "AUTHOR",
           modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
+            Modifier
+              .fillMaxWidth()
+              .padding(10.dp),
           textAlign = TextAlign.Center,
           style = Typography.titleMedium,
         )
@@ -197,13 +198,13 @@ fun CardItem(order: OrderModel) {
       Text(
         text = order.title,
         modifier = Modifier.fillMaxWidth(),
-        style = Typography.titleMedium
+        style = Typography.titleMedium,
       )
 
       order.description?.let {
         Text(
           text = it,
-          style = Typography.bodyMedium
+          style = Typography.bodyMedium,
         )
       }
 
@@ -225,7 +226,7 @@ fun CardItem(order: OrderModel) {
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth(),
       ) {
-        Column() {
+        Column {
           Text(
             text = "Deadline: ${order.deadline}",
             style = Typography.bodySmall,
@@ -254,28 +255,28 @@ fun CommentItem(comment: CommentsModel) {
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
     modifier =
-    Modifier
-      .fillMaxWidth()
-      .padding(bottom = 10.dp)
-      .background(color = BaseFont, RoundedCornerShape(15.dp)),
+      Modifier
+        .fillMaxWidth()
+        .padding(bottom = 10.dp)
+        .background(color = BaseFont, RoundedCornerShape(15.dp)),
   ) {
     Column(
       modifier =
-      Modifier
-        .fillMaxSize()
-        .padding(10.dp),
+        Modifier
+          .fillMaxSize()
+          .padding(10.dp),
     ) {
       Text(
         text = comment.author,
-        style = Typography.titleSmall
+        style = Typography.titleSmall,
       )
       Text(
         text = comment.description,
         style = Typography.bodyMedium,
         modifier =
-        Modifier
-          .padding(top = 10.dp)
-          .fillMaxWidth(),
+          Modifier
+            .padding(top = 10.dp)
+            .fillMaxWidth(),
       )
 
       Row(

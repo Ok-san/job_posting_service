@@ -1,4 +1,4 @@
-package org.example.job_posting_service.module
+package module
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import org.example.job_posting_service.ui.theme.Typography
-import org.example.job_posting_service.ui.theme.buttonSize
 import theme.BaseFont
 import theme.ButtonBackground
+import theme.Typography
+import theme.buttonSize
 import theme.second_layer_shape
 
 @Composable

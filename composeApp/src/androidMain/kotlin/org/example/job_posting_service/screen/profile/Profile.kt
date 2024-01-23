@@ -7,7 +7,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stac
 import page.main.profile.PersonalPage
 
 @Composable
- fun PersonalScreen(component: PersonalPage) {
+fun PersonalScreen(component: PersonalPage) {
   Children(
     stack = component.childStack,
     animation = stackAnimation(slide()),
@@ -17,4 +17,4 @@ import page.main.profile.PersonalPage
       is PersonalPage.Child.ViewableProfileChild -> ViewableProfileScreen(child.component)
     }
   }
- }
+}

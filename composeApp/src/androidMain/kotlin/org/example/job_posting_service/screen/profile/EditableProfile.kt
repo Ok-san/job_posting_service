@@ -29,7 +29,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
@@ -55,33 +54,33 @@ fun EditableProfileScreen(component: EditableProfile) {
 
   Box(
     modifier =
-    Modifier
-      .background(BaseLayer),
+      Modifier
+        .background(BaseLayer),
 //      .verticalScroll(rememberScrollState())
   ) {
     Box(
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .zIndex(1f),
+        Modifier
+          .fillMaxWidth()
+          .zIndex(1f),
       contentAlignment = Alignment.Center,
     ) {
       Image(
         painter = painterResource(id = R.drawable.logo),
         contentDescription = null,
         modifier =
-        Modifier
-          .size(mainIconSize)
-          .offset(y = 80.dp)
-          .clip(RoundedCornerShape(mainIconSize / 2)),
+          Modifier
+            .size(mainIconSize)
+            .offset(y = 80.dp)
+            .clip(RoundedCornerShape(mainIconSize / 2)),
       )
     }
     Column {
       Row(
         modifier =
-        Modifier
-          .padding(20.dp)
-          .fillMaxWidth(),
+          Modifier
+            .padding(20.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
         BackButton(component::onClickBack)
@@ -89,30 +88,30 @@ fun EditableProfileScreen(component: EditableProfile) {
       }
       Column(
         modifier =
-        Modifier
-          .fillMaxSize()
-          .padding(top = mainIconSize / 2 - 10.dp)
-          .clip(RoundedCornerShape(40.dp, 40.dp))
-          .background(FirstLayer)
-          .padding(20.dp),
+          Modifier
+            .fillMaxSize()
+            .padding(top = mainIconSize / 2 - 10.dp)
+            .clip(RoundedCornerShape(40.dp, 40.dp))
+            .background(FirstLayer)
+            .padding(20.dp),
       ) {
         Column(
           modifier =
-          Modifier
-            .shadow(
-              elevation = 6.dp,
-              shape = first_layer_shape,
-              spotColor = Color.Black,
-            )
-            .clip(first_layer_shape)
-            .background(SecondLayer)
-            .padding(10.dp),
+            Modifier
+              .shadow(
+                elevation = 6.dp,
+                shape = first_layer_shape,
+                spotColor = Color.Black,
+              )
+              .clip(first_layer_shape)
+              .background(SecondLayer)
+              .padding(10.dp),
         ) {
           Box(
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(top = mainIconSize / 2 - 20.dp),
+              Modifier
+                .fillMaxWidth()
+                .padding(top = mainIconSize / 2 - 20.dp),
             contentAlignment = Alignment.Center,
           ) {
             Text(
@@ -132,9 +131,9 @@ fun EditableProfileScreen(component: EditableProfile) {
 
         Row(
           modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
+            Modifier
+              .fillMaxWidth()
+              .padding(vertical = 6.dp),
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.SpaceBetween,
         ) {
@@ -144,10 +143,10 @@ fun EditableProfileScreen(component: EditableProfile) {
               checked = checkedState.value,
               onCheckedChange = { checkedState.value = it },
               colors =
-              CheckboxDefaults.colors(
-                checkedColor = SecondLayer,
-                checkmarkColor = BaseFont,
-              ),
+                CheckboxDefaults.colors(
+                  checkedColor = SecondLayer,
+                  checkmarkColor = BaseFont,
+                ),
             )
             Text(
               "I'm a master",
@@ -160,15 +159,15 @@ fun EditableProfileScreen(component: EditableProfile) {
 
         Column(
           modifier =
-          Modifier
-            .shadow(
-              elevation = 6.dp,
-              shape = first_layer_shape,
-              spotColor = Color.Black,
-            )
-            .clip(first_layer_shape)
-            .background(SecondLayer)
-            .padding(10.dp),
+            Modifier
+              .shadow(
+                elevation = 6.dp,
+                shape = first_layer_shape,
+                spotColor = Color.Black,
+              )
+              .clip(first_layer_shape)
+              .background(SecondLayer)
+              .padding(10.dp),
         ) {
           Column {
             DefaultField(
@@ -194,21 +193,21 @@ fun EditableProfileScreen(component: EditableProfile) {
             value = message.value,
             onValueChange = { newText -> message.value = newText },
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .clip(RoundedCornerShape(20.dp))
-              .background(PlaceholderBackground)
-              .padding(12.dp, 6.dp),
-            textStyle = ProfileTypography.bodyMedium,
+              Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(20.dp))
+                .background(PlaceholderBackground)
+                .padding(12.dp, 6.dp),
+            textStyle = Typography.bodyMedium,
             minLines = 2,
             maxLines = 10,
           )
 
           Row(
             modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(top = 10.dp),
+              Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
           ) {
             BasicTextButton("Save", {})
@@ -234,29 +233,29 @@ fun DefaultField(
     Text(
       text,
       modifier =
-      Modifier
-        .padding(end = 10.dp),
-      style = ProfileTypography.bodyMedium,
+        Modifier
+          .padding(end = 10.dp),
+      style = Typography.bodyMedium,
     )
     // val message = remember { mutableStateOf("") }
     BasicTextField(
       value = message,
       onValueChange = change,
       modifier =
-      Modifier
-        .fillMaxWidth()
-        .clip(RoundedCornerShape(40.dp))
-        .background(PlaceholderBackground)
-        .padding(12.dp, 6.dp),
-      textStyle = ProfileTypography.bodyMedium,
+        Modifier
+          .fillMaxWidth()
+          .clip(RoundedCornerShape(40.dp))
+          .background(PlaceholderBackground)
+          .padding(12.dp, 6.dp),
+      textStyle = Typography.bodyMedium,
       singleLine = true,
       maxLines = 1,
     )
   }
 }
 
-//@Preview
-//@Composable
-//fun EditableProfileScreenPreview() {
+// @Preview
+// @Composable
+// fun EditableProfileScreenPreview() {
 //  EditableProfileScreen()
-//}
+// }

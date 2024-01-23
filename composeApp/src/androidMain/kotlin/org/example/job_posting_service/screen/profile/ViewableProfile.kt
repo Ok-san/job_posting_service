@@ -30,7 +30,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
@@ -38,11 +37,13 @@ import component.profile.ViewableProfile
 import data.OrderModel
 import data.ServiceModel
 import org.example.job_posting_service.R
+import org.example.job_posting_service.module.BackButton
 import org.example.job_posting_service.module.BasicTextButton
 import org.example.job_posting_service.module.CompoundButton
 import org.example.job_posting_service.module.FavoritesButton
 import org.example.job_posting_service.ui.theme.Typography
 import org.example.job_posting_service.ui.theme.mainIconSize
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 import theme.BaseLayer
 import theme.FirstLayer
 import theme.PlaceholderBackground
@@ -59,7 +60,7 @@ fun ViewableProfileScreen(component: ViewableProfile) {
   // / вот тут чтото нормальное должно быть
 //  Я заменила но если что разблочь
 //  val user: ProfileModel = profile1
-////  val services: ArrayList<ServicesModel> = arrayListOf()
+// //  val services: ArrayList<ServicesModel> = arrayListOf()
 //  val services: ArrayList<ServiceModel> = arrayListOf(service1, service2)
 //  val orders: ArrayList<OrderModel> = arrayListOf(order1, order2)
   // /
@@ -68,9 +69,9 @@ fun ViewableProfileScreen(component: ViewableProfile) {
 
   Box(
     modifier =
-    Modifier
-      .fillMaxSize()
-      .background(BaseLayer),
+      Modifier
+        .fillMaxSize()
+        .background(BaseLayer),
   ) {
     Box(
       modifier =
@@ -104,12 +105,12 @@ fun ViewableProfileScreen(component: ViewableProfile) {
       }
       Column(
         modifier =
-        Modifier
-          .fillMaxSize()
-          .padding(top = mainIconSize / 2 - 10.dp)
-          .clip(RoundedCornerShape(40.dp, 40.dp))
-          .background(FirstLayer)
-          .padding(20.dp),
+          Modifier
+            .fillMaxSize()
+            .padding(top = mainIconSize / 2 - 10.dp)
+            .clip(RoundedCornerShape(40.dp, 40.dp))
+            .background(FirstLayer)
+            .padding(20.dp),
       ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
           Column(
@@ -156,16 +157,16 @@ fun ViewableProfileScreen(component: ViewableProfile) {
             Text(
               "Order",
               modifier =
-              Modifier
-                .shadow(
-                  elevation = 6.dp,
-                  shape = first_layer_shape,
-                  spotColor = Color.Black,
-                )
-                .clip(first_layer_shape)
-                .background(BaseLayer)
-                .padding(20.dp, 6.dp),
-              style = ProfileTypography.titleMedium,
+                Modifier
+                  .shadow(
+                    elevation = 6.dp,
+                    shape = first_layer_shape,
+                    spotColor = Color.Black,
+                  )
+                  .clip(first_layer_shape)
+                  .background(BaseLayer)
+                  .padding(20.dp, 6.dp),
+              style = Typography.titleMedium,
             )
             CompoundButton("Add order", Icons.Default.AddCircleOutline, {}, BaseLayer)
           }
@@ -185,16 +186,16 @@ fun ViewableProfileScreen(component: ViewableProfile) {
             Text(
               "Services",
               modifier =
-              Modifier
-                .shadow(
-                  elevation = 6.dp,
-                  shape = first_layer_shape,
-                  spotColor = Color.Black,
-                )
-                .clip(first_layer_shape)
-                .background(BaseLayer)
-                .padding(20.dp, 6.dp),
-              style = ProfileTypography.titleMedium,
+                Modifier
+                  .shadow(
+                    elevation = 6.dp,
+                    shape = first_layer_shape,
+                    spotColor = Color.Black,
+                  )
+                  .clip(first_layer_shape)
+                  .background(BaseLayer)
+                  .padding(20.dp, 6.dp),
+              style = Typography.titleMedium,
             )
 
             CompoundButton("Add service", Icons.Default.AddCircleOutline, {}, BaseLayer)
@@ -228,9 +229,9 @@ fun OrderItem(order: OrderModel) {
     Column {
       Row(
         modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp),
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(
@@ -248,9 +249,9 @@ fun OrderItem(order: OrderModel) {
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp),
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
       ) {
         OrderInfoField(order.specialization)
         order.city?.let {
@@ -303,9 +304,9 @@ fun ServiceItem(service: ServiceModel) {
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(bottom = 10.dp),
+          Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp),
       ) {
         OrderInfoField(service.category)
         OrderInfoField(service.specialization)
@@ -357,8 +358,8 @@ fun OrderInfoField(text: String) {
   )
 }
 
-//@Preview
-//@Composable
-//fun ViewableProfileScreenPreview() {
+// @Preview
+// @Composable
+// fun ViewableProfileScreenPreview() {
 //  ViewableProfileScreen()
-//}
+// }

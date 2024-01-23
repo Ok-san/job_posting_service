@@ -13,12 +13,12 @@ class EditableProfileIComponent(
   private val database: DefaultDatabase,
   val onBack: () -> Unit,
 ) : EditableProfile, ComponentContext by context {
-
-  private val _model = MutableValue(
-    EditableProfile.Model(
-      profileInfo = database.getUserInfo(userId)!!
+  private val _model =
+    MutableValue(
+      EditableProfile.Model(
+        profileInfo = database.getUserInfo(userId)!!,
+      ),
     )
-  )
   override val model: Value<EditableProfile.Model>
     get() = _model
 

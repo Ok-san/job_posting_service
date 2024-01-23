@@ -1,5 +1,6 @@
 package screens
 
+import BackButton
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,12 +43,11 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import data.CommentsModel
 import data.OrderModel
-import org.example.job_posting_service.module.BackButton
 import theme.BaseFont
 import theme.BaseLayer
 import theme.FirstLayer
 import theme.SecondFont
-import ui.theme.ProfileTypography
+import theme.Typography
 import ui.theme.mainIconSize
 
 @Composable
@@ -71,7 +71,6 @@ fun OrderDetailsScreen(component: OrderDetails) {
     Box(
       modifier =
         Modifier
-//                .height(mainIconSize/2)
           .fillMaxWidth()
           .zIndex(1f),
       contentAlignment = Alignment.Center,
@@ -90,7 +89,6 @@ fun OrderDetailsScreen(component: OrderDetails) {
       modifier =
         Modifier
           .fillMaxSize()
-          // .padding(top = 27.dp)
           .background(
             color = FirstLayer,
             shape = RoundedCornerShape(topStart = 47.dp, topEnd = 47.dp),
@@ -102,7 +100,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
         item {
           Text(
             text = "Comments:",
-            style = ProfileTypography.titleMedium,
+            style = Typography.titleMedium,
             modifier = Modifier.padding(top = 12.dp, bottom = 12.dp),
           )
         }
@@ -167,8 +165,8 @@ fun OrderDetailsScreen(component: OrderDetails) {
   }
 }
 
-//@Composable
-//fun BackButton(component: OrderDetails) {
+// @Composable
+// fun BackButton(component: OrderDetails) {
 //  Button(
 //    onClick = component::onBackClick,
 //    modifier = Modifier.size(buttonSize),
@@ -182,7 +180,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
 //      tint = BackButtonTint,
 //    )
 //  }
-//}
+// }
 
 @Composable
 fun CardItem(order: OrderModel) {
@@ -252,7 +250,7 @@ fun CardItem(order: OrderModel) {
       }
       Text(
         text = order.specialization,
-        style = ProfileTypography.bodyMedium,
+        style = Typography.bodyMedium,
         modifier = Modifier.fillMaxWidth(),
       )
       Row(
@@ -262,12 +260,12 @@ fun CardItem(order: OrderModel) {
         Column {
           Text(
             text = "Deadline: ${order.deadline}",
-            style = ProfileTypography.bodyMedium,
+            style = Typography.bodyMedium,
             modifier = Modifier.requiredWidth(169.dp),
           )
           Text(
             text = "Published: ${order.publicationDate}",
-            style = ProfileTypography.bodyMedium,
+            style = Typography.bodyMedium,
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
@@ -275,7 +273,7 @@ fun CardItem(order: OrderModel) {
           Text(
             text = it,
             textAlign = TextAlign.End,
-            style = ProfileTypography.bodyMedium,
+            style = Typography.bodyMedium,
           )
         }
       }
@@ -335,7 +333,7 @@ fun CommentItem(comment: CommentsModel) {
         Column {
           Text(
             text = "Published: ${comment.publicationDate}",
-            style = ProfileTypography.bodyMedium,
+            style = Typography.bodyMedium,
             modifier = Modifier.requiredWidth(158.dp),
           )
         }

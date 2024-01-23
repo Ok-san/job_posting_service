@@ -13,14 +13,13 @@ class ViewableProfileComponent(
   val onLogOut: () -> Unit,
   val onEdit: () -> Unit,
 ) : ComponentContext by context, ViewableProfile {
-
   private val _model =
     MutableValue(
       ViewableProfile.Model(
         profileInfo = database.getUserInfo(userId)!!,
         ordersList = database.getUserOrders(userId),
-        servicesList = database.getUserServices(userId)
-      )
+        servicesList = database.getUserServices(userId),
+      ),
     )
 
   override val model: Value<ViewableProfile.Model> get() = _model
@@ -41,13 +40,10 @@ class ViewableProfileComponent(
   }
 
   override fun onClickAddOrder(newOrder: OrderModel) {
-
     database.addOrder(userId, newOrder)
   }
 
   override fun onClickDeleteOrder(orderId: Int) {
     database.deleteOrder(orderId, userId)
   }
-
-
 }

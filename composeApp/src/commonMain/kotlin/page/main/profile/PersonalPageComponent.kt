@@ -24,12 +24,12 @@ class PersonalPageComponent(
       source = navigate,
       serializer = Config.serializer(),
       initialConfiguration = Config.ViewableConfig,
-      childFactory = ::child
+      childFactory = ::child,
     )
 
   private fun child(
     config: Config,
-    context: ComponentContext
+    context: ComponentContext,
   ): PersonalPage.Child =
     when (config) {
       is Config.ViewableConfig ->
@@ -39,8 +39,8 @@ class PersonalPageComponent(
             database = database,
             userId = userId,
             onLogOut = { navigate.popTo(1) },
-            onEdit = { navigate.push(Config.EditableConfig) }
-          )
+            onEdit = { navigate.push(Config.EditableConfig) },
+          ),
         )
 
       is Config.EditableConfig ->
@@ -49,8 +49,8 @@ class PersonalPageComponent(
             context = context,
             database = database,
             userId = userId,
-            onBack = {navigate.pop()}
-          )
+            onBack = { navigate.pop() },
+          ),
         )
     }
 

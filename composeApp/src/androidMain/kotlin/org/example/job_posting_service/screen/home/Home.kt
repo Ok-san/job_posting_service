@@ -65,7 +65,7 @@ fun SettingBar() {
       onValueChange = { newText ->
         text = newText
       },
-      textStyle = Typography.labelMedium,
+      textStyle = Typography.titleMedium,
       placeholder = {
         Text(
           text = "Search",

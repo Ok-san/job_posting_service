@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import theme.APPLICATION_TITLE
-import ui.theme.ProfileTypography
+import theme.Typography
 import ui.theme.mainIconSize
 import ui.theme.maxAuthScreenWidth
 import ui.theme.minAuthScreenWidth
@@ -56,7 +56,7 @@ fun RegistrationScreen(component: Registration) {
       )
       Text(
         APPLICATION_TITLE,
-        style = ProfileTypography.titleMedium,
+        style = Typography.titleMedium,
       )
       Column(modifier = Modifier.padding(top = 34.dp)) {
         DefaultField(text = "Name:", message = name, change = component::onNameChanged)
@@ -101,7 +101,7 @@ fun AuthorizationButton(component: Registration) {
     Text(
       text = "Authorization",
       textDecoration = TextDecoration.Underline,
-      style = ProfileTypography.labelMedium,
+      style = Typography.labelMedium,
     )
   }
 }
