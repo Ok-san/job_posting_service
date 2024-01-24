@@ -17,12 +17,9 @@ data class Tables(
 
 fun Application.configureRouting() {
     routing {
-        get("/") {
-            call.respondText("Hello World!")
-        }
         post("/api/CreateTable"){
             val Table = call.receive<Tables>()
-            //println(Table)
+            println(Table)
             call.respond(HttpStatusCode.OK)
         }
         get("/api/getinfo"){
