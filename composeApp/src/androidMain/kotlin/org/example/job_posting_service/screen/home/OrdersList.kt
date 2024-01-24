@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,9 +17,11 @@ import androidx.compose.material.Card
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -43,12 +46,11 @@ fun OrdersListScreen(component: OrdersList) {
 
   Column(
     modifier =
-      Modifier
-        .fillMaxSize()
-        .background(BaseLayer),
+    Modifier
+      .fillMaxSize()
+      .background(BaseLayer),
   ) {
 //        SettingBar()
-
     TabRow(
       modifier = Modifier.padding(bottom = 10.dp),
       selectedTabIndex = tabIndex,
@@ -64,8 +66,8 @@ fun OrdersListScreen(component: OrdersList) {
             )
           },
           modifier =
-            Modifier
-              .background(color = BaseLayer),
+          Modifier
+            .background(color = BaseLayer),
           selected = tabIndex == index,
           onClick = { tabIndex = index },
         )
@@ -74,13 +76,13 @@ fun OrdersListScreen(component: OrdersList) {
 
     LazyColumn(
       modifier =
-        Modifier
-          .fillMaxSize()
-          .background(
-            color = FirstLayer,
-            shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
-          )
-          .padding(top = 20.dp, start = 20.dp, end = 20.dp),
+      Modifier
+        .fillMaxSize()
+        .background(
+          color = FirstLayer,
+          shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
+        )
+        .padding(top = 20.dp, start = 20.dp, end = 20.dp),
     ) {
       when (tabIndex) {
         0 -> {
@@ -110,29 +112,28 @@ fun OrderItem(
   index: Int,
 ) {
   val model by component.model.subscribeAsState()
-  val favorite = model.ordersList[index].favorite
+  var favorite by remember { mutableStateOf(model.ordersList[index].favorite) }
 
   Card(
     modifier =
-      Modifier
-        .fillMaxWidth()
-        .padding(bottom = 8.dp)
-        .background(color = BaseLayer, RoundedCornerShape(15.dp))
-        .clickable { component.onItemClicked(index) },
+    Modifier
+      .fillMaxWidth()
+      .padding(bottom = 8.dp)
+      .background(color = BaseLayer, RoundedCornerShape(15.dp))
+      .clickable { component.onItemClicked(index) },
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
   ) {
     Column(
       modifier =
-        Modifier
-          .fillMaxSize()
-          .padding(10.dp),
+      Modifier
+        .fillMaxSize()
+        .padding(10.dp),
     ) {
       Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier =
-          Modifier
-            .fillMaxWidth(),
+        Modifier.fillMaxWidth(),
       ) {
         Text(
           modifier = Modifier.weight(1f),
@@ -140,23 +141,25 @@ fun OrderItem(
           style = Typography.titleSmall,
         )
 
-        when (favorite) {
-          false ->
-            Image(
-              modifier =
-                Modifier
-                  .clickable { component.onLikeClicked(item.orderId) },
-              painter = painterResource(R.drawable.ic_favorite_false),
-              contentDescription = "favorite false",
-            )
-          true ->
-            Image(
-              modifier =
-                Modifier
-                  .clickable { component.onLikeClicked(item.orderId) },
-              painter = painterResource(R.drawable.ic_favorite_true),
-              contentDescription = "favorite true",
-            )
+        IconButton(
+          modifier = Modifier.size(30.dp),
+          onClick = {
+            component.onLikeClicked(item.orderId)
+            favorite = !favorite
+          }
+        ) {
+          when (favorite) {
+            false ->
+              Image(
+                painter = painterResource(R.drawable.ic_favorite_false),
+                contentDescription = "favorite false",
+              )
+            true ->
+              Image(
+                painter = painterResource(R.drawable.ic_favorite_true),
+                contentDescription = "favorite true",
+              )
+          }
         }
       }
       item.description?.let {

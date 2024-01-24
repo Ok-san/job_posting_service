@@ -1,5 +1,6 @@
 package org.example.job_posting_service.screen.home
 
+// import org.example.job_posting_service.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -58,26 +59,26 @@ fun OrderDetailsScreen(component: OrderDetails) {
 
   Column(
     modifier =
-      Modifier
-        .fillMaxSize()
-        .background(BaseLayer),
+    Modifier
+      .fillMaxSize()
+      .background(BaseLayer),
   ) {
     Box(
       modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(20.dp),
+      Modifier
+        .fillMaxWidth()
+        .padding(20.dp),
     ) {
       BackButton(component::onBackClick)
     }
     Column(
       modifier =
-        Modifier
-          .background(
-            color = FirstLayer,
-            shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
-          )
-          .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
+      Modifier
+        .background(
+          color = FirstLayer,
+          shape = RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp),
+        )
+        .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
     ) {
       LazyColumn {
         item {

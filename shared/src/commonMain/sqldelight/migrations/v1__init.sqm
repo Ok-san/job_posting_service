@@ -1,0 +1,16 @@
+-- CREATE TABLE Category (
+--   id      UUID  NOT NULL  PRIMARY KEY,
+--   name    TEXT  NOT NULL
+-- );
+--
+-- CREATE TABLE Order (
+--   id                UUID  NOT NULL  PRIMARY KEY,
+--   user_login        TEXT  NOT NULL,
+--   category_id       UUID  NOT NULL  REFERENCES Category(id),
+--   title             TEXT  NOT NULL,
+--   description       TEXT,
+--   publication_date  TIMESTAMPTZ NOT NULL,
+--   deadline          TIMESTAMPTZ,
+--   price             INTEGER,
+--   city              TEXT
+-- );
