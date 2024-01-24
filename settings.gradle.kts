@@ -21,5 +21,3 @@ dependencyResolutionManagement {
 include(":server")
 include(":shared")
 include(":composeApp")
-
-rootProject.name = "ktor-sample"
