@@ -1,7 +1,8 @@
-
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
+val ktor_version: String by project
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -30,6 +31,7 @@ kotlin {
       implementation(libs.compose.ui)
       implementation(libs.compose.ui.tooling.preview)
       implementation(libs.androidx.activity.compose)
+      implementation(libs.ktor.client.okhttp)
     }
     desktopMain.dependencies {
       implementation(compose.desktop.currentOs)
@@ -49,6 +51,8 @@ kotlin {
       implementation(libs.decompose.core)
       implementation(libs.decompose.extension.compose)
       implementation(libs.kotlinx.serialization.json)
+      implementation(libs.ktor.client.core)
+      implementation(libs.kotlinx.coroutines.core)
     }
   }
 }

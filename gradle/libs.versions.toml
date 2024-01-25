@@ -1,5 +1,6 @@
 [versions]
 kotlin = "1.9.20"
+coroutines = "1.7.3"
 ktor = "2.3.6"
 compose = "1.5.4"
 compose-plugin = "1.5.11"
@@ -38,6 +39,8 @@ coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 #sqldelight-driver-native = { group = "app.cash.sqldelight", name = "native-driver", version.ref = "sqldelight" }
 #sqldelight-extensions-coroutines = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
 
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
