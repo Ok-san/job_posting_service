@@ -3,23 +3,18 @@ package component.profile
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import io.ktor.client.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import data.OrderModel
-import io.ktor.client.call.*
-import io.ktor.http.*
+import data.ProfileModel
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import kotlinx.coroutines.runBlocking
 import network.DefaultDatabase
-import kotlinx.serialization.Serializable
-import kotlinx.coroutines.*
-
-@Serializable
-data class Tables(
-  val name: String,
-  val email: String,
-  val city: String,
-  val address: String,
-)
 
 class ViewableProfileComponent(
   context: ComponentContext,
@@ -31,7 +26,8 @@ class ViewableProfileComponent(
   private val _model =
     MutableValue(
       ViewableProfile.Model(
-        profileInfo = runBlocking { gets("api/getinfo") },//database.getUserInfo(userId),
+        profileInfo = runBlocking { gets("api/getinfo") },
+        //database.getUserInfo(userId),
         ordersList = database.getUserOrders(userId),
         servicesList = database.getUserServices(userId),
       ),
@@ -64,13 +60,13 @@ class ViewableProfileComponent(
     database.deleteOrder(orderId, userId)
   }
 
-  suspend fun gets(url: String): Tables {
+  suspend fun gets(url: String): ProfileModel {
     val client = HttpClient()
-    val response: Tables = client.get("http://localhost:8080/$url").body()
+    val response: ProfileModel = client.get("http://localhost:8080/$url").body()
     return response
   }
 
-  suspend fun post(url: String, tables: Tables): HttpResponse {
+  suspend fun post(url: String, tables: ProfileModel): HttpResponse {
     val client = HttpClient()
     val response: HttpResponse = client.post("http://localhost:8080/$url") {
       contentType(ContentType.Application.Json)
