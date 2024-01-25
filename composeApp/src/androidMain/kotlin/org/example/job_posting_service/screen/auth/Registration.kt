@@ -11,7 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,13 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
-import org.example.job_posting_service.screen.profile.DefaultField
-import org.example.job_posting_service.ui.theme.Typography
+import org.example.job_posting_service.module.BasicIconButton
+import org.example.job_posting_service.module.BasicInputField
+import org.example.job_posting_service.module.BasicTextLink
+import org.example.job_posting_service.ui.theme.InterTypography
 import org.example.job_posting_service.ui.theme.mainIconSize
 import theme.BaseLayer
 
@@ -34,7 +36,6 @@ fun RegistrationScreen(component: Registration) {
   val name by component.name.collectAsState(Dispatchers.Main.immediate)
   val login by component.login.collectAsState(Dispatchers.Main.immediate)
   val password by component.password.collectAsState(Dispatchers.Main.immediate)
-//    val inProgress by component.inProgress.collectAsState()
 
   Column(
     modifier =
@@ -61,15 +62,15 @@ fun RegistrationScreen(component: Registration) {
       )
       Text(
         text = stringResource(R.string.app_name),
-        style = Typography.titleMedium,
+        style = InterTypography.titleMedium,
       )
     }
     Column(modifier = Modifier.fillMaxSize()) {
-      DefaultField(text = "Name:", message = name, change = component::onNameChanged)
+      BasicInputField(text = "Name:", message = name, change = component::onNameChanged)
       Box(
         modifier = Modifier.padding(top = 17.dp),
       ) {
-        DefaultField(
+        BasicInputField(
           text = "Email:",
           message = login,
           change = component::onLoginChanged,
@@ -78,7 +79,7 @@ fun RegistrationScreen(component: Registration) {
       Box(
         modifier = Modifier.padding(top = 17.dp),
       ) {
-        DefaultField(
+        BasicInputField(
           text = "Password:",
           message = password,
           change = component::onPasswordChanged,
@@ -92,22 +93,9 @@ fun RegistrationScreen(component: Registration) {
             .padding(top = 34.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        AuthorizationButton(component)
-        ForwardButton(component)
+        BasicTextLink("Authorization", component::onAuthorizationClick)
+        BasicIconButton(imageVector = Icons.Default.ArrowForward, onClickAction = component::onSignInClick)
       }
     }
-  }
-}
-
-@Composable
-fun AuthorizationButton(component: Registration) {
-  TextButton(
-    onClick = component::onAuthorizationClick,
-  ) {
-    Text(
-      text = "Authorization",
-      textDecoration = TextDecoration.Underline,
-      style = Typography.labelMedium,
-    )
   }
 }

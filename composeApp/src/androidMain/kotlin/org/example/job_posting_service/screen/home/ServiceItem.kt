@@ -2,9 +2,7 @@ package org.example.job_posting_service.screen.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,26 +10,30 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import data.ServiceModel
 import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.Typography
-import theme.BaseFont
+import org.example.job_posting_service.ui.theme.InterTypography
 import theme.BaseLayer
-import theme.SecondFont
 
 @Composable
 fun MasterItem(item: ServiceModel) {
+  var favorite by remember { mutableStateOf(item.favorite) }
+
   Card(
     elevation = 5.dp,
     shape = RoundedCornerShape(15.dp),
@@ -42,7 +44,6 @@ fun MasterItem(item: ServiceModel) {
         .background(color = BaseLayer, shape = RoundedCornerShape(15.dp)),
   ) {
     Column(
-      // horizontalArrangement = Arrangement.SpaceBetween,
       modifier =
         Modifier
           .fillMaxSize()
@@ -50,42 +51,34 @@ fun MasterItem(item: ServiceModel) {
     ) {
       Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier =
-          Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
       ) {
         Text(
           modifier =
-            Modifier
-//            .fillMaxSize(0.7f)
-              .weight(1f),
+            Modifier.weight(1f),
           text = item.master.name,
-          color = BaseFont,
-          fontSize = 18.sp,
-          fontWeight = FontWeight(600),
+          style = InterTypography.labelMedium,
         )
-        when (item.favorite) {
-          false ->
-            Box {
+        IconButton(
+          modifier = Modifier.size(30.dp),
+          onClick = {
+//            component.onLikeClicked(item.orderId)
+            favorite = !favorite
+          },
+        ) {
+          when (favorite) {
+            false ->
               Image(
-                modifier =
-                  Modifier
-                    .clickable { },
                 painter = painterResource(R.drawable.ic_favorite_false),
                 contentDescription = "favorite false",
               )
-            }
 
-          true ->
-            Box {
+            true ->
               Image(
-                modifier =
-                  Modifier
-                    .clickable { },
                 painter = painterResource(R.drawable.ic_favorite_true),
                 contentDescription = "favorite true",
               )
-            }
+          }
         }
       }
       Row(
@@ -98,12 +91,9 @@ fun MasterItem(item: ServiceModel) {
         item.description?.let {
           Text(
             modifier =
-              Modifier
-//              .fillMaxSize(0.7f)
-                .weight(1f),
+              Modifier.weight(1f),
             text = it,
-            color = BaseFont,
-            fontSize = 14.sp,
+            style = InterTypography.bodyMedium,
           )
         }
         Image(
@@ -126,22 +116,20 @@ fun MasterItem(item: ServiceModel) {
           if (item.coast != null) {
             Text(
               text = "${item.coast} P",
-              fontSize = 14.sp,
-              fontWeight = FontWeight(700),
-              color = SecondFont,
+              style = InterTypography.bodyMedium,
               modifier = Modifier.requiredWidth(175.dp),
             )
           }
           Text(
             text = "Published: ${item.publicationDate}",
-            style = Typography.bodyMedium,
+            style = InterTypography.bodyMedium,
             modifier = Modifier.requiredWidth(169.dp),
           )
         }
         item.city?.let {
           Text(
             text = it,
-            style = Typography.bodyMedium,
+            style = InterTypography.bodyMedium,
             textAlign = TextAlign.End,
           )
         }

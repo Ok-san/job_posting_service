@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import page.main.MainPage
 import page.main.navigationBar
 import theme.BackButtonTint
-import theme.Typography
+import theme.InterTypography
 import ui.theme.navigationBarSize
 
 @Composable
@@ -63,7 +63,7 @@ fun NavigationBar(onClick: (MainPage.Tab) -> Unit) {
             )
             Text(
               text = tab.title,
-              style = Typography.labelSmall,
+              style = InterTypography.labelSmall,
             )
           }
         }

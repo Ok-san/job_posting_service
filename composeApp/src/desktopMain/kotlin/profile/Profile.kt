@@ -1,21 +1,20 @@
-package screens
+package org.example.job_posting_service.screen.profile
 
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
-import root.Root
-import root.RootComponent
+import page.main.profile.PersonalPage
 
 @Composable
-fun RootScreen(rootComponent: RootComponent) {
+fun PersonalScreen(component: PersonalPage) {
   Children(
-    stack = rootComponent.childStack,
+    stack = component.childStack,
     animation = stackAnimation(slide()),
   ) {
     when (val child = it.instance) {
-      is Root.Child.Identification -> IdentificationScreen(child.component)
-      is Root.Child.Main -> MainScreen(child.component)
+      is PersonalPage.Child.EditableProfileChild -> EditableProfileScreen(child.component)
+      is PersonalPage.Child.ViewableProfileChild -> ViewableProfileScreen(child.component)
     }
   }
 }

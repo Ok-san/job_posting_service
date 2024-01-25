@@ -8,7 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.job_posting_service.ui.theme.Typography
+import org.example.job_posting_service.ui.theme.InterTypography
 import theme.ButtonBackground
 import theme.buttonSize
 import theme.second_layer_shape
@@ -25,6 +25,6 @@ fun BasicTextButton(
     contentPadding = PaddingValues(horizontal = 10.dp),
     colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
   ) {
-    Text(text = text, style = Typography.labelMedium)
+    Text(text = text, style = InterTypography.labelMedium)
   }
 }

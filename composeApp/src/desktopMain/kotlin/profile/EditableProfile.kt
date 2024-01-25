@@ -27,16 +27,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.profile.EditableProfile
-import org.example.job_posting_service.R
-import org.example.job_posting_service.module.BackButton
-import org.example.job_posting_service.module.BasicInputField
-import org.example.job_posting_service.module.BasicTextButton
-import org.example.job_posting_service.ui.theme.InterTypography
-import org.example.job_posting_service.ui.theme.mainIconSize
+import module.BackButton
+import module.BasicInputField
+import module.BasicTextButton
 import theme.BaseLayer
 import theme.FirstLayer
+import theme.InterTypography
 import theme.SecondLayer
 import theme.first_layer_shape
+import ui.theme.mainIconSize
 
 @Composable
 fun EditableProfileScreen(component: EditableProfile) {
@@ -54,7 +53,7 @@ fun EditableProfileScreen(component: EditableProfile) {
       contentAlignment = Alignment.Center,
     ) {
       Image(
-        painter = painterResource(id = R.drawable.logo),
+        painter = painterResource("drawable/logo.xml"),
         contentDescription = null,
         modifier =
           Modifier

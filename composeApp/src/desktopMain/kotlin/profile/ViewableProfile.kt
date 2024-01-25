@@ -37,16 +37,15 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.profile.ViewableProfile
 import data.OrderModel
 import data.ServiceModel
-import org.example.job_posting_service.R
-import org.example.job_posting_service.module.BasicTextButton
-import org.example.job_posting_service.module.CompoundButton
-import org.example.job_posting_service.ui.theme.InterTypography
-import org.example.job_posting_service.ui.theme.mainIconSize
+import module.BasicTextButton
+import module.CompoundButton
 import theme.BaseLayer
 import theme.FirstLayer
+import theme.InterTypography
 import theme.PlaceholderBackground
 import theme.SecondLayer
 import theme.first_layer_shape
+import ui.theme.mainIconSize
 
 @Composable
 fun ViewableProfileScreen(component: ViewableProfile) {
@@ -71,7 +70,7 @@ fun ViewableProfileScreen(component: ViewableProfile) {
       contentAlignment = Alignment.Center,
     ) {
       Image(
-        painter = painterResource(id = R.drawable.logo),
+        painter = painterResource("drawable/logo.xml"),
         contentDescription = null,
         modifier =
           Modifier

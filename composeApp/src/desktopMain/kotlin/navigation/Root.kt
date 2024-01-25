@@ -1,20 +1,23 @@
-package screens
+package navigation
 
 import androidx.compose.runtime.Composable
+import auth.IdentificationScreen
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
-import page.identification.IdentificationPage
+import root.Root
+import root.RootComponent
+import screens.MainScreen
 
 @Composable
-fun IdentificationScreen(component: IdentificationPage) {
+fun RootScreen(rootComponent: RootComponent) {
   Children(
-    stack = component.childStack,
+    stack = rootComponent.childStack,
     animation = stackAnimation(slide()),
   ) {
     when (val child = it.instance) {
-      is IdentificationPage.Child.RegistrationChild -> RegistrationScreen(child.component)
-      is IdentificationPage.Child.AuthorizationChild -> AuthorizationScreen(child.component)
+      is Root.Child.Identification -> IdentificationScreen(child.component)
+      is Root.Child.Main -> MainScreen(child.component)
     }
   }
 }

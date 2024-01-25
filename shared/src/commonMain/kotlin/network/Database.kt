@@ -23,15 +23,16 @@ interface Database {
   fun getUserName(userId: Int): String
   fun getComments(orderId: Int): MutableList<CommentsModel>?
   fun getServices(): List<ServiceModel>
-  fun createComment(orderId: Int, author: String, description: String) : CommentsModel
+  fun createComment(orderId: Int, author: String, description: String): CommentsModel
   fun deleteOrder(orderId: Int, userId: Int)
   fun addOrder(userId: Int, newOrder: OrderModel)
-  fun updateProfileInfo(userId: Int,
-                        name: String,
-                        city: String,
-                        address: String,
-                        email: String,
-                        phone: String,
-                        birthDate: String
-                        )
+  fun updateProfileInfo(
+    userId: Int,
+    name: String,
+    city: String,
+    address: String,
+    email: String,
+    phone: String,
+    birthDate: String
+  )
 }

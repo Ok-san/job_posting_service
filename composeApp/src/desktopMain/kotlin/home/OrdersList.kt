@@ -17,6 +17,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,7 +28,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
@@ -33,10 +35,9 @@ import component.home.orderlist.OrdersList
 import data.OrderModel
 import data.service1
 import data.service2
-import org.example.job_posting_service.R
-import org.example.job_posting_service.ui.theme.InterTypography
 import theme.BaseLayer
 import theme.FirstLayer
+import theme.InterTypography
 import theme.SecondFont
 
 @Composable
@@ -151,12 +152,13 @@ fun OrderItem(
           when (favorite) {
             false ->
               Image(
-                painter = painterResource(R.drawable.ic_favorite_false),
+                imageVector = Icons.Default.FavoriteBorder,
                 contentDescription = "favorite false",
               )
+
             true ->
               Image(
-                painter = painterResource(R.drawable.ic_favorite_true),
+                imageVector = Icons.Default.Favorite,
                 contentDescription = "favorite true",
               )
           }

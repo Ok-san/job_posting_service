@@ -42,7 +42,6 @@ class ViewableProfileComponent(
 
   override fun onClickArchiveOrder(orderId: Int) {
     val order = database.getOrdersById(orderId)
-//    getAllCategories()
     database.deleteOrder(orderId, userId)
   }
 

@@ -25,6 +25,7 @@ interface ViewableProfile {
   fun onClickArchiveOrder(orderId: Int)
 
   fun onClickDeleteOrder(orderId: Int)
+
 //  fun onClickFavoriteProfile()
 //  fun onClickOrder(idOrder: Int)
 //  fun onClickService(id: Int)

@@ -23,7 +23,7 @@ val InterFamily =
     Font(R.font.inter_thin, FontWeight.Thin),
   )
 
-val Typography =
+val InterTypography =
   Typography(
     titleLarge =
       TextStyle(

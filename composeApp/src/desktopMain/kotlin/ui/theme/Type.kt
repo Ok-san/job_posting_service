@@ -20,7 +20,7 @@ val InterFamily =
     Font("font/inter_thin.ttf", FontWeight.Thin),
   )
 
-val Typography =
+val InterTypography =
   Typography(
     titleLarge =
       TextStyle(

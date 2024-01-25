@@ -7,7 +7,9 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
+import home.HomeScreen
 import navigation.NavigationBar
+import org.example.job_posting_service.screen.profile.PersonalScreen
 import page.main.MainPage
 import ui.theme.navigationBarSize
 
@@ -26,10 +28,9 @@ fun MainScreen(component: MainPage) {
         animation = stackAnimation(slide()),
       ) {
         when (val child = it.instance) {
-//            is MainPage.Child.Favorites -> FavoritesScreen()
           is MainPage.Child.Home -> HomeScreen(child.component)
-//            is MainPage.Child.Profile -> ProfileScreen()
-          else -> {}
+          is MainPage.Child.Favorites -> FavoritesScreen()
+          is MainPage.Child.Profile -> PersonalScreen(child.component)
         }
       }
     },

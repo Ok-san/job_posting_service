@@ -43,7 +43,7 @@ fun Job_posting_serviceTheme(
 
   MaterialTheme(
     colorScheme = colorScheme,
-    typography = Typography,
+    typography = InterTypography,
     content = content,
   )
 }

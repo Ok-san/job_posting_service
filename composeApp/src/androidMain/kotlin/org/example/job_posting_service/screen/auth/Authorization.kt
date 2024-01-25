@@ -5,17 +5,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
@@ -25,26 +20,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import component.identification.authorization.Authorization
-import component.identification.registration.Registration
 import kotlinx.coroutines.Dispatchers
 import org.example.job_posting_service.R
-import org.example.job_posting_service.screen.profile.DefaultField
-import org.example.job_posting_service.ui.theme.Typography
-import org.example.job_posting_service.ui.theme.buttonSize
+import org.example.job_posting_service.module.BasicIconButton
+import org.example.job_posting_service.module.BasicInputField
+import org.example.job_posting_service.module.BasicTextLink
+import org.example.job_posting_service.ui.theme.InterTypography
 import org.example.job_posting_service.ui.theme.mainIconSize
-import theme.BackButtonTint
 import theme.BaseLayer
-import theme.ButtonBackground
-import theme.second_layer_shape
 
 @Composable
 fun AuthorizationScreen(component: Authorization) {
   val login by component.login.collectAsState(Dispatchers.Main.immediate)
   val password by component.password.collectAsState(Dispatchers.Main.immediate)
-  // val inProgress by component.inProgress.collectAsState()
 
   Column(
     modifier =
@@ -71,17 +61,15 @@ fun AuthorizationScreen(component: Authorization) {
       )
       Text(
         text = stringResource(R.string.app_name),
-        style = Typography.titleMedium,
+        style = InterTypography.titleMedium,
       )
     }
     Column(modifier = Modifier.fillMaxSize()) {
-      DefaultField("Email:", login, component::onLoginChanged)
+      BasicInputField("Email:", login, component::onLoginChanged)
       Box(
-        modifier =
-          Modifier
-            .padding(top = 17.dp),
+        modifier = Modifier.padding(top = 17.dp),
       ) {
-        DefaultField("Password:", password, component::onPasswordChanged)
+        BasicInputField("Password:", password, component::onPasswordChanged)
       }
       Row(
         modifier =
@@ -91,76 +79,9 @@ fun AuthorizationScreen(component: Authorization) {
             .padding(top = 34.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        RegistrationButton(component)
-//                RecoverButton(component)
-        ForwardButton(component)
+        BasicTextLink("Registration", component::onRegistrationClick)
+        BasicIconButton(imageVector = Icons.Default.ArrowForward, onClickAction = component::onSignInClick)
       }
     }
   }
 }
-
-@Composable
-fun ForwardButton(component: Authorization) {
-  Button(
-    onClick = component::onSignInClick,
-    modifier = Modifier.size(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(0.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Icon(
-      Icons.Default.ArrowForward,
-      contentDescription = "",
-      tint = BackButtonTint,
-    )
-  }
-}
-
-@Composable
-fun ForwardButton(component: Registration) {
-  Button(
-    onClick = component::onSignInClick,
-    modifier = Modifier.size(buttonSize),
-    shape = second_layer_shape,
-    contentPadding = PaddingValues(0.dp),
-    colors = ButtonDefaults.buttonColors(backgroundColor = ButtonBackground),
-  ) {
-    Icon(
-      Icons.Default.ArrowForward,
-      contentDescription = "",
-      tint = BackButtonTint,
-    )
-  }
-}
-
-@Composable
-fun RegistrationButton(component: Authorization) {
-  TextButton(
-    onClick = component::onRegistrationClick,
-  ) {
-    Text(
-      text = "Registration",
-      textDecoration = TextDecoration.Underline,
-      style = Typography.labelMedium,
-    )
-  }
-}
-
-// @Composable
-// fun RecoverButton(component: Authorization) {
-//    TextButton(
-//        onClick = component::onRecoverClick,
-//    ) {
-//        Text(
-//            text = "Recover Password",
-//            textDecoration = TextDecoration.Underline,
-//            style = Typography.labelMedium
-//        )
-//    }
-// }
-
-// @Preview(showBackground = true)
-// @Composable
-// fun IdentificationScreenPreview() {
-//    IdentificationScreen({})
-// }

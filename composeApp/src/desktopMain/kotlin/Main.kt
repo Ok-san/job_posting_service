@@ -1,4 +1,3 @@
-
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
@@ -11,19 +10,12 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import java.awt.Dimension
 import migrations.Categories
+import navigation.RootScreen
 import root.RootComponent
-import screens.RootScreen
 import theme.APPLICATION_TITLE
 import ui.theme.WINDOW_MIN_HEIGHT
 import ui.theme.WINDOW_MIN_WIDTH
 import utils.runOnUiThread
-
-// fun FrameWindowScope.setMinSize() {
-//    window.minimumSize = Dimension(windowMinWidth, windowMinHeight)
-// }
-
-val driver = DriverFactory()
-val db = createDatabase(driver)
 
 fun main() {
   val lifecycle = LifecycleRegistry()
@@ -32,6 +24,8 @@ fun main() {
       RootComponent(componentContext = DefaultComponentContext(lifecycle = lifecycle))
     }
 
+  val driver = DriverFactory()
+  val db = createDatabase(driver)
   val orderQueries = db.orderQueries
   val categoryQueries = db.categoryQueries
 
@@ -42,9 +36,10 @@ fun main() {
   orderQueries.insertArchivedOrder(null, "Илья", 1, "разбили ночник", 11, 12, "Шёл вечером по улице а там два макаровца ну и ...", 1000, "Спб")
 
   val CategoryStorage: List<Categories> = db.categoryQueries.getAllCategories().executeAsList()
+  val OrderStorage = db.orderQueries.getArchivedOrdersByUser("Илья").executeAsList()
 
   println(CategoryStorage)
-//  println(OrderStorage)
+  println(OrderStorage)
 
   application {
     Window(

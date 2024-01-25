@@ -37,19 +37,18 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import component.home.orderlist.OrderDetails
 import data.CommentsModel
 import data.OrderModel
-import org.example.job_posting_service.R
-import org.example.job_posting_service.module.BackButton
-import org.example.job_posting_service.ui.theme.InterTypography
-import org.example.job_posting_service.ui.theme.buttonSize
-import org.example.job_posting_service.ui.theme.mainIconSize
+import module.BackButton
 import theme.BackButtonTint
 import theme.BaseFont
 import theme.BaseLayer
 import theme.ButtonBackground
 import theme.FirstLayer
+import theme.InterTypography
 import theme.SecondFont
+import theme.buttonSize
 import theme.first_layer_shape
 import theme.second_layer_shape
+import ui.theme.mainIconSize
 
 @Composable
 fun OrderDetailsScreen(component: OrderDetails) {
@@ -178,7 +177,7 @@ fun CardItem(order: OrderModel) {
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Image(
-          painter = painterResource(id = R.drawable.logo),
+          painter = painterResource("drawable/logo.xml"),
           contentDescription = null,
           modifier =
             Modifier
