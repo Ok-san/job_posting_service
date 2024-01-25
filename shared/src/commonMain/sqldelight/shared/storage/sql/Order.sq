@@ -1,0 +1,18 @@
+getArchivedOrdersByUser:
+SELECT *
+FROM ArchivedOrders
+WHERE user_login = ?;
+
+insertArchivedOrder:
+INSERT OR REPLACE
+INTO ArchivedOrders(
+  id,
+  user_login,
+  category_id,
+  title,
+  publication,
+  deadline,
+  description,
+  payment,
+  location
+  ) VALUES (?,?,?,?,?,?,?,?,?);

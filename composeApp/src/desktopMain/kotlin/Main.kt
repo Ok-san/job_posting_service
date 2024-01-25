@@ -1,3 +1,4 @@
+
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
@@ -9,6 +10,7 @@ import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import java.awt.Dimension
+import migrations.Categories
 import root.RootComponent
 import screens.RootScreen
 import theme.APPLICATION_TITLE
@@ -20,12 +22,29 @@ import utils.runOnUiThread
 //    window.minimumSize = Dimension(windowMinWidth, windowMinHeight)
 // }
 
+val driver = DriverFactory()
+val db = createDatabase(driver)
+
 fun main() {
   val lifecycle = LifecycleRegistry()
   val root =
     runOnUiThread {
       RootComponent(componentContext = DefaultComponentContext(lifecycle = lifecycle))
     }
+
+  val orderQueries = db.orderQueries
+  val categoryQueries = db.categoryQueries
+
+  categoryQueries.insertCategory(null, "Строительство")
+  categoryQueries.insertCategory(null, "Ремонт")
+
+  orderQueries.insertArchivedOrder(null, "aboba", 0, "Надо построить мне будку", 11, 12, "Хочу огромную двухэтажную будку с подогревом сеном и миской", 0, "Бокситогорск")
+  orderQueries.insertArchivedOrder(null, "Илья", 1, "разбили ночник", 11, 12, "Шёл вечером по улице а там два макаровца ну и ...", 1000, "Спб")
+
+  val CategoryStorage: List<Categories> = db.categoryQueries.getAllCategories().executeAsList()
+
+  println(CategoryStorage)
+//  println(OrderStorage)
 
   application {
     Window(

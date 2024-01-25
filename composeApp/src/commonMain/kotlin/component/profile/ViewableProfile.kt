@@ -22,6 +22,8 @@ interface ViewableProfile {
 
   fun onClickAddOrder(newOrder: OrderModel)
 
+  fun onClickArchiveOrder(orderId: Int)
+
   fun onClickDeleteOrder(orderId: Int)
 //  fun onClickFavoriteProfile()
 //  fun onClickOrder(idOrder: Int)

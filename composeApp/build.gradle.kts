@@ -91,6 +91,8 @@ android {
 }
 
 dependencies {
+  implementation(project(":shared"))
+  implementation(project(":shared"))
   debugImplementation(libs.androidx.ui.tooling)
 }
 

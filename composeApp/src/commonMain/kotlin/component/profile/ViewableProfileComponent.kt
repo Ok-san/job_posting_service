@@ -33,10 +33,17 @@ class ViewableProfileComponent(
   }
 
   //  override fun onClickFavoriteProfile() {
-//    TODO("Not yet implemented")
-//  }
+  //    TODO("Not yet implemented")
+  //  }
+
   override fun onClickEditOrder(orderId: Int) {
     TODO("Not yet implemented")
+  }
+
+  override fun onClickArchiveOrder(orderId: Int) {
+    val order = database.getOrdersById(orderId)
+//    getAllCategories()
+    database.deleteOrder(orderId, userId)
   }
 
   override fun onClickAddOrder(newOrder: OrderModel) {

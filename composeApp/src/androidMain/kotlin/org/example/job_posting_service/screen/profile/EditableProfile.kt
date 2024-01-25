@@ -13,12 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.Checkbox
-import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddCircleOutline
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,10 +31,8 @@ import component.profile.EditableProfile
 import org.example.job_posting_service.R
 import org.example.job_posting_service.module.BackButton
 import org.example.job_posting_service.module.BasicTextButton
-import org.example.job_posting_service.module.CompoundButton
 import org.example.job_posting_service.ui.theme.Typography
 import org.example.job_posting_service.ui.theme.mainIconSize
-import theme.BaseFont
 import theme.BaseLayer
 import theme.FirstLayer
 import theme.PlaceholderBackground
@@ -128,92 +121,92 @@ fun EditableProfileScreen(component: EditableProfile) {
           }
         }
 
-        Row(
-          modifier =
-            Modifier
-              .fillMaxWidth()
-              .padding(vertical = 6.dp),
-          verticalAlignment = Alignment.CenterVertically,
-          horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-          Row(verticalAlignment = Alignment.CenterVertically) {
-            val checkedState = remember { mutableStateOf(true) }
-            Checkbox(
-              checked = checkedState.value,
-              onCheckedChange = { checkedState.value = it },
-              colors =
-                CheckboxDefaults.colors(
-                  checkedColor = SecondLayer,
-                  checkmarkColor = BaseFont,
-                ),
-            )
-            Text(
-              "I'm a master",
-              style = Typography.labelMedium,
-            )
-          }
-
-          CompoundButton("Add service", Icons.Default.AddCircleOutline, {}, BaseLayer)
-        }
-
-        Column(
-          modifier =
-            Modifier
-              .shadow(
-                elevation = 6.dp,
-                shape = first_layer_shape,
-                spotColor = Color.Black,
-              )
-              .clip(first_layer_shape)
-              .background(SecondLayer)
-              .padding(10.dp),
-        ) {
-          Column {
-            DefaultField(
-              "Category:",
-              message.value,
-            ) { newText -> message.value = newText }
-            DefaultField(
-              "Specialization",
-              message.value,
-            ) { newText -> message.value = newText }
-            DefaultField(
-              "Coast:",
-              message.value,
-            ) { newText -> message.value = newText }
-          }
-          Text(
-            "Tell us more details:",
-            modifier = Modifier.padding(vertical = 6.dp),
-            style = Typography.bodyMedium,
-          )
-
-          BasicTextField(
-            value = message.value,
-            onValueChange = { newText -> message.value = newText },
-            modifier =
-              Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(20.dp))
-                .background(PlaceholderBackground)
-                .padding(12.dp, 6.dp),
-            textStyle = Typography.bodyMedium,
-            minLines = 2,
-            maxLines = 10,
-          )
-
-          Row(
-            modifier =
-              Modifier
-                .fillMaxWidth()
-                .padding(top = 10.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-          ) {
-            BasicTextButton("Save", {})
-            BasicTextButton("Edit", {})
-            CompoundButton("Delete", Icons.Default.Delete, {})
-          }
-        }
+//        Row(
+//          modifier =
+//            Modifier
+//              .fillMaxWidth()
+//              .padding(vertical = 6.dp),
+//          verticalAlignment = Alignment.CenterVertically,
+//          horizontalArrangement = Arrangement.SpaceBetween,
+//        ) {
+//          Row(verticalAlignment = Alignment.CenterVertically) {
+//            val checkedState = remember { mutableStateOf(true) }
+//            Checkbox(
+//              checked = checkedState.value,
+//              onCheckedChange = { checkedState.value = it },
+//              colors =
+//                CheckboxDefaults.colors(
+//                  checkedColor = SecondLayer,
+//                  checkmarkColor = BaseFont,
+//                ),
+//            )
+//            Text(
+//              "I'm a master",
+//              style = Typography.labelMedium,
+//            )
+//          }
+//
+//          CompoundButton("Add service", Icons.Default.AddCircleOutline, {}, BaseLayer)
+//        }
+//
+//        Column(
+//          modifier =
+//            Modifier
+//              .shadow(
+//                elevation = 6.dp,
+//                shape = first_layer_shape,
+//                spotColor = Color.Black,
+//              )
+//              .clip(first_layer_shape)
+//              .background(SecondLayer)
+//              .padding(10.dp),
+//        ) {
+//          Column {
+//            DefaultField(
+//              "Category:",
+//              message.value,
+//            ) { newText -> message.value = newText }
+//            DefaultField(
+//              "Specialization",
+//              message.value,
+//            ) { newText -> message.value = newText }
+//            DefaultField(
+//              "Coast:",
+//              message.value,
+//            ) { newText -> message.value = newText }
+//          }
+//          Text(
+//            "Tell us more details:",
+//            modifier = Modifier.padding(vertical = 6.dp),
+//            style = Typography.bodyMedium,
+//          )
+//
+//          BasicTextField(
+//            value = message.value,
+//            onValueChange = { newText -> message.value = newText },
+//            modifier =
+//              Modifier
+//                .fillMaxWidth()
+//                .clip(RoundedCornerShape(20.dp))
+//                .background(PlaceholderBackground)
+//                .padding(12.dp, 6.dp),
+//            textStyle = Typography.bodyMedium,
+//            minLines = 2,
+//            maxLines = 10,
+//          )
+//
+//          Row(
+//            modifier =
+//              Modifier
+//                .fillMaxWidth()
+//                .padding(top = 10.dp),
+//            horizontalArrangement = Arrangement.SpaceBetween,
+//          ) {
+//            BasicTextButton("Save", {})
+//            BasicTextButton("Edit", {})
+//            CompoundButton("Delete", Icons.Default.Delete, {})
+//          }
+//        }
       }
     }
   }

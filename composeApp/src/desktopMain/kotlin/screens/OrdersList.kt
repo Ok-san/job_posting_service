@@ -36,6 +36,8 @@ import component.home.orderlist.OrdersList
 import data.OrderModel
 import data.service1
 import data.service2
+import db
+import migrations.ArchivedOrders
 import theme.BaseFont
 import theme.BaseLayer
 import theme.FavoriteButtonTint
@@ -47,6 +49,8 @@ import theme.SecondFont
 fun OrdersListScreen(component: OrdersList) {
   var tabIndex by remember { mutableIntStateOf(0) }
   val tabs = listOf("Orders", "Masters")
+
+  val OrderStorage: List<ArchivedOrders> = db.orderQueries.getArchivedOrdersByUser("Илья").executeAsList()
 
   Column(
     modifier =
@@ -95,11 +99,18 @@ fun OrdersListScreen(component: OrdersList) {
     ) {
       when (tabIndex) {
         0 -> {
+//          itemsIndexed(
+//            component.model.value.ordersList,
+//          ) { index, item ->
+//            OrderItem(item, component, index)
+//          }
           itemsIndexed(
-            component.model.value.ordersList,
-          ) { index, item ->
-            OrderItem(item, component, index)
+            OrderStorage,
+          ) { index, order ->
+            OrderItems(order, component, index)
           }
+
+          OrderStorage.forEach { order -> }
         }
 
         1 -> {
@@ -213,6 +224,118 @@ fun OrderItem(
           )
         }
         item.city?.let {
+          Text(
+            text = it,
+            textAlign = TextAlign.End,
+            color = FirstFont,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
+      }
+    }
+  }
+}
+
+@Composable
+fun OrderItems(
+  item: ArchivedOrders,
+  component: OrdersList,
+  index: Int,
+) {
+  val model by component.model.subscribeAsState()
+  val favorite = model.ordersList[index].favorite
+
+  Card(
+    modifier =
+      Modifier
+        .fillMaxWidth()
+        .padding(bottom = 8.dp),
+    elevation = 5.dp,
+    shape = RoundedCornerShape(15.dp),
+  ) {
+    Column(
+      modifier =
+        Modifier
+          .fillMaxSize()
+          .background(BaseLayer)
+          .clickable { component.onItemClicked(index) }
+          .padding(bottom = 12.dp, top = 12.dp, start = 9.dp, end = 9.dp),
+    ) {
+      Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+          Modifier
+            .fillMaxWidth(),
+      ) {
+        Text(
+          text = item.title,
+          color = BaseFont,
+          fontSize = 18.sp,
+          fontWeight = FontWeight(600),
+        )
+        when (favorite) {
+          false ->
+            Icon(
+              Icons.Default.FavoriteBorder,
+              contentDescription = null,
+              tint = FavoriteButtonTint,
+//              modifier = Modifier.clickable { component.onLikeClicked(item.id) },
+            )
+
+          true ->
+            Icon(
+              Icons.Default.Favorite,
+              contentDescription = null,
+              tint = FavoriteButtonTint,
+//              modifier = Modifier.clickable { component.onLikeClicked(item.id) },
+            )
+        }
+      }
+
+      Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+          Modifier
+            .fillMaxSize()
+            .padding(top = 7.dp, bottom = 7.dp),
+      ) {
+        item.description?.let {
+          Text(
+            modifier = Modifier.fillMaxSize(0.8f),
+            text = it,
+            color = BaseFont,
+            fontSize = 14.sp,
+          )
+        }
+        Text(
+          text = "${item.payment} P",
+          fontWeight = FontWeight(700),
+          color = Color(0xFFE8B100),
+        )
+      }
+      Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier =
+          Modifier
+            .fillMaxSize(),
+      ) {
+        Column {
+          Text(
+            modifier = Modifier.fillMaxSize(0.7f),
+            text = "Deadline: ${item.deadline}",
+            color = FirstFont,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+          Text(
+            text = "Published: ${item.publication}",
+            color = FirstFont,
+            fontWeight = FontWeight(400),
+            fontSize = 14.sp,
+          )
+        }
+        item.location?.let {
           Text(
             text = it,
             textAlign = TextAlign.End,

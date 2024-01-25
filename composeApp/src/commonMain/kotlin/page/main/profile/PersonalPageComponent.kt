@@ -16,7 +16,7 @@ class PersonalPageComponent(
   context: ComponentContext,
   private val userId: Int,
   private val database: DefaultDatabase,
-  val logOut: () -> Unit
+  val logOut: () -> Unit,
 ) : PersonalPage, ComponentContext by context {
   private val navigate = StackNavigation<Config>()
   override val childStack: Value<ChildStack<*, PersonalPage.Child>> =

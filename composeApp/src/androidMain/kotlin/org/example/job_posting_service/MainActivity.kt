@@ -12,6 +12,7 @@ import org.example.job_posting_service.screen.navigation.RootScreen
 import org.example.job_posting_service.ui.theme.Job_posting_serviceTheme
 import root.RootComponent
 
+
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

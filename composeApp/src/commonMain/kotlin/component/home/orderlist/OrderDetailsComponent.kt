@@ -44,11 +44,13 @@ class OrderDetailsComponent(
 
   override fun onSendCommentClick() {
     val newCommentsList = _model.value.comments
-    newCommentsList.add(database.createComment(orderId, database.getUserName(userId), _model.value.commentText.toString()))
+    newCommentsList.add(
+      database.createComment(orderId, database.getUserName(userId), _model.value.commentText.toString()),
+    )
     _model.update {
       it.copy(
         comments = newCommentsList,
-        commentText = ""
+        commentText = "",
       )
     }
   }

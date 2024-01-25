@@ -1,16 +1,16 @@
--- CREATE TABLE Category (
---   id      UUID  NOT NULL  PRIMARY KEY,
---   name    TEXT  NOT NULL
--- );
---
--- CREATE TABLE Order (
---   id                UUID  NOT NULL  PRIMARY KEY,
---   user_login        TEXT  NOT NULL,
---   category_id       UUID  NOT NULL  REFERENCES Category(id),
---   title             TEXT  NOT NULL,
---   description       TEXT,
---   publication_date  TIMESTAMPTZ NOT NULL,
---   deadline          TIMESTAMPTZ,
---   price             INTEGER,
---   city              TEXT
--- );
+CREATE TABLE Categories (
+  id      INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  name    TEXT  NOT NULL
+);
+
+CREATE TABLE ArchivedOrders (
+  id            INTEGER  PRIMARY KEY AUTOINCREMENT  NOT NULL,
+  user_login    TEXT  NOT NULL,
+  category_id   INTEGER  NOT NULL REFERENCES Categories(id),
+  title         TEXT  NOT NULL,
+  publication   INTEGER  NOT NULL,
+  deadline      INTEGER,
+  description   TEXT,
+  payment       INTEGER,
+  location      TEXT
+);

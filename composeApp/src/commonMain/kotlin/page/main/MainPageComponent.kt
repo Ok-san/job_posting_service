@@ -16,7 +16,7 @@ class MainPageComponent(
   val context: ComponentContext,
   val userId: Int,
   private val database: DefaultDatabase,
-  val logOut: () -> Unit
+  val logOut: () -> Unit,
 ) : MainPage, ComponentContext by context {
   private val navigate = StackNavigation<Config>()
 
@@ -73,7 +73,7 @@ class MainPageComponent(
             context = context,
             userId = userId,
             database = database,
-            logOut = logOut
+            logOut = logOut,
           ),
         )
     }

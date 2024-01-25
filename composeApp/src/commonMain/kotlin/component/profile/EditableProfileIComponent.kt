@@ -40,7 +40,7 @@ class EditableProfileIComponent(
       address = _model.value.address,
       email = _model.value.email,
       phone = _model.value.phoneNumber,
-      birthDate = _model.value.birthDate
+      birthDate = _model.value.birthDate,
     )
     onSave()
   }

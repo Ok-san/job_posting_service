@@ -1,0 +1,10 @@
+getAllCategories:
+SELECT *
+FROM Categories;
+
+insertCategory:
+INSERT OR REPLACE
+INTO Categories(
+  id,
+  name
+) VALUES (?,?);

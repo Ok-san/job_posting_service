@@ -146,7 +146,7 @@ class DefaultDatabase : Database {
   }
 
   override fun deleteOrder(orderId: Int, userId: Int) {
-
+    TODO("Not yet implemented")
   }
 
   override fun addOrder(userId: Int, newOrder: OrderModel) {

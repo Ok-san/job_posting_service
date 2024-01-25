@@ -11,7 +11,7 @@ interface EditableProfile {
     val phoneNumber: String,
     val city: String,
     val birthDate: String,
-    val address: String
+    val address: String,
   )
 
   fun onClickBack()
@@ -19,10 +19,14 @@ interface EditableProfile {
   fun onClickSave()
 
   fun onChangeName(name: String)
-  fun onChangeEmail(email: String)
-  fun onChangeDateBirth(date: String)
-  fun onChangeCity(city: String)
-  fun onChangeAddress(address: String)
-  fun onChangePhone(phone: String)
 
+  fun onChangeEmail(email: String)
+
+  fun onChangeDateBirth(date: String)
+
+  fun onChangeCity(city: String)
+
+  fun onChangeAddress(address: String)
+
+  fun onChangePhone(phone: String)
 }

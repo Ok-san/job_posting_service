@@ -19,6 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircleOutline
+import androidx.compose.material.icons.filled.Archive
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,100 +38,87 @@ import component.profile.ViewableProfile
 import data.OrderModel
 import data.ServiceModel
 import org.example.job_posting_service.R
-import org.example.job_posting_service.module.BackButton
 import org.example.job_posting_service.module.BasicTextButton
 import org.example.job_posting_service.module.CompoundButton
-import org.example.job_posting_service.module.FavoritesButton
 import org.example.job_posting_service.ui.theme.Typography
 import org.example.job_posting_service.ui.theme.mainIconSize
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import theme.BaseLayer
 import theme.FirstLayer
 import theme.PlaceholderBackground
 import theme.SecondLayer
 import theme.first_layer_shape
 
-@OptIn(ExperimentalResourceApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun ViewableProfileScreen(component: ViewableProfile) {
   val model by component.model.subscribeAsState()
   val user = model.profileInfo
   val services = model.servicesList
   val orders = model.ordersList
-  // / вот тут чтото нормальное должно быть
-//  Я заменила но если что разблочь
-//  val user: ProfileModel = profile1
-// //  val services: ArrayList<ServicesModel> = arrayListOf()
-//  val services: ArrayList<ServiceModel> = arrayListOf(service1, service2)
-//  val orders: ArrayList<OrderModel> = arrayListOf(order1, order2)
-  // /
 
   val message = remember { mutableStateOf("") }
 
   Box(
     modifier =
-      Modifier
-        .fillMaxSize()
-        .background(BaseLayer),
+    Modifier
+      .fillMaxSize()
+      .background(BaseLayer),
   ) {
     Box(
       modifier =
-        Modifier
-          .fillMaxWidth()
-          .zIndex(1f),
+      Modifier
+        .fillMaxWidth()
+        .zIndex(1f),
       contentAlignment = Alignment.Center,
     ) {
       Image(
         painter = painterResource(id = R.drawable.logo),
         contentDescription = null,
         modifier =
-          Modifier
-            .size(mainIconSize)
-            .offset(y = 80.dp)
-            .clip(RoundedCornerShape(mainIconSize / 2)),
+        Modifier
+          .size(mainIconSize)
+          .offset(y = 80.dp)
+          .clip(RoundedCornerShape(mainIconSize / 2)),
       )
     }
     Column {
       Row(
         modifier =
-          Modifier
-            .padding(20.dp)
-            .fillMaxWidth(),
+        Modifier
+          .padding(20.dp)
+          .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        BackButton({})
         BasicTextButton("Log Out", component::onClickLogOut)
         BasicTextButton("Edit", component::onClickEditProfile)
-        FavoritesButton()
       }
       Column(
         modifier =
-          Modifier
-            .fillMaxSize()
-            .padding(top = mainIconSize / 2 - 10.dp)
-            .clip(RoundedCornerShape(40.dp, 40.dp))
-            .background(FirstLayer)
-            .padding(20.dp),
+        Modifier
+          .fillMaxSize()
+          .padding(top = mainIconSize / 2 - 10.dp)
+          .clip(RoundedCornerShape(40.dp, 40.dp))
+          .background(FirstLayer)
+          .padding(20.dp),
       ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
           Column(
             modifier =
-              Modifier
-                .padding(bottom = 10.dp)
-                .shadow(
-                  elevation = 6.dp,
-                  shape = first_layer_shape,
-                  spotColor = Color.Black,
-                )
-                .clip(first_layer_shape)
-                .background(SecondLayer)
-                .padding(10.dp),
+            Modifier
+              .padding(bottom = 10.dp)
+              .shadow(
+                elevation = 6.dp,
+                shape = first_layer_shape,
+                spotColor = Color.Black,
+              )
+              .clip(first_layer_shape)
+              .background(SecondLayer)
+              .padding(10.dp),
           ) {
             Box(
               modifier =
-                Modifier
-                  .fillMaxWidth()
-                  .padding(top = mainIconSize / 2 - 20.dp),
+              Modifier
+                .fillMaxWidth()
+                .padding(top = mainIconSize / 2 - 20.dp),
               contentAlignment = Alignment.Center,
             ) {
               Text(
@@ -148,53 +136,53 @@ fun ViewableProfileScreen(component: ViewableProfile) {
 
           Row(
             modifier =
-              Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp),
+            Modifier
+              .fillMaxWidth()
+              .padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
           ) {
             Text(
               "Order",
               modifier =
-                Modifier
-                  .shadow(
-                    elevation = 6.dp,
-                    shape = first_layer_shape,
-                    spotColor = Color.Black,
-                  )
-                  .clip(first_layer_shape)
-                  .background(BaseLayer)
-                  .padding(20.dp, 6.dp),
+              Modifier
+                .shadow(
+                  elevation = 6.dp,
+                  shape = first_layer_shape,
+                  spotColor = Color.Black,
+                )
+                .clip(first_layer_shape)
+                .background(BaseLayer)
+                .padding(20.dp, 6.dp),
               style = Typography.titleMedium,
             )
             CompoundButton("Add order", Icons.Default.AddCircleOutline, {}, BaseLayer)
           }
 
           orders.forEach { order ->
-            OrderItem(order = order)
+            OrderItem(component = component, order = order)
           }
 
           Row(
             modifier =
-              Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp),
+            Modifier
+              .fillMaxWidth()
+              .padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
           ) {
             Text(
               "Services",
               modifier =
-                Modifier
-                  .shadow(
-                    elevation = 6.dp,
-                    shape = first_layer_shape,
-                    spotColor = Color.Black,
-                  )
-                  .clip(first_layer_shape)
-                  .background(BaseLayer)
-                  .padding(20.dp, 6.dp),
+              Modifier
+                .shadow(
+                  elevation = 6.dp,
+                  shape = first_layer_shape,
+                  spotColor = Color.Black,
+                )
+                .clip(first_layer_shape)
+                .background(BaseLayer)
+                .padding(20.dp, 6.dp),
               style = Typography.titleMedium,
             )
 
@@ -212,46 +200,46 @@ fun ViewableProfileScreen(component: ViewableProfile) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun OrderItem(order: OrderModel) {
+fun OrderItem(component: ViewableProfile, order: OrderModel) {
   Column(
     modifier =
-      Modifier
-        .padding(bottom = 10.dp)
-        .shadow(
-          elevation = 6.dp,
-          shape = first_layer_shape,
-          spotColor = Color.Black,
-        )
-        .clip(first_layer_shape)
-        .background(SecondLayer)
-        .padding(10.dp),
+    Modifier
+      .padding(bottom = 10.dp)
+      .shadow(
+        elevation = 6.dp,
+        shape = first_layer_shape,
+        spotColor = Color.Black,
+      )
+      .clip(first_layer_shape)
+      .background(SecondLayer)
+      .padding(10.dp),
   ) {
     Column {
       Row(
         modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(bottom = 10.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(bottom = 10.dp),
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(
           text = order.title,
           modifier =
-            Modifier
-              .padding(horizontal = 6.dp)
-              .weight(1f),
+          Modifier
+            .padding(horizontal = 6.dp)
+            .weight(1f),
           style = Typography.titleSmall,
         )
-        FavoritesButton()
+//        FavoritesButton()
       }
 
       FlowRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(bottom = 10.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(bottom = 10.dp),
       ) {
         OrderInfoField(order.specialization)
         order.city?.let {
@@ -272,12 +260,13 @@ fun OrderItem(order: OrderModel) {
 
     Row(
       modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(top = 10.dp),
+      Modifier
+        .fillMaxWidth()
+        .padding(top = 10.dp),
       horizontalArrangement = Arrangement.SpaceBetween,
     ) {
       BasicTextButton("Edit", {})
+      CompoundButton("Archive", Icons.Default.Archive, { (component::onClickArchiveOrder)(order.orderId) })
       CompoundButton("Delete", Icons.Default.Delete, {})
     }
   }
@@ -288,25 +277,25 @@ fun OrderItem(order: OrderModel) {
 fun ServiceItem(service: ServiceModel) {
   Column(
     modifier =
-      Modifier
-        .padding(bottom = 10.dp)
-        .shadow(
-          elevation = 6.dp,
-          shape = first_layer_shape,
-          spotColor = Color.Black,
-        )
-        .clip(first_layer_shape)
-        .background(SecondLayer)
-        .padding(10.dp),
+    Modifier
+      .padding(bottom = 10.dp)
+      .shadow(
+        elevation = 6.dp,
+        shape = first_layer_shape,
+        spotColor = Color.Black,
+      )
+      .clip(first_layer_shape)
+      .background(SecondLayer)
+      .padding(10.dp),
   ) {
     Column {
       FlowRow(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier =
-          Modifier
-            .fillMaxWidth()
-            .padding(bottom = 10.dp),
+        Modifier
+          .fillMaxWidth()
+          .padding(bottom = 10.dp),
       ) {
         OrderInfoField(service.category)
         OrderInfoField(service.specialization)
@@ -325,9 +314,9 @@ fun ServiceItem(service: ServiceModel) {
 
     Row(
       modifier =
-        Modifier
-          .fillMaxWidth()
-          .padding(top = 10.dp),
+      Modifier
+        .fillMaxWidth()
+        .padding(top = 10.dp),
       horizontalArrangement = Arrangement.SpaceBetween,
     ) {
       BasicTextButton("Edit", {})
@@ -350,10 +339,10 @@ fun OrderInfoField(text: String) {
   Text(
     text = text,
     modifier =
-      Modifier
-        .clip(RoundedCornerShape(20.dp))
-        .background(PlaceholderBackground)
-        .padding(12.dp, 4.dp),
+    Modifier
+      .clip(RoundedCornerShape(20.dp))
+      .background(PlaceholderBackground)
+      .padding(12.dp, 4.dp),
     style = Typography.bodyMedium,
   )
 }
