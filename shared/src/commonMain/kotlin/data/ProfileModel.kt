@@ -4,15 +4,15 @@ import java.time.LocalDate
 
 
 data class ProfileModel(
-  val userId: Int,
-  val name: String,
-  val phoneNumber: String,
-  val email: String?,
-  val city: String,
-  val birthdate: LocalDate?,
-  val address: String?,
+  var userId: Int,
+  var name: String,
+  var phoneNumber: String?,
+  var email: String?,
+  var city: String?,
+  var birthdate: LocalDate?,
+  var address: String?,
   val avatar: String?,
   val isMaster: Boolean = false,
-  val services: List<Int>?,
-  val orders: List<Int>?,
+  var services: MutableList<Int>,
+  var orders: MutableList<Int>,
 )

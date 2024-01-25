@@ -9,7 +9,7 @@ interface OrderDetails {
 
   data class Model(
     var order: OrderModel,
-    var comments: List<CommentsModel> = emptyList(),
+    var comments: MutableList<CommentsModel>,
     var commentText: String? = null,
   )
 

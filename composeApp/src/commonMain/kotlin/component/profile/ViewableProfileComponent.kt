@@ -16,7 +16,7 @@ class ViewableProfileComponent(
   private val _model =
     MutableValue(
       ViewableProfile.Model(
-        profileInfo = database.getUserInfo(userId)!!,
+        profileInfo = database.getUserInfo(userId),
         ordersList = database.getUserOrders(userId),
         servicesList = database.getUserServices(userId),
       ),

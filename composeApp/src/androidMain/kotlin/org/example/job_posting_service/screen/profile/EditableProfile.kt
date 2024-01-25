@@ -50,7 +50,6 @@ import theme.first_layer_shape
 fun EditableProfileScreen(component: EditableProfile) {
   val message = remember { mutableStateOf("") }
   val model by component.model.subscribeAsState()
-  val user = model.profileInfo
 
   Box(
     modifier =
@@ -84,7 +83,7 @@ fun EditableProfileScreen(component: EditableProfile) {
         horizontalArrangement = Arrangement.SpaceBetween,
       ) {
         BackButton(component::onClickBack)
-        BasicTextButton("Save", {} /*component::onClickSave(newData)*/)
+        BasicTextButton("Save", component::onClickSave)
       }
       Column(
         modifier =
@@ -120,12 +119,12 @@ fun EditableProfileScreen(component: EditableProfile) {
             )
           }
           Column {
-            DefaultField("Name:", message.value) { newText -> message.value = newText }
-            DefaultField("Date of birth:", message.value) { newText -> message.value = newText }
-            DefaultField("City:", message.value) { newText -> message.value = newText }
-            DefaultField("Address", message.value) { newText -> message.value = newText }
-            DefaultField("Phone number:", message.value) { newText -> message.value = newText }
-            DefaultField("Email:", message.value) { newText -> message.value = newText }
+            DefaultField("Name:", model.name, component::onChangeName)
+            DefaultField("Date of birth:", model.birthDate, component::onChangeDateBirth)
+            DefaultField("City:", model.city, component::onChangeCity)
+            DefaultField("Address", model.address, component::onChangeAddress)
+            DefaultField("Phone number:", model.phoneNumber, component::onChangePhone)
+            DefaultField("Email:", model.email, component::onChangeEmail)
           }
         }
 

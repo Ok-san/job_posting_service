@@ -3,8 +3,7 @@ package component.home.orderlist
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import data.CommentsModel
-import java.time.LocalDate
+import com.arkivanov.decompose.value.update
 import network.Database
 
 class OrderDetailsComponent(
@@ -17,7 +16,7 @@ class OrderDetailsComponent(
   private val _model =
     MutableValue(
       OrderDetails.Model(
-        comments = database.getComments(orderId),
+        comments = database.getComments(orderId) ?: mutableListOf(),
         commentText = "",
         order = database.getOrdersById(orderId),
       ),
@@ -38,18 +37,19 @@ class OrderDetailsComponent(
   }
 
   override fun onChangeTextComment(text: String) {
-    _model.value.commentText = text
+    _model.update {
+      it.copy(commentText = text)
+    }
   }
 
   override fun onSendCommentClick() {
-    val newComment =
-      CommentsModel(
-        id = 2,
-        author = database.getUserName(userId),
-        description = _model.value.commentText.toString(),
-        publicationDate = LocalDate.now().toString(),
+    val newCommentsList = _model.value.comments
+    newCommentsList.add(database.createComment(orderId, database.getUserName(userId), _model.value.commentText.toString()))
+    _model.update {
+      it.copy(
+        comments = newCommentsList,
+        commentText = ""
       )
-
-    database.createComment(orderId, newComment)
+    }
   }
 }

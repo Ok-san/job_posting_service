@@ -5,7 +5,6 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
-import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import component.profile.EditableProfileIComponent
@@ -17,6 +16,7 @@ class PersonalPageComponent(
   context: ComponentContext,
   private val userId: Int,
   private val database: DefaultDatabase,
+  val logOut: () -> Unit
 ) : PersonalPage, ComponentContext by context {
   private val navigate = StackNavigation<Config>()
   override val childStack: Value<ChildStack<*, PersonalPage.Child>> =
@@ -38,7 +38,7 @@ class PersonalPageComponent(
             context = context,
             database = database,
             userId = userId,
-            onLogOut = { navigate.popTo(1) },
+            onLogOut = logOut,
             onEdit = { navigate.push(Config.EditableConfig) },
           ),
         )
@@ -50,6 +50,7 @@ class PersonalPageComponent(
             database = database,
             userId = userId,
             onBack = { navigate.pop() },
+            onSave = { navigate.pop() },
           ),
         )
     }

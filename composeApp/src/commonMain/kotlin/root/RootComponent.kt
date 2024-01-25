@@ -49,6 +49,7 @@ class RootComponent(
             context = context,
             userId = config.userId,
             database = database,
+            logOut = {navigate.replaceAll(Config.IdentificationScreenConfig)}
           ),
         )
     }

@@ -31,7 +31,7 @@ import theme.BaseLayer
 
 @Composable
 fun RegistrationScreen(component: Registration) {
-  val name by component.login.collectAsState(Dispatchers.Main.immediate)
+  val name by component.name.collectAsState(Dispatchers.Main.immediate)
   val login by component.login.collectAsState(Dispatchers.Main.immediate)
   val password by component.password.collectAsState(Dispatchers.Main.immediate)
 //    val inProgress by component.inProgress.collectAsState()

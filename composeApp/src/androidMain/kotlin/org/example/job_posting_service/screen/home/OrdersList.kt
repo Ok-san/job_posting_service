@@ -43,6 +43,7 @@ import theme.SecondFont
 fun OrdersListScreen(component: OrdersList) {
   var tabIndex by remember { mutableIntStateOf(0) }
   val tabs = listOf("Orders", "Masters")
+  val model = component.model.subscribeAsState()
 
   Column(
     modifier =
@@ -87,7 +88,7 @@ fun OrdersListScreen(component: OrdersList) {
       when (tabIndex) {
         0 -> {
           itemsIndexed(
-            component.model.value.ordersList,
+            model.value.ordersList,
           ) { index, item ->
             OrderItem(item, component, index)
           }

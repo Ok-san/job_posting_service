@@ -54,6 +54,8 @@ import ui.theme.mainIconSize
 fun OrderDetailsScreen(component: OrderDetails) {
   val model by component.model.subscribeAsState()
   val order = model.order
+  val comments = model.comments
+
   Column(
     modifier =
       Modifier
@@ -106,7 +108,7 @@ fun OrderDetailsScreen(component: OrderDetails) {
         }
 
         itemsIndexed(
-          component.model.value.comments,
+          comments,
         ) { _, comment ->
           CommentItem(comment)
         }

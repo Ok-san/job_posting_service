@@ -2,19 +2,6 @@ package data
 
 import java.time.LocalDate
 
-val orders: MutableList<OrderModel>
-  get() = mutableListOf(order1, order2, order3, order2)
-
-val comments: MutableList<CommentsModel> by lazy { mutableListOf(comment1, comment1) }
-
-val services: MutableList<ServiceModel>
-  get() = mutableListOf(service1, service2, service2)
-val users: MutableList<UserModel>
-  get() = mutableListOf(user1, user2)
-
-val profiles: MutableList<ProfileModel>
-  get() = mutableListOf(profile1, profile2)
-
 val order1 =
   OrderModel(
     orderId = 0,
@@ -26,23 +13,24 @@ val order1 =
     specialization = "Manicure",
     city = "San Vicente de Tagua Tagua",
     deadline = "Nov 11, 2023",
-    comments = mutableListOf(0,0)
+    comments = mutableListOf(0)
   )
 
 val order2 =
   OrderModel(
     orderId = 1,
     title = "I need help",
-    description = "Very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. I can't. It's very urgent. ",
-    price = "100 000",
+    description = "I'm very smart and cool. I’ve been working for a thousand years and in general everything is great for me.I'm very smart and cool. I’ve been working for a thousand years and in general everything is great for me.I'm very smart and cool. I’ve been working ...",
+    price = "100",
     favorite = true,
     publicationDate = "Oct 14, 2023",
     specialization = "Java",
     city = "Santiago",
     deadline = "March 11, 2024",
+    comments = mutableListOf(),
   )
 
-val order3 = order2.copy(description = "", orderId = 2)
+val order3 = order1.copy(description = "", orderId = 2)
 
 val profile1 =
   ProfileModel(
@@ -68,8 +56,8 @@ val profile2 =
     birthdate = LocalDate.parse("1994-10-03"),
     address = null,
     avatar = null,
-    services = null,
-    orders = listOf(2),
+    services = mutableListOf(),
+    orders = mutableListOf(2),
   )
 
 val service1 =

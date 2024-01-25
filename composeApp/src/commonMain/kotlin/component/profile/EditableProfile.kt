@@ -1,16 +1,28 @@
 package component.profile
 
 import com.arkivanov.decompose.value.Value
-import data.ProfileModel
 
 interface EditableProfile {
   val model: Value<Model>
 
   data class Model(
-    val profileInfo: ProfileModel,
+    val name: String,
+    val email: String,
+    val phoneNumber: String,
+    val city: String,
+    val birthDate: String,
+    val address: String
   )
 
   fun onClickBack()
 
-  fun onClickSave(newData: ProfileModel)
+  fun onClickSave()
+
+  fun onChangeName(name: String)
+  fun onChangeEmail(email: String)
+  fun onChangeDateBirth(date: String)
+  fun onChangeCity(city: String)
+  fun onChangeAddress(address: String)
+  fun onChangePhone(phone: String)
+
 }

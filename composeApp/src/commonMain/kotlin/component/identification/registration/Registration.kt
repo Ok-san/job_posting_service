@@ -12,7 +12,7 @@ interface Registration {
 
   fun onPasswordChanged(password: String)
 
-  fun onNameChanged(password: String)
+  fun onNameChanged(name: String)
 
   fun onSignInClick()
 

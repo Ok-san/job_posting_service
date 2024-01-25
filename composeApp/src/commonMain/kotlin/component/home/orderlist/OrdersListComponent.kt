@@ -8,7 +8,7 @@ import network.Database
 
 class OrdersListComponent(
   componentContext: ComponentContext,
-  private val database: Database,
+  database: Database,
   private val onSelected: (id: Int) -> Unit,
 ) : ComponentContext by componentContext, OrdersList {
   private val _model =
@@ -20,9 +20,10 @@ class OrdersListComponent(
   override val model: Value<OrdersList.Model> get() = _model
 
   override fun onLikeClicked(id: Int) {
-    val order = this._model.value.ordersList
-    order[id].favorite = order[id].favorite.not()
-    _model.update { it.copy(ordersList = order) }
+    _model.update {
+      it.ordersList[id].favorite = it.ordersList[id].favorite.not()
+      it.copy(ordersList = it.ordersList)
+    }
   }
 
   override fun onItemClicked(id: Int) {
