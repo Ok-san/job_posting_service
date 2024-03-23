@@ -12,7 +12,6 @@ import theme.FirstFont
 
 val InterFamily =
   FontFamily(
-    Font(R.font.inter_black, FontWeight.Black),
     Font(R.font.inter_bold, FontWeight.Bold),
     Font(R.font.inter_extrabold, FontWeight.ExtraBold),
     Font(R.font.inter_extralight, FontWeight.ExtraLight),

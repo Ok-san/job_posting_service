@@ -1,14 +1,14 @@
 [versions]
 kotlin = "1.9.20"
-ktor = "2.3.6"
+ktor = "2.3.7"
 compose = "1.5.4"
 compose-plugin = "1.5.11"
 compose-compiler = "1.5.4"
 android-minSdk = "24"
 android-compileSdk = "34"
 android-targetSdk = "34"
-agp = "8.2.1"
-androidx-activityCompose = "1.8.2"
+agp = "8.2.2"
+androidx-activity-compose = "1.8.2"
 decompose = "2.2.0-alpha04"
 kotlinx-serialization = "1.6.0"
 coroutine = "1.7.3"
@@ -27,9 +27,10 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 
 decompose-core = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-extension-compose = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose" }
+
 kotlinx-coroutine = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
 kotlinx-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "coroutine" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
